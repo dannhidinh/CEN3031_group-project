@@ -1,0 +1,22 @@
+#searchBar {
+  margin: 15px 10px;
+}
+
+.tableWrapper {
+  max-height: 275px;
+  overflow: auto;
+  border-collapse: collapse;
+  padding: 5px;
+  background-color: white;
+  border: 1px solid lightgray;
+}
+body {
+  color: crimson;
+  font-family: "Andale Mono", monospace;
+  background-color: #fcf9f9;
+}
+.jumbotron {
+  background-color: white;
+  height: 610px;
+  border: 1px solid lightgray;
+}
