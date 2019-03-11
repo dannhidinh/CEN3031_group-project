@@ -1,22 +1,46 @@
-#searchBar {
-  margin: 15px 10px;
-}
 
-.tableWrapper {
-  max-height: 275px;
-  overflow: auto;
-  border-collapse: collapse;
-  padding: 5px;
-  background-color: white;
-  border: 1px solid lightgray;
-}
 body {
-  color: crimson;
+  color: black;
   font-family: "Andale Mono", monospace;
   background-color: #fcf9f9;
 }
-.jumbotron {
-  background-color: white;
-  height: 610px;
-  border: 1px solid lightgray;
+.searchbar input[type=text] {
+  
+  padding: 10px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 16px;
 }
+
+.dropbtn {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+}
+ 
+.topbar {
+    position: relative;
+    display: inline-block;
+}
+ 
+.topbar-content {
+    display: none;
+    position: absolute;
+    background-color: lightgrey;
+    min-width: 200px;
+    z-index: 1;
+}
+ 
+.topbar-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+ 
+.topbar-content a:hover {background-color: white;}
+.topbar:hover .topbar-content {display: block;}
+.topbar:hover .dropbtn {background-color: grey;}
