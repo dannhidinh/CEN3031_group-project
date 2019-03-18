@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.css"> />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />    
+
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+
+        <h1>BODEGA</h1>
+		<img src = "logo.jpg" alt ="logo">
+	  </div>
+  </body>
+  <br>
+  <div class="topbar">
+	<button class="dropbtn">MENU</button>
+		<div class="topbar-content">
+
+		<a href="/about">About Us</a>
+		<a href="/contact">Contact Us</a>
+		<a href="/signup">Log In/Sign Up</a>
+		<a href="/user">Profile</a>
+		<a href="/cart">Cart</a>
+		</div>
+   </div>
+
+   <input type="text" placeholder="Search...">   <div class="nearestBodega">
+       <h1>Find a Bodega near you</h1>
+       <link rel="mapStyle" href="mapbox/map.css">
+       <div id='map' style='width: 800px; height: 600px;'></div>
+       <script src="mapbox/map.js"></script>
+
+   </div>
+
+
+
+</html>
