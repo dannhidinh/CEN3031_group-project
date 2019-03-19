@@ -6,8 +6,10 @@
   "author": "Medhir Bhargava",
   "license": "MIT",
   "dependencies": {
+    "@mapbox/maki": "^6.1.0",
     "body-parser": "^1.14.1",
     "express": "^4.16.4",
+    "maki": "^2.1.0",
     "mongoose": "^4.13.18",
     "morgan": "^1.6.1",
     "request": "^2.67.0"
