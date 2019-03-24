@@ -11,33 +11,39 @@ var map = new mapboxgl.Map({
 map.addControl(new mapboxgl.NavigationControl());
 
 // load location of Bodega
-map.on('load', function () {
-  map.addLayer({
-    "id": "points",
-    "type": "symbol",
-    "source": {
-      "type": "geojson",
-      "data": {
-        "type": "FeatureCollection",
-        "features": [{
-          "type": "Feature",
-          "geometry": {
-            "type": "Point",
-            "coordinates": [-82.332681, 29.650244]
-          },
-          "properties": {
-            "title": "Bodega at the Hub",
-            "icon": "marker"
-          }
-        }]
+map.on("load", function () {
+  map.loadImage("https://i.imgur.com/MK4NUzI.png", function(error, image) {
+    if (error) throw error;
+    map.addImage("custom-marker", image);
+    map.addLayer({
+      id: "markers",
+      type: "symbol",
+      source: {
+        type: "geojson",
+        data: {
+          type: "FeatureCollection",
+          features: [
+            {
+              type: 'Feature',
+              properties: {
+                "title": "Bodega at the Hub",
+              },
+              geometry: {
+                type: "Point",
+                coordinates: [ -82.3327, 29.6502]
+              }
+            }
+          ]
+        }
+      },
+      layout: {
+        "icon-image": "custom-marker",
+        "icon-size": 0.75,
+        "text-field": "{title}",
+        "text-font": ["Arial Unicode MS Bold"],
+        "text-anchor": "top"
       }
-    },
-    "layout": {
-      "icon-image": "{icon}-15",
-      "text-field": "{title}",
-      "text-font": ["Arial Unicode MS Bold"],
-      "text-anchor": "top"
-    }
+    });
   });
 });
 
