@@ -3,11 +3,14 @@ var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v11',
   center:[-82.332681, 29.650244],
-  zoom: 9
+  zoom: 12.5
 });
 
+
+// navigation control
 map.addControl(new mapboxgl.NavigationControl());
 
+// load location of Bodega
 map.on('load', function () {
   map.addLayer({
     "id": "points",
@@ -37,3 +40,13 @@ map.on('load', function () {
     }
   });
 });
+
+// geolocate control - locate user
+map.addControl(new mapboxgl.GeolocateControl ({
+  positionOptions: {
+    enableHighAccuracy: true
+  },
+  trackUserLocation: true
+}));
+
+// distance
