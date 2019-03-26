@@ -4,6 +4,7 @@
     <meta charset='utf-8' />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
+    <!-- next 3 lines are mapbox api implementations-->
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -34,8 +35,8 @@
   			<input type="text" placeholder="Search.." id="myInput">
   	</div>
   </center>
+  <!-- nearestBodega class calls mapbox stuff -->
   <div class="nearestBodega">
-    <script src='https://unpkg.com/es6-promise@4.2.4/dist/es6-promise.auto.min.js'></script>
     <h1>Find a Bodega near you</h1>
     <link rel="mapStyle" href="mapbox/map.css">
     <div id='map' style='width: 800px; height: 600px;'></div>

@@ -7,7 +7,7 @@ var map = new mapboxgl.Map({
 });
 
 // load location of Bodega
-map.on("load", function () {
+map.on('load', function () {
   map.loadImage("https://i.imgur.com/MK4NUzI.png", function(error, image) {
     if (error) throw error;
     map.addImage("custom-marker", image);
@@ -22,12 +22,15 @@ map.on("load", function () {
             {
               type: 'Feature',
               properties: {"title": "Bodega at the Hub",
-                           "description": "<p>This be a description lolz.</p>"},
+                           "description": "<p>This be a description lolz.",
+                           "icon": "marker"},
               geometry: {type: "Point",coordinates: [ -82.3327, 29.6502]}
             },
             {
               type: 'Feature',
-              properties: {"title": "Bodega at Exactech",},
+              properties: {"title": "Bodega at Exactech",
+                           "description": "<p></p>",
+                           "icon": "marker"},
               geometry: {type: "Point", coordinates: [ -82.356005, 29.717539]}
             }
           ]
@@ -72,5 +75,3 @@ map.addControl(new mapboxgl.GeolocateControl ({
   },
   trackUserLocation: true
 }));
-
-// distance
