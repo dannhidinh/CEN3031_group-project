@@ -3,12 +3,8 @@ var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/streets-v11',
   center:[-82.332681, 29.650244],
-  zoom: 12.5
+  zoom: 10
 });
-
-
-// navigation control
-map.addControl(new mapboxgl.NavigationControl());
 
 // load location of Bodega
 map.on("load", function () {
@@ -25,27 +21,49 @@ map.on("load", function () {
           features: [
             {
               type: 'Feature',
-              properties: {
-                "title": "Bodega at the Hub",
-              },
-              geometry: {
-                type: "Point",
-                coordinates: [ -82.3327, 29.6502]
-              }
+              properties: {"title": "Bodega at the Hub",
+                           "description": "<p>This be a description lolz.</p>"},
+              geometry: {type: "Point",coordinates: [ -82.3327, 29.6502]}
+            },
+            {
+              type: 'Feature',
+              properties: {"title": "Bodega at Exactech",},
+              geometry: {type: "Point", coordinates: [ -82.356005, 29.717539]}
             }
           ]
-        }
+        },
       },
       layout: {
         "icon-image": "custom-marker",
+        "icon-allow-overlap": true,
         "icon-size": 0.75,
         "text-field": "{title}",
         "text-font": ["Arial Unicode MS Bold"],
-        "text-anchor": "top"
+        "text-offset": [0, 1],
+        "text-anchor": "top",
       }
     });
   });
+  map.on('click', 'places', function (e) {
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var description = e.features[0].properties.description;
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360; }
+    new mapboxgl.Popup()
+      .setLngLat(coordinates)
+      .setHTML(description)
+      .addTo(map);
+    });
+    map.on('mouseenter', 'places', function () {
+      map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', 'places', function () {
+      map.getCanvas().style.cursor = '';
+    });
 });
+
+// navigation control
+map.addControl(new mapboxgl.NavigationControl());
 
 // geolocate control - locate user
 map.addControl(new mapboxgl.GeolocateControl ({
