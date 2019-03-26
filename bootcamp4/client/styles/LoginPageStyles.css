@@ -1,0 +1,67 @@
+*{
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: 'Verdana', sans-serif;
+  }
+  
+  .loginPage{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .myLogin, .mySignUp{
+    width: 35%;
+    min-height: 250px;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #0B0B0B;
+    padding: 20px 20px;
+  }
+  
+  .logForm{
+    display: flex;
+    flex-direction: column;
+    align-items: space-around;
+    justify-content: center;
+    font-size: 14px;
+  }
+  
+  .logTitle{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+  
+  .logInItem{
+    margin-top: 10px;
+  }
+  
+  .signForm{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signTitle{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+  
+  .fieldTitle{
+    margin-right: 20px;
+  }
+  
+  .signUpItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    font-size: 14px;
+    margin-top: 10px;
+  }
