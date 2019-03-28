@@ -3,11 +3,11 @@
     font-weight: bold;
     font-family: 'Verdana', sans-serif;
   }
-  
+
   .userPage{
     text-align: center;
   }
-  
+
   .topBar{
     height: 150px;
     width: 100%;
@@ -16,16 +16,16 @@
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .logo{
     order: 1;
   }
-  
+
   .sideButtons{
     order: 2;
     min-width: 150px;
   }
-  
+
   .signout, .cart{
     min-width: 150px;
     height: 40px;
@@ -39,15 +39,15 @@
     outline: none;
     cursor: pointer;
   }
-  
+
   .signout{
     margin-bottom: 30px;
   }
-  
+
   .fa-sign-out-alt, .fa-shopping-cart{
     font-size: 26px;
   }
-  
+
   .userContent{
     order: 2;
     display: flex;
@@ -57,7 +57,7 @@
     border: 1px solid #57EDF2;
     border-radius: 10px;
   }
-  
+
   .menuDrop{
     order: 1;
     padding-left: 10px;
@@ -65,20 +65,20 @@
     font-size: 14px;
     position: absolute;
   }
-  
+
   .menuDrop:hover .dropContent{
     display: flex;
     flex-direction: column;
   }
-  
-  
+
+
   .dropContent{
     display: none;
     position: relative;
     z-index: 5;
     width: 100%;
   }
-  
+
   .infoContainer{
     order: 2;
     align-self: center;
@@ -89,7 +89,7 @@
     width: 100%;
     padding: 20px 20px;
   }
-  
+
   .history{
     order: 1;
     display: flex;
@@ -97,8 +97,8 @@
     justify-content: center;
     padding-top: 20px;
     width: 35%;
-  } 
-  
+  }
+
   .listedItems{
     height: 500px;
     border: 1px solid #57EDF2;
@@ -131,7 +131,7 @@
     justify-content: center;
     width: 35%;
   }
-  
+
   .listedInfo{
     height: 500px;
     border: 1px solid #57EDF2;

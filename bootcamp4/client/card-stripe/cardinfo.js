@@ -11,7 +11,7 @@ stripe.charges.create({
   },{
     idempotency_key: "AKBlM0uKaTZCCsPC"
   }, function(err, charge) {
-    if err throw err; 
+    if err throw err;
     // asynchronously called
 });
 
