@@ -3,11 +3,18 @@
 <title>BODEGA HOMEPAGE</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- LINKS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+	 <!-- next 3 lines are mapbox api implementations-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <!-- implementing notifications API -->
 
 <head>
 	<br>
@@ -98,7 +105,42 @@
   
    <br>
    <br>
+   <!-- MAP -->
+   <!--ADDRESS-->
+   <center><h1>FIND A BODEGA NEAR YOU</h1></center>
+   <div class="w3-container w3-half w3-card w3-left">
+	<CENTER><h3>STORES NEARBY</h3></CENTER>
+  	<table class="w3-table-all w3-card-4">
+		<tr>
+			<th>NAME</th>
+			<th>ADDRESS</th>
+			
+
+			</tr>
+			<tr>
+			<td>BODEGA AT THE HUB</td>
+			<td>UF HUB ADDRESS</td>
+			</tr>
+			<td>BODEGA AT EXATECH</td>
+			<td>UF HUB ADDRESS</td>
+		</tr>
+	</table>
+  </div>
    
+   <!-- MAP ACTUTAL -->
+  <div class "w3-container w3-half w3-card">
+    <div class="nearestBodega">
+    
+    <link rel="mapStyle w3-left" href="mapbox/map.css">
+    <div id='map' style='width: 600px; height: 600px;'></div>
+    <script src="mapbox/map.js"></script>
+	</div>
+   </div>
+
+
+  <!-- MAP END -->
+  
+
   <!-- Footer -->
   <footer class="w3-row-padding padding-32">
     <div class="w3-third" >

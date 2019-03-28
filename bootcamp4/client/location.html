@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- next 3 lines are mapbox api implementations-->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <!-- implementing notifications API -->
+
+  </head>
+
+	<br>
+    <div class="header">
+		<center>
+		<img src = "pictures/BodegaLogo.png" alt ="Bodega Logo" width="196" height="154">
+		</center>
+	</div>
+
+  <body>
+  <br>
+  <br>
+  <center>
+  	<div class="dropdown">
+  		<button onclick="myFunction()" class="dropbtn">MENU</button>
+  			<div id="myDropdown" class="dropdown-content">
+  				<a href="index.html">Home</a>
+  				<a href="AboutAndContact.html">About Us</a>
+  				<a href="AboutAndContact.html">Contact Us</a>
+  				<a href="">Log In/Sign Up</a>
+  				<a href="">Profile</a>
+  				<a href="">Cart</a>
+          <a href="location.html">Location</a>
+  			</div>
+  			<input type="text" placeholder="Search.." id="myInput">
+  	</div>
+  </center>
+  <!-- nearestBodega class calls mapbox stuff -->
+  <div class="nearestBodega">
+    <h1>Find a Bodega near you</h1>
+    <link rel="mapStyle" href="mapbox/map.css">
+    <div id='map' style='width: 800px; height: 600px;'></div>
+    <script src="mapbox/map.js"></script>
+  </div>
+
+	<script>
+		/* When the user clicks on the button,
+		toggle between hiding and showing the dropdown content */
+		function myFunction()
+		{
+			document.getElementById("myDropdown").classList.toggle("show");
+		}
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function(e)
+		{
+			if (!e.target.matches('.dropbtn'))
+			{
+				var myDropdown = document.getElementById("myDropdown");
+				if (myDropdown.classList.contains('show'))
+				{
+					myDropdown.classList.remove('show');
+				}
+			}
+		}
+	</script>
+   </div>
+  </center>
+  </body>
+</html>
