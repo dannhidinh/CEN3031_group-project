@@ -52,18 +52,20 @@
             <div class='cardContainer'>
               <!-- <button class='myCard'>CARD API HERE</button> -->
               <!--Link saved payment API here-->
-              <form action="your-server-side-code" method="POST">
+
+              <form action="userPage.html" method="POST">
+                <button class='myCard'>ADD MY CARD</button>
                 <script
                   src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                  src="card-stripe/cardinfo.js"
+                  src="card-stripe/stripe.js"
                   data-key="pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a"
-                  data-amount="999"
                   data-name="Demo Site"
-                  data-description="Example charge"
+                  data-description="Add Card"
                   data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
                   data-locale="auto">
                 </script>
               </form>
+
             </div>
             <div class='changeInfo'>
               <div class='submittedImg'>Change My Picture</div> <!--Find dropImage API and place here-->
