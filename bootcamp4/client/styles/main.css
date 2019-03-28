@@ -1,6 +1,12 @@
+*{
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: 'Verdana', sans-serif;
+  }
+
 body {
 	
-	font-family: "Times New Roman", Georgia, Serif;
+	font-family: "Verdana", sans-serif;
 	color : black;
 }
 h1, h2, h3, h4, h5, h6 {
