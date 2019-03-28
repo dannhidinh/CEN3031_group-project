@@ -14,8 +14,7 @@
   
   .myLogin, .mySignUp{
     width: 35%;
-    min-height: 250px;
-    height: 60%;
+    min-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -42,6 +41,10 @@
     margin-top: 10px;
   }
   
+  .logSubmit{
+    margin-top: 20px;
+  }
+
   .signForm{
     display: flex;
     flex-direction: column;
@@ -64,4 +67,8 @@
     align-content: center;
     font-size: 14px;
     margin-top: 10px;
+  }
+
+  .signUpSubmit{
+    margin-top: 20px;
   }
