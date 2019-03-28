@@ -1,80 +1,128 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<title>BODEGA HOMEPAGE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
-  </head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 
-	<br>
-    <div class="header">
-		<center>
-		<img src = "pictures/BodegaLogo.png" alt ="Bodega Logo" width="196" height="154">
-		</center>
-	</div>
-
-  <body>
-  <br>
-  <br>
-  <center>
-
-	<div class="dropdown">
-		<button onclick="myFunction()" class="dropbtn">MENU</button>
-			<div id="myDropdown" class="dropdown-content">
-				<a href="index.html">Home</a>
-				<a href="AboutAndContact.html">About Us</a>
-				<a href="AboutAndContact.html">Contact Us</a>
-				<a href="">Log In/Sign Up</a>
-				<a href="">Profile</a>
-				<a href="">Cart</a>
-        <a href="location.html">Location</a>
-			</div>
-			<input type="text" placeholder="Search.." id="myInput">
-	</div>
-
-
-
-	<script>
-		/* When the user clicks on the button,
-		toggle between hiding and showing the dropdown content */
-		function myFunction()
-		{
-			document.getElementById("myDropdown").classList.toggle("show");
-		}
-
-		// Close the dropdown if the user clicks outside of it
-		window.onclick = function(e)
-		{
-			if (!e.target.matches('.dropbtn'))
-			{
-				var myDropdown = document.getElementById("myDropdown");
-				if (myDropdown.classList.contains('show'))
-				{
-					myDropdown.classList.remove('show');
-				}
-			}
-		}
-	</script>
-
-   <div class = "productarea">
-    <br>
-	<br>
-	<center>
-	<img src = "pictures/product.jpg" alt ="product">
-	<img src = "pictures/product.jpg" alt ="product">
-	<img src = "pictures/product.jpg" alt ="product">
-
+<head>
 	<br>
 	<br>
-	<br>
-	<img src = "pictures/product.jpg" alt ="product">
-	<img src = "pictures/product.jpg" alt ="product">
-	<img src = "pictures/product.jpg" alt ="product">
-	</center>
+	<center><img src = "pictures/BodegaLogo.png" alt ="Bodega Logo" width="196" height="154"></center>
+<!-- Top menu -->
+<div class="w3-main w3-content" style="max-width:1200px;margin-top:50px">
+	<div class="w3-bar w3-black w3-padding-16">
+		
+		<a href="index.html" class="w3-bar-item w3-button">HOME</a> 
+		<a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+		<a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
+	
+		<input class="w3-input w3-half w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="black">
+		<i class="fa fa-search w3-xxlarge" ></i>
+		
+		<a href="#cart" class="w3-right w3-bar-item w3-button">CART</a>
+		<!--<i class="fa fa-shopping-cart w3-xxlarge" ></i> -->
+		<a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
+		<!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
+  </div>
 
-   </div>
+</div>
+</head>
+<body>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main w3-content " style="max-width:1200px;margin-top:50px">
 
-  </center>
-  </body>
+  <!-- First Photo Grid-->
+  <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+    <div class="w3-quarter">
+      <img src="products/product.jpg" alt="product" >
+      <h3>Product</h3>
+      <p>Description : This is the food desciption</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="products/product.jpg" alt="product" >
+      <h3>Product</h3>
+      <p>Description : This is the food desciption</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="products/product.jpg" alt="product" >
+      <h3>Product</h3>
+      <p>Description : This is the food description</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="products/product.jpg" alt="product" >
+      <h3>Product</h3>
+      <p>Description : This is the food description</p>
+    </div>
+  </div>
+  
+    <!-- Second Photo Grid-->
+  <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+    <div class="w3-quarter">
+      <img src="products/product.jpg" alt="product" >
+      <h3>Product</h3>
+      <p>Description : This is the food description</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="products/product.jpg" alt="product" >
+      <h3>Product</h3>
+      <p>Description : This is the food description</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="products/product.jpg" alt="product" >
+      <h3>Product</h3>
+      <p>Description : This is the food description</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="products/product.jpg" alt="product" >
+      <h3>Product</h3>
+      <p>Description : This is the food description</p>
+    </div>
+  </div>
+  
+   <!-- Pagination -->
+  <div class="w3-center w3-padding-32">
+    <div class="w3-bar">
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+    </div>
+  </div>
+  
+   <br>
+   <br>
+   
+  <!-- Footer -->
+  <footer class="w3-row-padding padding-32">
+    <div class="w3-third" >
+	<a name="about"></a> 
+      <center><h3>ABOUT</h3></center>
+      <p>Collective & Co.</p>
+    </div>
+  
+    <div class="w3-third">
+	<a name="contact"></a> 
+      <center><h3>CONTACT US</h3></center>
+		<p>Collective & Co.</p>
+    </div>
+	
+	<div class="w3-third">
+      <center><h3>SOCIAL MEDIA</h3></center>
+			<a href="#" class="fa fa-facebook w3-jumbo"></a>
+			<a href="#" class="fa fa-twitter w3-jumbo"></a>
+			<a href="#" class="fa fa-instagram w3-jumbo"></a>
+    </div>
 
+  </footer>
 
+<!-- End page content -->
+</div>
+</body>
 </html>

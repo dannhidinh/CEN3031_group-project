@@ -1,0 +1,190 @@
+*{
+    box-sizing: border-box;
+    font-weight: bold;
+    font-family: 'Verdana', sans-serif;
+  }
+  
+  .userPage{
+    text-align: center;
+  }
+  
+  .topBar{
+    height: 150px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo{
+    order: 1;
+  }
+  
+  .sideButtons{
+    order: 2;
+    min-width: 150px;
+  }
+  
+  .signout, .cart{
+    min-width: 150px;
+    height: 40px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .signout{
+    margin-bottom: 30px;
+  }
+  
+  .fa-sign-out-alt, .fa-shopping-cart{
+    font-size: 26px;
+  }
+  
+  .userContent{
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    border: 1px solid #57EDF2;
+    border-radius: 10px;
+  }
+  
+  .menuDrop{
+    order: 1;
+    padding-left: 10px;
+    min-width: 100px;
+    font-size: 14px;
+    position: absolute;
+  }
+  
+  .menuDrop:hover .dropContent{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .dropContent{
+    display: none;
+    position: relative;
+    z-index: 5;
+    width: 100%;
+  }
+  
+  .infoContainer{
+    order: 2;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 20px 20px;
+  }
+  
+  .history{
+    order: 1;
+    display: flex;
+    flex-direction: column;;
+    justify-content: center;
+    padding-top: 20px;
+    width: 35%;
+  } 
+  
+  .listedItems{
+    height: 500px;
+    border: 1px solid #57EDF2;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+
+  .individualItem{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 10px;
+    font-size: 14px;
+  }
+
+  .descriptionButton, .reorderButton{
+    border-radius: 50%;
+    border: 2px solid #57EDF2;
+    color: #F7A830;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .userInfo{
+    order: 2;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 35%;
+  }
+  
+  .listedInfo{
+    height: 500px;
+    border: 1px solid #57EDF2;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+  }
+
+  .mainInfo{
+    order: 1;
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .infoData{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 20px;
+    height: 40%;
+    width: 75%;
+  }
+
+  .infoBlock{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .cardContainer{
+    order: 2;
+    width: 100%;
+    height: 10%
+  }
+
+  .myCard{
+    width: 80%;
+    height: 100%;
+  }
+
+  .changeInfo{
+    order: 3;
+    width: 100%;
+    height: 20%;
+  }
