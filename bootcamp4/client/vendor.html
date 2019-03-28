@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>BODEGA ADMIN</title>
+<title>BODEGA VENDOR</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-
 <head>
 	<br>
 	<br>
@@ -35,33 +34,12 @@
 <body>
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content " style="max-width:1200px;margin-top:50px">
-	<CENTER><H2> ADMIN PAGE </H2></CENTER>
+	<CENTER><H2> VENDOR PAGE </H2></CENTER>
 
-  <!-- orders-->
-  <div class="w3-row-padding w3-padding-16 w3-half">
-	<CENTER><h3>ORDERS</h3></CENTER>
-	<table class="w3-table-all w3-card-4">
-		<tr>
-			<th>ORDER</th>
-			<th>NAME</th>
-			<th>EMAIL</th>
-			<TH>ORDER DETAILS</TH>
-			<TH>AMOUNT</TH>
-
-			</tr>
-			<tr>
-			<td>50</td>
-			<td>Jill Smith</td>
-			<td>JSmith@email.com</td>
-			<td>DATA</td>
-			<td>DATA</td>
-		</tr>
-	</table>
-  </div>
   
       <!--inventory -->
   <div class="w3-row-padding w3-padding-16 w3-half">
-	<CENTER><h3>INVENTORY</h3></CENTER>
+	<CENTER><h3>VENDOR INVENTORY</h3></CENTER>
   	<table class="w3-table-all w3-card-4">
 		<tr>
 			<th>FOOD ID</th>
@@ -77,43 +55,39 @@
 	</table>
   </div>
   
-  <!--USERS -->
+  <!--ADD inventory -->
   <div class="w3-row-padding w3-padding-16 w3-half">
-	<CENTER><h3>USERS</h3></CENTER>
-  	<table class="w3-table-all w3-card-4">
-		<tr>
-			<th>USER ID</th>
-			<th>NAME</th>
-			<th>EMAIL</th>
-			<th>PHONE</th>
+	<CENTER><h3>ADD PRODUCTS</h3></CENTER>
+	 <div class="w3-card-4">
 
-			</tr>
-			<tr>
-			<td>1</td>
-			<td>STEVEN POLK</td>
-			<td>COOLGUY@UFL.EDU</td>
-			<td>111-111-1111</td>
-		</tr>
-	</table>
+	<div class="w3-container w3-light-gray">
+		<h2>Product Additon Form</h2>
+	</div>
+	<br>
+	<form class="w3-container">
+
+	<label>Product Name:</label>
+	<input class="w3-input" type="text">
+
+	<label>Product Description:</label>
+	<input class="w3-input" type="text">
+	
+	<label>Product Expiration:</label>
+	<input class="w3-input" type="text">
+	
+	<label>Product Price:</label>
+	<input class="w3-input" type="text">
+	
+	<label>Product Image:</label>
+	<input type="file" name="datasize" size="30">
+	<br>
+
+</form>
+
+</div> 
+
   </div>
   
-    <!--ANALYTICS -->
-  <div class="w3-row-padding w3-padding-16 w3-half">
-	<CENTER><h3>ANALYTICS</h3></CENTER>
-  	<table class="w3-table-all w3-card-4">
-		<tr>
-			<th>BEST SELLER</th>
-			<th>SOME DATA</th>
-			<th>WORST SELLER</th>
-
-			</tr>
-			<tr>
-			<td>BANANA</td>
-			<td>DATA</td>
-			<td>BRUSSEL SPROUTS</td>
-		</tr>
-	</table>
-  </div>
   
   </div> <!-- END MAIN CONTENT -->
    <br>
