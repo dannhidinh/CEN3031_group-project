@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='./styles/CartPageStyles.css'/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  </head>
+  <body class='cartPage'>
+    <div class='topBar'>
+      <img class='logo' src='./pictures/BodegaLogo.PNG' height='150px' width='150px'/>
+      <div class="navBar w3-main w3-content" style="max-width:1200px">
+        <div class="w3-bar w3-black w3-padding-16">   
+          <a href="index.html" class="w3-bar-item w3-button">HOME</a> 
+          <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+          <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
+      
+          <input class="w3-input w3-half w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="color: black">
+          <i class="fa fa-search w3-xxlarge" ></i>
+          
+          <a href="#cart" class="w3-right w3-bar-item w3-button">CART</a>
+          <!--<i class="fa fa-shopping-cart w3-xxlarge" ></i> -->
+          <a href="#login" class="w3-right w3-bar-item w3-button">LOG IN</a>
+          <!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
+        </div>
+      </div>
+    </div>
+    <div class='cartContent'>
+      <span class='title'>SHOPPING CART</span>
+      <div class='infoContainer'>
+        <div class='individualCartListing'> <!--Repeating Row-->
+          <div class='itemName'>Item Name</div> <!--Place item name data here in {}-->
+          <div class='itemDescription'>Description</div> <!--Place item description here in {}-->
+          <div class='listingPrice'>Price</div> <!--Place item price data here in {}-->
+          <button class='removeListing'>Remove</button>
+        </div>
+        <div class='separateCalcRow'>
+            <div class='taxInfo'>Tax</div>
+            <div class='finalPrice'>Final</div>
+        </div>
+      </div>
+      <div class='bottomButtons'>
+        <button class='backToProducts'>Go Back To Shopping</button>
+        <button class='order'>Checkout</button>
+      </div>
+    </div>
+  </body> 
+</html>
