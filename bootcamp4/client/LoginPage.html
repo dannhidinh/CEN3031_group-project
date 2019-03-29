@@ -5,21 +5,28 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   </head>
   <body class='loginPage' ng-app="directoryApp" ng-controller="ListingsController">
+    {{currentUser.name}} is Logged in!
     <div class='myLogin' id="logginForm">
       <span class='logTitle'>LOGIN</span>
-      <form class='logForm'>
+      <form class='logForm' onsubmit="this.reset()">
         <span class='logInItem'>Username/Email</span>
         <input class='logInItem' type='text' ng-model="nm"/>
         <span class='logInItem'>Password</span>
         <input class='logInItem' type='text' ng-model="pw"/>
-        <button class='btn btn-primary' ng-click='loggedIn(nm, pw)'>SIGN IN</button>
+        <button class='btn btn-primary' ng-click='loggedIn(nm, pw)' oninput="myFunction()">SIGN IN</button>
+
       </form>
       <div id="result"></div>
-          
+<script>
+function myFunction() {
+  console.log("used");
+  document.getElementById("logginForm").reset();
+}
+</script>
     </div>
     <div class='mySignUp' ng-controller="ListingsController">
       <span class='signTitle'>SIGN UP</span>
-      <form class= 'signForm' id= "myForm">
+      <form class= 'signForm' id= "myForm" onsubmit="this.reset()">
         <span class='signUpItem'>
           <span class='fieldTitle'>Username</span>
           <input type='text' ng-model="newUser.name"/></span>

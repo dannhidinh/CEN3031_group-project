@@ -5,11 +5,11 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   </head>
-  <body class='userPage' ng-app="directoryApp" ng-controller="ListingsController" >
+  <body class='userPage' ng-app="directoryApp" ng-controller="ListingsController">
     <div class='topBar'>
       <img class='logo' src='./pictures/BodegaLogo.PNG' height='150px' width='150px'/>
       <div class='sideButtons'>
-        <button class='signout'>
+        <button class='signout' ng-click= 'signOut()'>
           <span>Sign Out</span> <i class="fas fa-sign-out-alt"></i>
         </button>     
         <button class='cart'>
@@ -19,11 +19,11 @@
     </div>
     <div class='userContent'>
         <!--
-        <button class='signin' ng-click="loggedIn('Steven', '2502')">
+        <button class='signin' ng-click="getCurrent()">
           <span>temp Sign in</span> <i class="fas fa-sign-out-alt"></i>
         </button>
-        -->
-
+        {{currentUser.name}}
+-->
       <div class='menuDrop'>
         <span>MENU</span>
         <div class='dropContent'>
@@ -47,6 +47,7 @@
           <a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
           <!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
         </div>
+        {{currentUser.name}} is Logged in!
       </div>
     </div>
   </div>

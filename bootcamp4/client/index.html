@@ -37,10 +37,11 @@
 		<a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
 		<!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
   </div>
+  {{currentUser.name}} is Logged in!
 
 </div>
 </head>
-<body>
+<body ng-app="directoryApp" ng-controller="ListingsController">
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content " style="max-width:1200px;margin-top:50px">
 
@@ -129,7 +130,7 @@
    
    <!-- MAP ACTUTAL -->
    
-  <div class "w3-container w3-left">
+  <div class= "w3-container w3-left">
     <div class="nearestBodega">
     <link rel="mapStyle w3-left" href="mapbox/map.css">
     <div id='map' style='width: 800px; height: 600px;'></div>
@@ -168,5 +169,11 @@
 
 <!-- End page content -->
 </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script> 
 </body>
 </html>

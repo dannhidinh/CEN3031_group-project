@@ -21,13 +21,17 @@
           <!--<i class="fa fa-shopping-cart w3-xxlarge" ></i> -->
           <a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
           <!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
+          
         </div>
+        {{currentUser.name}} is Logged in!
       </div>
     </div>
     <div class='cartContent'>
-      <button class='signin' ng-click="loggedIn('Bob', 'belch')">
+      <!--
+      <button class='signin' ng-click="getCurrent()">
           <span>temp Sign in</span> <i class="fas fa-sign-out-alt"></i>
         </button>   
+      -->
       <span class='title'>SHOPPING CART</span>
       <div class='infoContainer'>
         <div class='individualCartListing' ng-repeat= 'cart in currentUser.cart'> <!--Repeating Row-->

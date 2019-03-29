@@ -7,14 +7,51 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       console.log('Unable to retrieve listings:', error);
     });
 
-    $scope.currentUser = undefined;
+    //$scope.currentUser = undefined;
     $scope.detailedInfo = undefined;
 
     $scope.test = function(){
       console.log($scope.currentUser);
     }
 
+window.addEventListener('DOMContentLoaded', (event) => {
+    //console.log('DOM fully loaded and parsed');      
+    if (typeof(Storage) !== "undefined") {
+        //console.log("used");
+        // Store
+        //sessionStorage.setItem("current", $scope.currentUser);
+        //console.log(JSON.parse(sessionStorage.getItem("current")));
+        // Retrieve
+        $scope.currentUser = JSON.parse(sessionStorage.getItem("current"));
+        //console.log('used');
+        //console.log($scope.currentUser);
+      } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+      }
+});
 
+$scope.signOut = function(){
+  $scope.currentUser = undefined;
+  sessionStorage.setItem("current", null);
+  console.log(sessionStorage.getItem("current"));
+}
+
+
+    $scope.getCurrent = function(){
+      console.log("used2");
+      if (typeof(Storage) !== "undefined") {
+        
+        // Store
+        //sessionStorage.setItem("current", $scope.currentUser);
+        //console.log(JSON.parse(sessionStorage.getItem("current")));
+        // Retrieve
+        $scope.currentUser = JSON.parse(sessionStorage.getItem("current"));
+        //console.log('used');
+        //console.log(currentUser);
+      } else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+      }
+    }
 
 
     $scope.loggedIn = function(testName, testPass){
@@ -51,13 +88,18 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
           break;
         }
       }
-      console.log($scope.currentUser);
+      //console.log($scope.currentUser);
 
       if (typeof(Storage) !== "undefined") {
+        var curr = $scope.currentUser;
+        //console.log(curr);
+
   // Store
-  sessionStorage.setItem("current", $scope.currentUser);
+  sessionStorage.setItem("current", JSON.stringify(curr));
   // Retrieve
-  document.getElementById("result").innerHTML = sessionStorage.getItem("current");
+  //console.log(JSON.parse(sessionStorage.getItem("current")));
+  //document.getElementById("result").innerHTML = sessionStorage.getItem("current");
+  //console.log(document.getElementById("result").innerHTML);
 } else {
   document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
 }
@@ -71,7 +113,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 	  saved redirect back to the list page. Otherwise, display the error
 	    */
       var testPass = $scope.newUser.password;
-      console.log(testPass);
+      //console.log(testPass);
         var hash = 0, i, chr;
         if (testPass.length === 0) return hash;
         for (i = 0; i < testPass.length; i++) {
@@ -95,7 +137,8 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       $scope.newUser = {};
 */
 
-    Users.create({name: $scope.newUser.name, password: $scope.newUser.password, email: $scope.newUser.email, phone: $scope.newUser.phone}).then(function(response){
+    Users.create({name: $scope.newUser.name, password: $scope.newUser.password, 
+      email: $scope.newUser.email, phone: $scope.newUser.phone}).then(function(response){
       Users.getAll().then(function(response) {
           $scope.users = response.data;
       }, function(error) {
@@ -105,6 +148,10 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
       
     };
+
+    $scope.addToCart = function(){
+
+    }
 
     $scope.deleteListing = function(id) {
 	   /**TODO
