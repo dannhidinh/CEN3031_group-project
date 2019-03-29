@@ -40,7 +40,11 @@
       </div>
       <div class='bottomButtons'>
         <button class='backToProducts'><a href='index.html' >Go Back To Shopping</a></button>
-        <button class='order'>Checkout</button>
+        
+		 <!-- CHECKOUT API -->
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+        <button class='order' id="customButton">Checkout</button>
+        <script src="card-stripe/checkout.js"></script>
       </div>
     </div>
   </body> 
