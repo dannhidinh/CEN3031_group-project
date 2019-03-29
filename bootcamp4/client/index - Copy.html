@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  
+	<br>
+    <div class="header">
+		<center>
+		<img src = "pictures/BodegaLogo.png" alt ="Bodega Logo" width="196" height="154">
+		</center>
+	</div>
+	
+  <body>
+  <br>
+  <br>
+  <center>
+ 
+	<div class="dropdown">
+		<button onclick="myFunction()" class="dropbtn">MENU</button>
+			<div id="myDropdown" class="dropdown-content">
+				<a href="index.html">Home</a>
+				<a href="AboutAndContact.html">About Us</a>
+				<a href="AboutAndContact.html">Contact Us</a>
+				<a href="">Log In/Sign Up</a>  <!-- need login page htmls -->
+				<a href="">Profile</a>
+				<a href="">Cart</a>
+			</div>
+			<input type="text" placeholder="Search.." id="myInput">
+	</div>
+	
+
+
+	
+
+	<script>
+		function myFunction() 
+		{
+			document.getElementById("myDropdown").classList.toggle("show");
+		}
+		window.onclick = function(e)
+		{
+			if (!e.target.matches('.dropbtn'))
+			{
+				var myDropdown = document.getElementById("myDropdown");
+				if (myDropdown.classList.contains('show'))
+				{
+					myDropdown.classList.remove('show');
+				}
+			}
+		}
+	</script>
+
+   <div class = "productarea">
+    <br>
+	<br>
+	<left><form action="/action_page.php">
+		<input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
+		<input type="checkbox" name="vehicle2" value="Car"> I have a car<br>
+		<input type="checkbox" name="vehicle3" value="Boat" checked> I have a boat<br><br>
+		<input type="submit" value="Submit">
+	</form></left>
+
+	<center>
+	<img src = "pictures/product.jpg" alt ="product">
+	<img src = "pictures/product.jpg" alt ="product">
+	<img src = "pictures/product.jpg" alt ="product">
+
+	<br>
+	<br>
+	<br>
+	<img src = "pictures/product.jpg" alt ="product">
+	<img src = "pictures/product.jpg" alt ="product">
+	<img src = "pictures/product.jpg" alt ="product">
+	</center>
+	
+   </div>
+  
+  </center>
+  </body>
+  
+ 
+</html>
