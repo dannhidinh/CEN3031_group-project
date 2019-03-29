@@ -7,12 +7,14 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       console.log('Unable to retrieve listings:', error);
     });
 
-    //$scope.currentUser = undefined;
+    $scope.currentUser = undefined;
     $scope.detailedInfo = undefined;
 
     $scope.test = function(){
       console.log($scope.currentUser);
     }
+
+
 
 
     $scope.loggedIn = function(testName, testPass){
@@ -50,6 +52,16 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
         }
       }
       console.log($scope.currentUser);
+
+      if (typeof(Storage) !== "undefined") {
+  // Store
+  sessionStorage.setItem("current", $scope.currentUser);
+  // Retrieve
+  document.getElementById("result").innerHTML = sessionStorage.getItem("current");
+} else {
+  document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
+
      //console.log($scope.currentUser.orderHist[0].transaction.getMonth());
     };
 
