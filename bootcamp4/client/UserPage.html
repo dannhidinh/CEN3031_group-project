@@ -4,19 +4,25 @@
     <link rel='stylesheet' href='./styles/UserPageStyles.css'/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   </head>
-  <body class='userPage'>
+  <body class='userPage' ng-app="directoryApp">
     <div class='topBar'>
       <img class='logo' src='./pictures/BodegaLogo.PNG' height='150px' width='150px'/>
       <div class='sideButtons'>
         <button class='signout'>
           <span>Sign Out</span> <i class="fas fa-sign-out-alt"></i>
-        </button>
+        </button>     
         <button class='cart'>
           <span>Cart</span><i class="fas fa-shopping-cart"></i>
         </button>
       </div>
     </div>
-    <div class='userContent'>
+    <div class='userContent' ng-controller="ListingsController">
+        
+        <button class='signin' ng-click="test()">
+          <span>temp Sign in</span> <i class="fas fa-sign-out-alt"></i>
+        </button>
+        
+
       <div class='menuDrop'>
         <span>MENU</span>
         <div class='dropContent'>
@@ -25,13 +31,13 @@
           <span>Item 3</span>
         </div>
       </div>
-      <div class='infoContainer'>
+      <div class='infoContainer' >
         <div class='history'>
           <span>ORDER HISTORY</span>
           <div class='listedItems'>
-            <div class='individualItem'>
-              <div class='itemName'>Item Name</div> <!--Place item name data here in {}-->
-              <div class='orderDate'>Order Date</div> <!--Place item last order data here in {}-->
+            <div class='individualItem' ng-repeat= 'orderHist in currentUser.orderHist'>
+              <div class='itemName'>{{orderHist.Product}}</div> <!--Place item name data here in {}-->
+              <div class='orderDate'>{{orderHist.transaction.getDate()}}</div> <!--Place item last order data here in {}-->
               <i class='descriptionButton fas fa-info-circle'></i> <!--Link to product page for item ID-->
               <i class='reorderButton fas fa-plus-circle'></i><!--Link to add item to current user cart-->
             </div>
@@ -44,9 +50,9 @@
               <img class='userPic' src='./pictures/ProfileIcon.png' height='100px' width='100px'/> <!--Place user-submitted image here in {} in src-->
               <div class='infoData'>
                 <div class='infoBlock'><span>Logged in as </span><span>'User'</span></div> <!--Place user type data here in {}-->
-                <div class='infoBlock'><span>Name </span><span>'John Doe'</span></div> <!--Place user name data here in {}-->
-                <div class='infoBlock'><span>Cell </span><span>'000-000-0000'</span></div> <!--Place user cell data here in {}-->
-                <div class='infoBlock'><span>Email </span><span>'johnDoe@gmail.com'</span></div> <!--Place user email data here in {}-->
+                <div class='infoBlock'><span>Name </span><span>{{currentUser.name}}</span></div> <!--Place user name data here in {}-->
+                <div class='infoBlock'><span>Cell </span><span>{{currentUser.phone}}</span></div> <!--Place user cell data here in {}-->
+                <div class='infoBlock'><span>Email </span><span>{{currentUser.email}}</span></div> <!--Place user email data here in {}-->
               </div>
             </div>
             <div class='cardContainer'>
@@ -63,5 +69,11 @@
         </div>
       </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/factories/listingFactory.js"></script>
+    <script src="js/controllers/listingController.js"></script>    
   </body>  
 </html>
