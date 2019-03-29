@@ -33,7 +33,7 @@
 </head>
 <body>
 <!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content " style="max-width:1200px;margin-top:50px">
+<div class="w3-main w3-content " style="max-width:1200px;margin-top:50px" ng-controller="ListingsController">
 	<CENTER><H2> VENDOR PAGE </H2></CENTER>
 
   
@@ -47,10 +47,10 @@
 			<th>QUANITY</th>
 			<!-- ng repeat table -->
 			</tr>
-			<tr>
-			<td>1</td>
-			<td>BANANA</td>
-			<td>99</td>
+			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+                <td>{{listing.itemid}}</td>
+                <td>{{listing.name}}</td> 
+                <td>{{listing.quantity}}</td>
 		</tr>
 	</table>
   </div>

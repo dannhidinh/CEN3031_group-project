@@ -33,11 +33,11 @@
 </head>
 <body>
 <!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content " style="max-width:1200px;margin-top:50px">
+<div class="w3-main w3-content " style="max-width:1200px;margin-top:50px" ng-controller="ListingsController">
 	<CENTER><H2> ADMIN PAGE </H2></CENTER>
 
   <!-- orders-->
-  <div class="w3-row-padding w3-padding-16 w3-half">
+  <div class="w3-row-padding w3-padding-16" >
 	<CENTER><h3>ORDERS</h3></CENTER>
 	<table class="w3-table-all w3-card-4">
 		<tr>
@@ -48,18 +48,18 @@
 			<TH>AMOUNT</TH>
 
 			</tr>
-			<tr>
-			<td>50</td>
-			<td>Jill Smith</td>
-			<td>JSmith@email.com</td>
-			<td>DATA</td>
-			<td>DATA</td>
+			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+                <td>{{listing.order}}</td>
+                <td>{{users.name}}</td>
+				<td>{{users.email}}</td>
+                <td>{{listing.details}}</td> 
+                <td>{{listing.amount}}</td>
 		</tr>
 	</table>
   </div>
   
       <!--inventory -->
-  <div class="w3-row-padding w3-padding-16 w3-half">
+  <div class="w3-row-padding w3-padding-16">
 	<CENTER><h3>INVENTORY</h3></CENTER>
   	<table class="w3-table-all w3-card-4">
 		<tr>
@@ -68,10 +68,10 @@
 			<th>QUANITY</th>
 			<!-- ng repeat table -->
 			</tr>
-			<tr>
-			<td>1</td>
-			<td>BANANA</td>
-			<td>99</td>
+			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+                <td>{{listing.itemid}}</td>
+                <td>{{listing.name}}</td> 
+                <td>{{listing.quantity}}</td>
 		</tr>
 	</table>
   </div>
@@ -87,17 +87,17 @@
 			<th>PHONE</th>
 			<!-- ng repeat table -->
 			</tr>
-			<tr>
-			<td>1</td>
-			<td>STEVEN POLK</td>
-			<td>COOLGUY@UFL.EDU</td>
-			<td>111-111-1111</td>
+			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+                <td>{{user.id}}</td>
+                <td>{{users.name}}</td>
+				<td>{{users.email}}</td>
+				<td>{{users.phone}}</td>
 		</tr>
 	</table>
   </div>
   
     <!--ANALYTICS -->
-  <div class="w3-row-padding w3-padding-16 w3-half">
+  <div class="w3-row-padding w3-padding-16 w3-third w3-right">
 	<CENTER><h3>ANALYTICS</h3></CENTER>
   	<table class="w3-table-all w3-card-4">
 		<tr>
