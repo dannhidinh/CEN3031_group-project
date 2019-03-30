@@ -41,12 +41,14 @@
           <button class='removeListing'>Remove</button>
         </div>
         <div class='separateCalcRow'>
-            <div class='taxInfo'>Tax</div>
-            <div class='finalPrice'>Final</div>
+          <button class="calculate" ng-click='finalPrice()'>Done Ordering</button>
+            <div class="preTax">Before Tax: {{before}}</div>
+            <div class='taxInfo'>Tax: {{tax}}</div>
+            <div class='finalPrice'>Final: {{final}}</div>
         </div>
       </div>
       <div class='bottomButtons'>
-        <button class='backToProducts'><a href='index.html' >Go Back To Shopping</a></button>
+        <button class='backToProducts'><a href='index.html'>Go Back To Shopping</a></button>
         <button class='order'>Checkout</button>
       </div>
     </div>

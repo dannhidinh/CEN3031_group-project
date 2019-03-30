@@ -14,6 +14,22 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       console.log($scope.currentUser);
     }
 
+    $scope.finalPrice = function(){
+      //console.log($scope.currentUser.cart[0].price);
+    var amount = 0;
+    for (var i = 0; i < $scope.currentUser.cart.length; i++) {
+      //console.log(user.cart[i].price);
+      amount += $scope.currentUser.cart[i].price * $scope.currentUser.cart[i].quantity;
+    }
+    $scope.before = amount;
+    var uftax = amount*.06;
+    $scope.tax = uftax.toFixed(2);
+    amount = amount + uftax;// make tax a variable
+    $scope.final = amount.toFixed(2);
+    
+  console.log("Total price (including tax): " + $scope.final + "\n");      
+    }
+
 window.addEventListener('DOMContentLoaded', (event) => {
     //console.log('DOM fully loaded and parsed');      
     if (typeof(Storage) !== "undefined") {
