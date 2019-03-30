@@ -7,39 +7,19 @@
   </head>
   <body class='userPage' ng-app="directoryApp" ng-controller="ListingsController">
     <div class='topBar'>
-      <img class='logo' src='./pictures/BodegaLogo.PNG' height='150px' width='150px'/>
       <div class='sideButtons'>
-        <button class='signout' ng-click= 'signOut()'>
-          <span>Sign Out</span> <i class="fas fa-sign-out-alt"></i>
-        </button>     
-        <button class='cart'>
-          <span>Cart</span><i class="fas fa-shopping-cart"></i>
+        <button class='signout' ng-click='signOut()'>
+          <span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
         </button>
       </div>
-    </div>
-    <div class='userContent'>
-        <!--
-        <button class='signin' ng-click="getCurrent()">
-          <span>temp Sign in</span> <i class="fas fa-sign-out-alt"></i>
-        </button>
-        {{currentUser.name}}
--->
-      <div class='menuDrop'>
-        <span>MENU</span>
-        <div class='dropContent'>
-          <span>Item 1</span>
-          <span>Item 2</span>
-          <span>Item 3</span>
-        </div>
-      </div>
-      <div class='infoContainer' >
+      <img class='logo' src='./pictures/BodegaLogo.PNG' height='150px' width='150px'/>
       <div class="navBar w3-main w3-content" style="max-width:1200px">
         <div class="w3-bar w3-black w3-padding-16">   
           <a href="index.html" class="w3-bar-item w3-button">HOME</a> 
           <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
           <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
       
-          <input class="w3-input w3-half w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="black">
+          <input class="w3-input w3-half w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="color: black">
           <i class="fa fa-search w3-xxlarge" ></i>
           
           <a href="CartPage.html" class="w3-right w3-bar-item w3-button">CART</a>
@@ -47,11 +27,11 @@
           <a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
           <!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
         </div>
-        {{currentUser.name}} is Logged in!
       </div>
     </div>
   </div>
     <div class='userContent'>
+      {{currentUser.name}} is Logged in!
       <div class='infoContainer'>
         <div class='history'>
           <span>ORDER HISTORY</span>

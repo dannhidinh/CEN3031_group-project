@@ -21,23 +21,23 @@
           <!--<i class="fa fa-shopping-cart w3-xxlarge" ></i> -->
           <a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
           <!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
-          
         </div>
-        {{currentUser.name}} is Logged in!
       </div>
     </div>
     <div class='cartContent'>
-      <!--
-      <button class='signin' ng-click="getCurrent()">
-          <span>temp Sign in</span> <i class="fas fa-sign-out-alt"></i>
-        </button>   
-      -->
+      {{currentUser.name}} is Logged in!
       <span class='title'>SHOPPING CART</span>
       <div class='infoContainer'>
+        <div class='cartHeaders'>
+            <div class='nameHeader'>Product</div> <!--Place item name data here in {}-->
+            <div class='quantityHeader'>Quantity</div> <!--Place item description here in {}-->
+            <div class='priceHeader'>Price</div> <!--Place item price data here in {}-->
+            <div class='removeHeader'>Remove</div>
+        </div>
         <div class='individualCartListing' ng-repeat= 'cart in currentUser.cart'> <!--Repeating Row-->
-          <div class='itemName'>Product: {{cart.productC}}</div> <!--Place item name data here in {}-->
-          <div class='itemDescription'>Quant: {{cart.quantity}}</div> <!--Place item description here in {}-->
-          <div class='listingPrice'>Price: {{cart.price}}</div> <!--Place item price data here in {}-->
+          <div class='itemName'>{{cart.productC}}</div> <!--Place item name data here in {}-->
+          <div class='itemQuantity'>{{cart.quantity}}</div> <!--Place item description here in {}-->
+          <div class='listingPrice'>{{cart.price}}</div> <!--Place item price data here in {}-->
           <button class='removeListing'>Remove</button>
         </div>
         <div class='separateCalcRow'>
