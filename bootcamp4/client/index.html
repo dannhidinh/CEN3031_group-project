@@ -43,8 +43,9 @@
 <body>
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content " ng-controller="ListingsController" style="max-width:1200px;margin-top:50px">
-
-  <!-- First Photo Grid-->
+	
+	
+  <!-- First Photo Grid
   <div class="w3-row-padding w3-padding-16 w3-center" id="food">
     <div class="w3-quarter" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
 	<a href ="ProductPage.html">
@@ -52,50 +53,71 @@
       <h3>{{blisting.name}}</h3>
       <p>{{blisting.description}}</p>
 	  </a>
-    </div>
+    </div>-->
 	
-	<!-- placeholder commented out-->
-<!--     <div class="w3-quarter">
-      <img src="pictures/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food desciption</p>
+	  <!-- First Photo Grid-->
+  <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+    <div class="w3-quarter" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+	<a href ="ProductPage.html">
+      <img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="196" height="154">
+      <h3>Chicken and Veggies</h3>
+      <p>Baked chicken with assorted Veggies.</p>
+	  </a>
+    </div>
+     <div class="w3-quarter">
+	 <a href ="ProductPage.html">
+      <img src="pictures/foods/Mojo pork with rice and beans.jpg" alt="product" width="196" height="154" >
+      <h3>Mojo pork with rice and beans</h3>
+      <p>White rice mixed with black beans, topped with delicious Mojo pork.</p>
+	  </a>
     </div>
     <div class="w3-quarter">
-      <img src="pictures/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
+      <img src="pictures/foods/Turkey with mash potatoes.jpg" alt="product" width="196" height="154" >
+	  <a href ="ProductPage.html">
+      <h3>Turkey with mash potatoes</h3>
+      <p>A taste of Thanksgiving.</p>
+	  </a>
     </div>
     <div class="w3-quarter">
-      <img src="pictures/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
-    </div> -->
+      <img src="pictures/foods/Summer Salad.jpg" alt="product" width="196" height="154" >
+	  <a href ="ProductPage.html">
+      <h3>Summer Salad</h3>
+      <p>Salad built for the summer.</p>
+	  </a>
+    </div>
   </div>
   
     <!-- Second Photo Grid-->
-	
-<!--   <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-    <div class="w3-quarter">
-      <img src="pictures/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
+  <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+    <div class="w3-quarter" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+	<a href ="ProductPage.html">
+      <img src="pictures/foods/Chicken and Bri on Tomato Swirl bread.jpg" alt="product" width="196" height="154">
+      <h3>Chicken and Bri on Tomato Swirl bread</h3>
+      <p>Yummy Chicken and Bri on Tomato Swirl bread</p>
+	  </a>
+    </div>
+     <div class="w3-quarter">
+	 <a href ="ProductPage.html">
+      <img src="pictures/foods/Chicken Croissant and Brio cold brew coffee.jpg" alt="product" width="196" height="154" >
+      <h3>Chicken Croissant and Brio cold brew coffee</h3>
+      <p>Chicken Croissant and Brio cold brew coffee</p>
+	  </a>
     </div>
     <div class="w3-quarter">
-      <img src="pictures/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
+      <img src="pictures/foods/cilantro chicken with rice & beans.jpg" alt="product" width="196" height="154" >
+	  <a href ="ProductPage.html">
+      <h3>Cilantro chicken with rice & beans</h3>
+      <p>Cilantro chicken with rice & beans</p>
+	  </a>
     </div>
     <div class="w3-quarter">
-      <img src="pictures/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
+      <img src="pictures/foods/turkey club on a spinach wrap with a yummy cookie.jpg" alt="product" width="196" height="154" >
+	  <a href ="ProductPage.html">
+      <h3>Turkey club on a spinach wrap with a yummy cookie</h3>
+      <p>Turkey club on a spinach wrap with a yummy cookie.</p>
+	  </a>
     </div>
-    <div class="w3-quarter">
-      <img src="pictures/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
-    </div>
-  </div> -->
+  </div>>
 	 
    <!-- Pagination -->
   <div class="w3-center w3-padding-32">
