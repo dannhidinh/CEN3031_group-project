@@ -4,7 +4,7 @@
 module.exports = {
   db: {
     uri: 'mongodb://spolk:shpjr2502@ds145019.mlab.com:45019/bodega_users', //place the URI of your mongo database here.
-    //buri: 
+    buri: 'mongodb://tflowers1:Turtle1@ds161804.mlab.com:61804/tyfadmin',
   },
   port: 8080
 };
