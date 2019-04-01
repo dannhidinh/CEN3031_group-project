@@ -4,9 +4,12 @@
 
 module.exports = {
   db: {
-    uri: 'mongodb://magic:rainbowd4sh@ds245523.mlab.com:45523/bootcamp3_db', //place the URI of your mongo database here.
+    uri: 'mongodb://tflowers1:Turtle1@ds161804.mlab.com:61804/tyfadmin',
+    //place the URI of your mongo database here.
   },
-  port: 8080
+ port: 8080
+ //  var port = process.env.PORT || 8080
+  // for heroku
 };
 
 /* Now go to the JSONtoMongo.js file and include this file as a variable named 'config' with a require() */
