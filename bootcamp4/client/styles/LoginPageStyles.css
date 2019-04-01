@@ -4,6 +4,10 @@
     font-family: 'Verdana', sans-serif;
   }
   
+  .navbar{
+    margin-bottom: 20px;
+  }
+
   .loginPage{
     text-align: center;
     display: flex;
