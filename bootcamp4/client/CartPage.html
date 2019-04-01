@@ -48,8 +48,14 @@
         </div>
       </div>
       <div class='bottomButtons'>
-        <button class='backToProducts'><a href='index.html'>Go Back To Shopping</a></button>
-        <button class='order'>Checkout</button>
+
+        <button class='backToProducts'><a href='index.html' >Go Back To Shopping</a></button>
+        
+		 <!-- CHECKOUT API -->
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+        <button class='order' id="customButton">Checkout</button>
+        <script src="card-stripe/checkout.js"></script>
+
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
