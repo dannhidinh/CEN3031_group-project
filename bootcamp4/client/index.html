@@ -5,9 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<!-- LINKS -->
+	<!-- Bootstrapf or modal-->
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<!-- bootstrap from bootcamp-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<!-- Main Css-->
     <link rel="stylesheet" href="styles/main.css">
+	<!-- font awesome-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- w3.css-->
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 	 <!-- next 3 lines are mapbox api implementations-->
@@ -55,82 +63,36 @@
 	  </a>
     </div>-->
 	
+	
 	  <!-- First Photo Grid-->
   <div class="w3-row-padding w3-padding-16 w3-center" id="food">
     <div class="w3-quarter" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-	<a href ="ProductPage.html">
       <img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="196" height="154">
       <h3>Chicken and Veggies</h3>
-      <p>Baked chicken with assorted Veggies.</p>
-	  </a>
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">More Details</button>
     </div>
+	
      <div class="w3-quarter">
-	 <a href ="ProductPage.html">
       <img src="pictures/foods/Mojo pork with rice and beans.jpg" alt="product" width="196" height="154" >
       <h3>Mojo pork with rice and beans</h3>
-      <p>White rice mixed with black beans, topped with delicious Mojo pork.</p>
-	  </a>
+	  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">More Details</button>
     </div>
+	
     <div class="w3-quarter">
       <img src="pictures/foods/Turkey with mash potatoes.jpg" alt="product" width="196" height="154" >
-	  <a href ="ProductPage.html">
       <h3>Turkey with mash potatoes</h3>
-      <p>A taste of Thanksgiving.</p>
-	  </a>
+	  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal3">More Details</button>
     </div>
+	
     <div class="w3-quarter">
       <img src="pictures/foods/Summer Salad.jpg" alt="product" width="196" height="154" >
-	  <a href ="ProductPage.html">
       <h3>Summer Salad</h3>
-      <p>Salad built for the summer.</p>
-	  </a>
+	  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal4">More Details</button>
     </div>
   </div>
   
-    <!-- Second Photo Grid-->
-  <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-    <div class="w3-quarter" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-	<a href ="ProductPage.html">
-      <img src="pictures/foods/Chicken and Bri on Tomato Swirl bread.jpg" alt="product" width="196" height="154">
-      <h3>Chicken and Bri on Tomato Swirl bread</h3>
-      <p>Yummy Chicken and Bri on Tomato Swirl bread</p>
-	  </a>
-    </div>
-     <div class="w3-quarter">
-	 <a href ="ProductPage.html">
-      <img src="pictures/foods/Chicken Croissant and Brio cold brew coffee.jpg" alt="product" width="196" height="154" >
-      <h3>Chicken Croissant and Brio cold brew coffee</h3>
-      <p>Chicken Croissant and Brio cold brew coffee</p>
-	  </a>
-    </div>
-    <div class="w3-quarter">
-      <img src="pictures/foods/cilantro chicken with rice & beans.jpg" alt="product" width="196" height="154" >
-	  <a href ="ProductPage.html">
-      <h3>Cilantro chicken with rice & beans</h3>
-      <p>Cilantro chicken with rice & beans</p>
-	  </a>
-    </div>
-    <div class="w3-quarter">
-      <img src="pictures/foods/turkey club on a spinach wrap with a yummy cookie.jpg" alt="product" width="196" height="154" >
-	  <a href ="ProductPage.html">
-      <h3>Turkey club on a spinach wrap with a yummy cookie</h3>
-      <p>Turkey club on a spinach wrap with a yummy cookie.</p>
-	  </a>
-    </div>
-  </div>>
-	 
-   <!-- Pagination -->
-  <div class="w3-center w3-padding-32">
-    <div class="w3-bar">
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-    </div>
-  </div>
-  
+
+
    <br>
    <!-- MAP -->
    <!--ADDRESS-->
@@ -155,20 +117,155 @@
   </div> -->
    
    <!-- MAP ACTUTAL -->
-   
   <div class "w3-container w3-left">
     <div class="nearestBodega">
     <link rel="mapStyle w3-left" href="mapbox/map.css">
-    <div id='map' style='width: 800px; height: 600px;'></div>
+    <div id='map' style='width: 1200px; height: 600px;'></div>
     <script src="mapbox/map.js"></script>
 	</div>
    </div>
-
 
   <!-- MAP END -->
   
 	<br>
 	<br>
+<!-- product 1 Modal -->
+<div id="myModal1" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Chicken and Veggies</h4>
+      </div>
+	  <center>
+      <div class="modal-body">
+		<img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="396" height="354">
+		<div class='productInfo'>
+            <div class='productName'>
+              <span>Name: </span><span class='nameContent'>Chips and Queso</span>
+            </div>
+            <div class='productDescription'>
+              <span>Description: </span><span class='descriptionContent'>Yum!</span>
+            </div>
+            <div class='productPrice'>
+              <span>Price: </span><span class='priceContent'>$5.00</span>
+            </div>
+            <button class='addToCart'>Add to My Cart</button>
+          </div>
+      </div>
+	  </center>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--  product2 Modal -->
+<div id="myModal2" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mojo pork with rice and beans</h4>
+      </div>
+	  <center>
+      <div class="modal-body">
+		<img src="pictures/foods/Mojo pork with rice and beans.jpg" alt="product" width="396" height="354">
+			<div class='productInfo'>
+            <div class='productName'>
+              <span>Name: </span><span class='nameContent'>Chips and Queso</span>
+            </div>
+            <div class='productDescription'>
+              <span>Description: </span><span class='descriptionContent'>Yum!</span>
+            </div>
+            <div class='productPrice'>
+              <span>Price: </span><span class='priceContent'>$5.00</span>
+            </div>
+            <button class='addToCart'>Add to My Cart</button>
+          </div>
+      </div>
+	  </center>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+	
+  </div>
+</div>
+<!-- product 3 Modal -->
+<div id="myModal3" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Turkey with mash potatoes</h4>
+      </div>
+	  <center>
+      <div class="modal-body">
+		<img src="pictures/foods/Turkey with mash potatoes.jpg"" alt="product" width="396" height="354">
+			<div class='productInfo'>
+            <div class='productName'>
+              <span>Name: </span><span class='nameContent'>Chips and Queso</span>
+            </div>
+            <div class='productDescription'>
+              <span>Description: </span><span class='descriptionContent'>Yum!</span>
+            </div>
+            <div class='productPrice'>
+              <span>Price: </span><span class='priceContent'>$5.00</span>
+            </div>
+            <button class='addToCart'>Add to My Cart</button>
+          </div>
+      </div>
+	  </center>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- product 4 Modal -->
+<div id="myModal4" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Summer Salad</h4>
+      </div>
+	  <center>
+      <div class="modal-body">
+		<img src="pictures/foods/Summer Salad.jpg" alt="product" width="396" height="354">
+		<div class='productInfo'>
+            <div class='productName'>
+              <span>Name: </span><span class='nameContent'>Chips and Queso</span>
+            </div>
+            <div class='productDescription'>
+              <span>Description: </span><span class='descriptionContent'>Yum!</span>
+            </div>
+            <div class='productPrice'>
+              <span>Price: </span><span class='priceContent'>$5.00</span>
+            </div>
+            <button class='addToCart'>Add to My Cart</button>
+          </div>
+      </div>
+	  </center>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
   <!-- Footer -->
   <footer class="w3-row-padding padding-32">
     <div class="w3-third" >
@@ -192,6 +289,8 @@
     </div>
 
   </footer>
+  
+
 
 <!-- End page content -->
 </div>
