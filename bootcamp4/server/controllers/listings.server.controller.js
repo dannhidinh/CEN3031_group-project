@@ -57,7 +57,7 @@ exports.updateCart = function(req, res) {
   });
 */
 
-  User.findOneAndUpdate({ name: user.name }, { $addToSet: {cart: {productC: "pen", quantity: 4, price: 1.50}} }, function(err, user) {
+  User.findOneAndUpdate({ name: user.name }, { $addToSet: {cart: {productC: "Chicken and Veggies", quantity: 1, price: 10.00}} }, function(err, user) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
