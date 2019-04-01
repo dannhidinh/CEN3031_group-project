@@ -2,7 +2,7 @@
 /* Dependencies */
 var mongoose = require('mongoose'),
     User = require('../models/listings.server.model.js');
-
+console.log("Page used");
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
   On an error you should send a 404 status code, as well as the error message.
@@ -34,11 +34,13 @@ exports.read = function(req, res) {
 };
 
 /* Update a listing */
-exports.update = function(req, res) {
+exports.updateCart = function(req, res) {
   var user = req.user;
+  console.log("used");
   /** TODO **/
   /* Replace the article's properties with the new properties found in req.body */
   /* Save the article */
+  /*
   user.name = req.body.name;
   user.email = req.body.email;
   user.password = req.body.password;
@@ -53,7 +55,27 @@ exports.update = function(req, res) {
       res.json(user);
     }
   });
+*/
 
+  User.findOneAndUpdate({ name: user.name }, { $addToSet: {cart: {productC: "pen", quantity: 4, price: 1.50}} }, function(err, user) {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+    else{
+      
+    }
+  });
+  
+   
+  User.findOne({ name: user.name }, function (err, user) {
+    if (err) return handleError(err);
+    
+    else{
+      res.json(user);
+    }
+  });
+  
 };
 
 /* Delete a listing */

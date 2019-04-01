@@ -15,6 +15,10 @@ angular.module('users', []).factory('Users', function($http) {
         return result of HTTP delete method
        */
 
+    },
+
+    updateCart: function(id){
+      return $http.put('http://localhost:8080/api/users/' + id);
     }
 
     

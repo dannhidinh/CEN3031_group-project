@@ -6,6 +6,11 @@
   </head>
   <body class='loginPage' ng-app="directoryApp" ng-controller="ListingsController">
     {{currentUser.name}} is Logged in!
+    <div class='sideButtons'>
+      <button class='signout' ng-click='signOut()'>
+        <span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
+      </button>
+    </div>    
     <div class='myLogin' id="logginForm">
       <span class='logTitle'>LOGIN</span>
       <form class='logForm' onsubmit="this.reset()">
@@ -14,13 +19,13 @@
         <span class='logInItem'>Password</span>
         <input class='logInItem' type='text' ng-model="pw"/>
         <button class='btn btn-primary' ng-click='loggedIn(nm, pw)'>SIGN IN</button>
-
+        {{result}}
       </form>
       <div id="result"></div>
     </div>
     <div class='mySignUp' ng-controller="ListingsController">
       <span class='signTitle'>SIGN UP</span>
-      <form class= 'signForm' id= "myForm" onsubmit="this.reset()">
+      <form class= 'signForm' id= "myForm" onsubmit="this.reset()" action="">
         <span class='signUpItem'>
           <span class='fieldTitle'>Username</span>
           <input type='text' ng-model="newUser.name"/></span>
@@ -36,8 +41,9 @@
           <span class='fieldTitle'>Phone Number</span>
           <input type='text' ng-model="newUser.phone"/></span>
           <button class='btn btn-primary' ng-click='addListing()'>SIGN UP</button>
+          {{upResult}}
       </form>     
-                       
+       <button class="test" ng-click="addToCart()">TESTS</button>                
     </div>  
     <div class = "testButton"><a href="UserPage.html" class="w3-right w3-bar-item w3-button">User Page</a></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
