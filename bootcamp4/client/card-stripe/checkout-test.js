@@ -1,6 +1,7 @@
 var checkoutHandler = StripeCheckout.configure({
   key: "pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a",
-  locale: "auto"
+  locale: "auto",
+  image: 'https://stripe.com/img/documentation/checkout/marketplace.png'
 });
 var button = document.getElementById("buttonCheckout");
 button.addEventListener("click", function(ev) {
@@ -10,6 +11,8 @@ button.addEventListener("click", function(ev) {
     token: handleToken
   });
 });
+
+
 function handleToken(token) {
   fetch("/charge", {
   method: "POST",

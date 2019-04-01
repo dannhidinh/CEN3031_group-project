@@ -21,11 +21,10 @@
 		<a href="#about" class="w3-bar-item w3-button">ABOUT</a>
 		<a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
 	
-		<input class="w3-input w3-half w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="black">
+		<input class="w3-input w3-third w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="black">
 		<i class="fa fa-search w3-xxlarge" ></i>
 		
-		<a href="#cart" class="w3-right w3-bar-item w3-button">CART</a>
-		<!--<i class="fa fa-shopping-cart w3-xxlarge" ></i> -->
+
 		<a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
 		<!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
   </div>
@@ -34,11 +33,11 @@
 </head>
 <body>
 <!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content " style="max-width:1200px;margin-top:50px">
+<div class="w3-main w3-content " style="max-width:1200px;margin-top:50px" ng-controller="ListingsController">
 	<CENTER><H2> ADMIN PAGE </H2></CENTER>
 
   <!-- orders-->
-  <div class="w3-row-padding w3-padding-16 w3-half">
+  <div class="w3-row-padding w3-padding-16" >
 	<CENTER><h3>ORDERS</h3></CENTER>
 	<table class="w3-table-all w3-card-4">
 		<tr>
@@ -49,30 +48,30 @@
 			<TH>AMOUNT</TH>
 
 			</tr>
-			<tr>
-			<td>50</td>
-			<td>Jill Smith</td>
-			<td>JSmith@email.com</td>
-			<td>DATA</td>
-			<td>DATA</td>
+			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+                <td>{{listing.order}}</td>
+                <td>{{users.name}}</td>
+				<td>{{users.email}}</td>
+                <td>{{listing.details}}</td> 
+                <td>{{listing.amount}}</td>
 		</tr>
 	</table>
   </div>
   
       <!--inventory -->
-  <div class="w3-row-padding w3-padding-16 w3-half">
+  <div class="w3-row-padding w3-padding-16">
 	<CENTER><h3>INVENTORY</h3></CENTER>
   	<table class="w3-table-all w3-card-4">
 		<tr>
 			<th>FOOD ID</th>
 			<th>NAME</th>
 			<th>QUANITY</th>
-
+			<!-- ng repeat table -->
 			</tr>
-			<tr>
-			<td>1</td>
-			<td>BANANA</td>
-			<td>99</td>
+			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+                <td>{{listing.itemid}}</td>
+                <td>{{listing.name}}</td> 
+                <td>{{listing.quantity}}</td>
 		</tr>
 	</table>
   </div>
@@ -86,26 +85,26 @@
 			<th>NAME</th>
 			<th>EMAIL</th>
 			<th>PHONE</th>
-
+			<!-- ng repeat table -->
 			</tr>
-			<tr>
-			<td>1</td>
-			<td>STEVEN POLK</td>
-			<td>COOLGUY@UFL.EDU</td>
-			<td>111-111-1111</td>
+			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+                <td>{{user.id}}</td>
+                <td>{{users.name}}</td>
+				<td>{{users.email}}</td>
+				<td>{{users.phone}}</td>
 		</tr>
 	</table>
   </div>
   
     <!--ANALYTICS -->
-  <div class="w3-row-padding w3-padding-16 w3-half">
+  <div class="w3-row-padding w3-padding-16 w3-third w3-right">
 	<CENTER><h3>ANALYTICS</h3></CENTER>
   	<table class="w3-table-all w3-card-4">
 		<tr>
 			<th>BEST SELLER</th>
 			<th>SOME DATA</th>
 			<th>WORST SELLER</th>
-
+			<!-- ng repeat table -->
 			</tr>
 			<tr>
 			<td>BANANA</td>
@@ -123,21 +122,22 @@
   <footer class="w3-row-padding padding-32">
     <div class="w3-third" >
 	<a name="about"></a> 
-      <center><h3>ABOUT</h3></center>
-      <p>Collective & Co.</p>
+      <center><h1>ABOUT</h1></center>
+      <center><p>	Collective & Co opened The Bodega marketplace September 2018 inside UF Innovate the Hub. The Bodega exists to provide a premiere lunch experience through fast and reliable service, exceptional customer-to-employee interactions, and high quality, locally-sourced prepared foods. Catering and group orders can be ordered by businesses around the Bodega by contacting bodegaGNV@gmail.com.</p></center>
     </div>
   
     <div class="w3-third">
 	<a name="contact"></a> 
-      <center><h3>CONTACT US</h3></center>
-		<p>Collective & Co.</p>
+      <center><h1>CONTACT US</h1></center>
+		<center><p>Collective & Co. Bodega Email : bodegaGNV@gmail.com. </p></center>
     </div>
 	
 	<div class="w3-third">
-      <center><h3>SOCIAL MEDIA</h3></center>
+      <center><h1>SOCIAL MEDIA</h1>
 			<a href="#" class="fa fa-facebook w3-jumbo"></a>
 			<a href="#" class="fa fa-twitter w3-jumbo"></a>
 			<a href="#" class="fa fa-instagram w3-jumbo"></a>
+			</center>
     </div>
 
   </footer>

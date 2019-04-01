@@ -12,19 +12,12 @@ button.addEventListener("click", function(ev) {
 });
 function handleToken(token) {
   fetch("/charge", {
-  method: "POST",
-  headers: {"Content-Type": "application/json"},
-  body: JSON.stringify(token)
-  })
-  .then(response => {
-    if (!response.ok)
-      throw response;
-    return response.json();
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(token)
   })
   .then(output => {
-    console.log("Purchase succeeded:", output);
-  })
-  .catch(err => {
-    console.log("Purchase failed:", err);
+    if (output.status === "succeeded")
+      document.getElementById("shop").innerHTML = "<p>Purchase complete!</p>";
   })
 }

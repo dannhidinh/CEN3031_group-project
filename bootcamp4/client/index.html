@@ -23,15 +23,15 @@
 <!-- Top menu -->
 <div class="w3-main w3-content" style="max-width:1200px;margin-top:50px">
 	<div class="w3-bar w3-black w3-padding-16">
-
-		<a href="index.html" class="w3-bar-item w3-button">HOME</a>
+		
+		<a href="index.html" class="w3-bar-item w3-button">HOME</a> 
 		<a href="#about" class="w3-bar-item w3-button">ABOUT</a>
 		<a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
 		<a href="UserPage.html" class="w3-bar-item w3-button">USER PAGE</a>
-
+	
 		<input class="w3-input w3-third w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="black">
 		<i class="fa fa-search w3-xxlarge" ></i>
-
+		
 		<a href="CartPage.html" class="w3-right w3-bar-item w3-button">CART</a>
 		<!--<i class="fa fa-shopping-cart w3-xxlarge" ></i> -->
 		<a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
@@ -42,56 +42,83 @@
 </head>
 <body>
 <!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content " style="max-width:1200px;margin-top:50px">
-
-  <!-- First Photo Grid-->
+<div class="w3-main w3-content " ng-controller="ListingsController" style="max-width:1200px;margin-top:50px">
+	
+	
+  <!-- First Photo Grid
   <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-    <div class="w3-quarter">
-      <img src="products/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food desciption</p>
+    <div class="w3-quarter" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+	<a href ="ProductPage.html">
+      <img src="pictures/product.jpg" alt="product" >
+      <h3>{{blisting.name}}</h3>
+      <p>{{blisting.description}}</p>
+	  </a>
+    </div>-->
+	
+	  <!-- First Photo Grid-->
+  <div class="w3-row-padding w3-padding-16 w3-center" id="food">
+    <div class="w3-quarter" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+	<a href ="ProductPage.html">
+      <img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="196" height="154">
+      <h3>Chicken and Veggies</h3>
+      <p>Baked chicken with assorted Veggies.</p>
+	  </a>
+    </div>
+     <div class="w3-quarter">
+	 <a href ="ProductPage.html">
+      <img src="pictures/foods/Mojo pork with rice and beans.jpg" alt="product" width="196" height="154" >
+      <h3>Mojo pork with rice and beans</h3>
+      <p>White rice mixed with black beans, topped with delicious Mojo pork.</p>
+	  </a>
     </div>
     <div class="w3-quarter">
-      <img src="products/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food desciption</p>
+      <img src="pictures/foods/Turkey with mash potatoes.jpg" alt="product" width="196" height="154" >
+	  <a href ="ProductPage.html">
+      <h3>Turkey with mash potatoes</h3>
+      <p>A taste of Thanksgiving.</p>
+	  </a>
     </div>
     <div class="w3-quarter">
-      <img src="products/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
-    </div>
-    <div class="w3-quarter">
-      <img src="products/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
+      <img src="pictures/foods/Summer Salad.jpg" alt="product" width="196" height="154" >
+	  <a href ="ProductPage.html">
+      <h3>Summer Salad</h3>
+      <p>Salad built for the summer.</p>
+	  </a>
     </div>
   </div>
-
+  
     <!-- Second Photo Grid-->
   <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-    <div class="w3-quarter">
-      <img src="products/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
+    <div class="w3-quarter" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+	<a href ="ProductPage.html">
+      <img src="pictures/foods/Chicken and Bri on Tomato Swirl bread.jpg" alt="product" width="196" height="154">
+      <h3>Chicken and Bri on Tomato Swirl bread</h3>
+      <p>Yummy Chicken and Bri on Tomato Swirl bread</p>
+	  </a>
+    </div>
+     <div class="w3-quarter">
+	 <a href ="ProductPage.html">
+      <img src="pictures/foods/Chicken Croissant and Brio cold brew coffee.jpg" alt="product" width="196" height="154" >
+      <h3>Chicken Croissant and Brio cold brew coffee</h3>
+      <p>Chicken Croissant and Brio cold brew coffee</p>
+	  </a>
     </div>
     <div class="w3-quarter">
-      <img src="products/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
+      <img src="pictures/foods/cilantro chicken with rice & beans.jpg" alt="product" width="196" height="154" >
+	  <a href ="ProductPage.html">
+      <h3>Cilantro chicken with rice & beans</h3>
+      <p>Cilantro chicken with rice & beans</p>
+	  </a>
     </div>
     <div class="w3-quarter">
-      <img src="products/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
+      <img src="pictures/foods/turkey club on a spinach wrap with a yummy cookie.jpg" alt="product" width="196" height="154" >
+	  <a href ="ProductPage.html">
+      <h3>Turkey club on a spinach wrap with a yummy cookie</h3>
+      <p>Turkey club on a spinach wrap with a yummy cookie.</p>
+	  </a>
     </div>
-    <div class="w3-quarter">
-      <img src="products/product.jpg" alt="product" >
-      <h3>Product</h3>
-      <p>Description : This is the food description</p>
-    </div>
-  </div>
-
+  </div>>
+	 
    <!-- Pagination -->
   <div class="w3-center w3-padding-32">
     <div class="w3-bar">
@@ -103,7 +130,7 @@
       <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
     </div>
   </div>
-
+  
    <br>
    <!-- MAP -->
    <!--ADDRESS-->
@@ -114,6 +141,7 @@
 		<tr>
 			<th>NAME</th>
 			<th>ADDRESS</th>
+			
 
 			</tr>
 			<tr>
@@ -125,9 +153,9 @@
 		</tr>
 	</table>
   </div> -->
-
+   
    <!-- MAP ACTUTAL -->
-
+   
   <div class "w3-container w3-left">
     <div class="nearestBodega">
     <link rel="mapStyle w3-left" href="mapbox/map.css">
@@ -138,23 +166,23 @@
 
 
   <!-- MAP END -->
-
+  
 	<br>
 	<br>
   <!-- Footer -->
   <footer class="w3-row-padding padding-32">
     <div class="w3-third" >
-	<a name="about"></a>
+	<a name="about"></a> 
       <center><h1>ABOUT</h1></center>
       <center><p>	Collective & Co opened The Bodega marketplace September 2018 inside UF Innovate the Hub. The Bodega exists to provide a premiere lunch experience through fast and reliable service, exceptional customer-to-employee interactions, and high quality, locally-sourced prepared foods. Catering and group orders can be ordered by businesses around the Bodega by contacting bodegaGNV@gmail.com.</p></center>
     </div>
-
+  
     <div class="w3-third">
-	<a name="contact"></a>
+	<a name="contact"></a> 
       <center><h1>CONTACT US</h1></center>
 		<center><p>Collective & Co. Bodega Email : bodegaGNV@gmail.com. </p></center>
     </div>
-
+	
 	<div class="w3-third">
       <center><h1>SOCIAL MEDIA</h1>
 			<a href="#" class="fa fa-facebook w3-jumbo"></a>
