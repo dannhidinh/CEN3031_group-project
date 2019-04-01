@@ -9,6 +9,7 @@ var path = require('path'),
 module.exports.init = function() {
   //connect to database
   mongoose.connect(config.db.uri);
+  mongoose.connect(config.db.buri);
 
   //initialize app
   var app = express();
@@ -26,7 +27,7 @@ module.exports.init = function() {
 
   /**TODO
   Use the listings router for requests to the api */
-  app.use('/api/listings', listingsRouter);
+  app.use('/api/users', listingsRouter);
 
   /**TODO
   Go to homepage for all routes not specified */
