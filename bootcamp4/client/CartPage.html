@@ -4,6 +4,8 @@
     <link rel='stylesheet' href='./styles/CartPageStyles.css'/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body class='cartPage' ng-app="directoryApp" ng-controller="ListingsController">
     <div class='topBar'>
@@ -53,7 +55,7 @@
         
 		 <!-- CHECKOUT API -->
         <script src="https://checkout.stripe.com/checkout.js"></script>
-        <button class='order' id="customButton">Checkout</button>
+        <button class='order' id="buttonCheckout">Checkout</button>
         <script src="card-stripe/checkout.js"></script>
 
       </div>
