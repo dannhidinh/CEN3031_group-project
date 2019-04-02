@@ -2,7 +2,7 @@ const path = require('path'),
     express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
-    cors = require('cors'),
+    //cors = require('cors'),
     bodyParser = require('body-parser'),
     config = require('./config'),
     blistingsRouter = require('../routes/blistings.server.routes');
@@ -23,7 +23,7 @@ module.exports.init = function() {
   //enable request logging for development debugging
   app.use(morgan('dev'));
 
-  app.use(cors());
+  //app.use(cors());
 
   //body parsing middleware
   app.use(bodyParser.json());
