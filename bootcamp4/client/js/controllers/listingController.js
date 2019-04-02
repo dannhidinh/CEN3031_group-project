@@ -11,17 +11,29 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
 //IGNORE, used for general testing
 /*
+    $scope.otherTest = function(){
+//document.location.reload(true);
+console.log("got here");
+    }
     $scope.test = function(){
-      console.log($scope.currentUser._id);
+      //console.log("test");
       //User.findOne({ name: $scope.currentUser.name }, function (err, user) {
       //if (err) return handleError(err);
         //console.log("works");
 
     //});
+    var test = "as@d.";
+    //console.log(test.indexOf('@'));
+      if (test.indexOf('@') < 0 || test.indexOf('.') < 0)
+  {
+    
+    console.log("not a valid email address");
+    //return;
+  }
+  else
+    console.log("valid");
+  //$scope.otherTest();
 
-    for (var i = 0; i < $scope.currentUser.cart.length; i++) {
-      console.log($scope.currentUser.cart[i]);
-    }
   }
 */
 //calculates price amounts when button is pressed
@@ -42,6 +54,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
           
     }
 
+//carries user between htmls
   window.addEventListener('DOMContentLoaded', (event) => {
 
       if (typeof(Storage) !== "undefined") {
@@ -148,10 +161,11 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
     }
 
   }
-
+//console.log($scope.newUser.email.indexOf('@'));
 //checks if email input has '@' to consider it an email, might need more validation
-  if ($scope.newUser.email.indexOf('@') != 0)
+  if ($scope.newUser.email.indexOf('@') < 0 || $scope.newUser.email.indexOf('.') < 0)
   {
+    
     $scope.upResult = "not a valid email address";
     return;
   }
@@ -193,11 +207,11 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       Users.getAll().then(function(response) {
           $scope.users = response.data;
       }, function(error) {
-          console.log('Unable to retrieve listings:', error);
+          console.log('Unable to add user', error);
         });
       });    
 
-
+    document.location.reload(true);
 //resets newUser values between attempts
     $scope.newUser.name = undefined;
     $scope.newUser.password = undefined;
