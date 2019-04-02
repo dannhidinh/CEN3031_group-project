@@ -1,58 +1,48 @@
-const path = require('path'),
+var path = require('path'),
     express = require('express'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
-    cors = require('cors'),
     bodyParser = require('body-parser'),
     config = require('./config'),
-    blistingsRouter = require('../routes/blistings.server.routes');
+    listingsRouter = require('../routes/listings.server.routes');
 
-// stripe API bs
-const keyPublishable = process.env.PUBLISHABLE_KEY,
-      keySecret = process.env.SECRET_KEY,
-      stripe = require("stripe")(keySecret);
+// STRIPE: variables
+var keyPublishable = 'pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a',
+    keySecret = 'sk_test_5szqSVkKfzjcxPvMPFSBLMxB00iWi4Ie9i',
+    stripe = require("stripe")(keySecret),
+    stripeRouter = express.Router();
 
 module.exports.init = function() {
   //connect to database
   mongoose.connect(config.db.uri);
+  mongoose.connect(config.db.buri);
 
   //initialize app
-  const app = express(),
-        router = express.Router();
+  var app = express();
 
   //enable request logging for development debugging
   app.use(morgan('dev'));
 
-  app.use(cors());
-
   //body parsing middleware
   app.use(bodyParser.json());
 
-  /**
+  /**TODO
   Serve static files */
   app.use('/', express.static(path.join(__dirname, '/../../client')));
   app.use('/public', express.static(path.join(__dirname, '/../../public')));
 
-  /**
+  /**TODO
   Use the listings router for requests to the api */
-  app.use('/api/blistings', blistingsRouter);
+  app.use('/api/users', listingsRouter);
 
-  /**
-  Go to homepage for all routes not specified */
- //app.get('*', function(req, res) {
- //  res.redirect('/');
- //});
-
-  app.all('/*', function(req, res) {
-      res.sendFile(path.resolve('./client/index.html'));
-  });
-
-  // stripe bs
-  blistingsRouter.get('/CartPage', function(req, res) {
-    res.sendFile(path.join(__dirname + "/../../client/CartPage.html"));
+  // STRIPE: use router for requests to cart
+  stripeRouter.get('/CartPage',function(req,res){
+    res.sendFile(path.join(__dirname + '/../../client.html'));
+    app.use(bodyParser.urlencoded({extended: false}));
+    app.use(bodyParser.json());
     app.post("/charge", (req, res) => {
-      let amount = 999;
-
+      res.sendFile(path.join(__dirname + '/../../charge.html'));
+      let amount = 999; // **change this so that it gets the price from the database
       stripe.customers.create({
         email: req.body.email,
         card: req.body.id
@@ -62,7 +52,7 @@ module.exports.init = function() {
           amount,
           description: "Sample Charge",
           currency: "usd",
-          customer: customer.id
+          customer: customer.id // **edit maybe
         }))
       .then(charge => res.send(charge))
       .catch(err => {
@@ -71,6 +61,12 @@ module.exports.init = function() {
       });
     });
   });
+
+  /**TODO
+  Go to homepage for all routes not specified */
+ app.get('*', function(req, res) {
+   res.redirect('/');
+ });
 
   return app;
 };

@@ -11,7 +11,7 @@ button.addEventListener("click", function(ev) {
   });
 });
 function handleToken(token) {
-  fetch("/charge", {
+  fetch("./charge", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(token)
