@@ -1,8 +1,8 @@
 
 /* Dependencies */
 var mongoose = require('mongoose'),
-    Listing = require('../models/listings.server.model.js');
-
+    User = require('../models/listings.server.model.js');
+console.log("Page used");
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
   On an error you should send a 404 status code, as well as the error message.
@@ -15,14 +15,14 @@ var mongoose = require('mongoose'),
 /* Create a listing */
 exports.create = function(req, res) {
   /* Instantiate a Listing */
-  var listing = new Listing(req.body);
+  var user = new User(req.body);
   /* Then save the listing */
-  listing.save(function(err) {
+  user.save(function(err) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
     } else {
-      res.json(listing);
+      res.json(user);
     }
   });
 };
@@ -30,36 +30,60 @@ exports.create = function(req, res) {
 /* Show the current listing */
 exports.read = function(req, res) {
   /* send back the listing as json from the request */
-  res.json(req.listing);
+  res.json(req.user);
 };
 
 /* Update a listing */
-exports.update = function(req, res) {
-  var listing = req.listing;
+exports.updateCart = function(req, res) {
+  var user = req.user;
+  console.log("used");
   /** TODO **/
   /* Replace the article's properties with the new properties found in req.body */
   /* Save the article */
-  listing.code = req.body.code;
-  listing.name = req.body.name;
-  listing.address = req.body.address;
-  listing.save(function(err) {
+  /*
+  user.name = req.body.name;
+  user.email = req.body.email;
+  user.password = req.body.password;
+  user.phone = req.body.phone;
+  //listing.address = req.body.address;
+  user.save(function(err) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
     }
     else {
-      res.json(listing);
+      res.json(user);
     }
   });
+*/
 
+  User.findOneAndUpdate({ name: user.name }, { $addToSet: {cart: {productC: "Chicken and Veggies", quantity: 1, price: 10.00}} }, function(err, user) {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+    else{
+      
+    }
+  });
+  
+   
+  User.findOne({ name: user.name }, function (err, user) {
+    if (err) return handleError(err);
+    
+    else{
+      res.json(user);
+    }
+  });
+  
 };
 
 /* Delete a listing */
 exports.delete = function(req, res) {
-  var listing = req.listing;
+  var user = req.user;
   /** TODO **/
   /* Remove the article */
-  Listing.findByIdAndRemove(listing.id).exec(function(err) {
+  User.findByIdAndRemove(user.id).exec(function(err) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
@@ -74,14 +98,14 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
   /** TODO **/
   /* Your code here */
-  var listing = req.listing;
-  Listing.find().sort('code').exec(function(err, listings) {
+  var user = req.user;
+  User.find().sort('email').exec(function(err, users) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
     }
     else {
-      res.json(listings);
+      res.json(users);
 
     }
   });
@@ -95,11 +119,11 @@ exports.list = function(req, res) {
         then finally call next
  */
 exports.listingByID = function(req, res, next, id) {
-  Listing.findById(id).exec(function(err, listing) {
+  User.findById(id).exec(function(err, user) {
     if(err) {
       res.status(400).send(err);
     } else {
-      req.listing = listing;
+      req.user = user;
       next();
     }
   });
