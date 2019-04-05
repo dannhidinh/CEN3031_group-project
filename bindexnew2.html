@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Tangerine:300,400,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body ng-app="BodegaApp">
+    <div class="container">
+      <div class="row" ng-controller="bListingsController">
+             <table>
+                <tr><th>Bodega</th><th>Website</th></tr>
+                <tbody ng-repeat="blisting in blistings | flattenRows">
+                    <tr><td> {{ blisting.bodname }} </td>
+                         <td> {{ blisting.bodurl }} </td>
+                        <td>
+                            <table>
+                                <tr><th>Vendor</th><th>Phone</th></tr>
+                                <tbody ng-repeat="ven in blisting.vendor">
+                                <tr ng-click="showDetails($index)"><td>{{ ven.venname }}</td>
+                                     <td>{{ven.venmobile}}</td></tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+               </tbody>
+             </table>
+          <div class="jumbotron">
+          <h2><a href="#" data-toggle="tooltip" title="Click on Vendor for Item Info">Item Information</a></h2>
+          <div ng-show="detailedInfo == undefined"></div>
+          <div ng-show="detailedInfo != undefined">
+              <h3 ng-repeat="i in ven.item" | flattenRows> Item: {{i.itemname}}{{ detailedInfo.i.itemname }} </h3>
+              <h4> Price: {{i.itemprice}}{{ detailedInfo.i.itemprice }} -- Qty: {{i.itemqty}}{{ detailedInfo.i.itemqty }} </h4>
+              <h5> Expiration: {{i.itemexp}}{{ detailedInfo.i.itemexp }}</h5>
+          </div>
+          </div>
+
+       <div class="container" ng-controller="bListingsController">
+        <div class="row">
+            <table><tr><th>Item</th><th>Price</th><th>Qty</th></tr>
+            <tr ng-repeat="i in blistings | flattenRows">
+                <td>{{ i.vendor.itemname }}</td>
+                <td>{{ i.vendor.itemprice }}</td>
+                <td>{{ i.vendor.itemqty }}</td>
+                <td><span class="glyphicon glyphicon-trash"> </span></td></tr>
+            </table>
+        </div>
+       </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://code.angularjs.org/1.6.7/angular.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/factories/blistingFactory.js"></script>
+    <script src="./js/controllers/blistingController.js"></script>
+  </body>
+</html>
