@@ -1,19 +1,30 @@
-angular.module('listings', []).factory('Listings', function($http) {
+angular.module('users', []).factory('Users', function($http) {
   var methods = {
     getAll: function() {
-      return $http.get('https://bodegathing-cen3031-test.herokuapp.com/api/listings');
-    },
 
-	create: function(listing) {
-	  return $http.post('https://bodegathing-cen3031-test.herokuapp.com/api/listings', listing);
+      return $http.get('http://localhost:8080/api/users');
+
     },
+  
+  create: function(user) {
+    return $http.post('http://localhost:8080/api/users', user);
+    }, 
 
     delete: function(id) {
-	   /**TODO
+      return $http.delete('http://localhost:8080/api/users/' + id);
+
+     /**TODO
         return result of HTTP delete method
        */
-      return $http.delete('https://bodegathing-cen3031-test.herokuapp.com/api/listings', id);
+    },
+
+    updateCart: function(id){
+      return $http.put('http://localhost:8080/api/users/' + id);
+
     }
+
+    
+
   };
 
   return methods;

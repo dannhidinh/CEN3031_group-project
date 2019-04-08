@@ -1,4 +1,3 @@
-
 /* Dependencies */
 var mongoose = require('mongoose'),
     User = require('../models/listings.server.model.js');
@@ -7,7 +6,6 @@ console.log("Page used");
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
   On an error you should send a 404 status code, as well as the error message.
   On success (aka no error), you should send the listing(s) as JSON in the response.
-
   HINT: if you are struggling with implementing these functions, refer back to this tutorial
   from assignment 3 https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
  */
@@ -63,19 +61,19 @@ exports.updateCart = function(req, res) {
       res.status(400).send(err);
     }
     else{
-      
+
     }
   });
-  
-   
+
+
   User.findOne({ name: user.name }, function (err, user) {
     if (err) return handleError(err);
-    
+
     else{
       res.json(user);
     }
   });
-  
+
 };
 
 /* Delete a listing */
@@ -113,7 +111,6 @@ exports.list = function(req, res) {
 
 /*
   Middleware: find a listing by its ID, then pass it to the next request handler.
-
   Find the listing using a mongoose query,
         bind it to the request object as the property 'listing',
         then finally call next

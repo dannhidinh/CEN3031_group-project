@@ -36,7 +36,6 @@
   margin-top: 100px;
   width: 100%;
   border: 1px solid #0B0B0B;
-  height: 600px;
 }
 
 .title{
@@ -56,7 +55,7 @@
   padding: 0px 20px;
 }
 
-.individualCartListing{
+.individualCartListing, .cartHeaders{
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -76,7 +75,7 @@
 .separateCalcRow{
   margin: 20px 20px;
   position: relative;
-  left: 16.5%;
+  left: 16%;
 }
 
 .bottomButtons{
