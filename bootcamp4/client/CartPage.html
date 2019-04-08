@@ -38,17 +38,17 @@
           <div class='itemName'>{{cart.productC}}</div> <!--Place item name data here in {}-->
           <div class='itemQuantity'>{{cart.quantity}}</div> <!--Place item description here in {}-->
           <div class='listingPrice'>{{cart.price}}</div> <!--Place item price data here in {}-->
-          <button class='removeListing'>Remove</button>
+          <button class='removeListing' ng-click="removeFromCart(cart._id)">Remove</button>
         </div>
         <div class='separateCalcRow'>
-          <button class="calculate" ng-click='finalPrice()'>Done Ordering</button>
+          <!--<button class="calculate" ng-click='finalPrice()'>Done Ordering</button>-->
             <div class="preTax">Before Tax: {{before}}</div>
             <div class='taxInfo'>Tax: {{tax}}</div>
             <div class='finalPrice'>Final: {{final}}</div>
         </div>
       </div>
       <div class='bottomButtons'>
-
+<a href="orgindex.html" class="w3-right w3-bar-item w3-button">test add</a>
         <button class='backToProducts'><a href='index.html' >Go Back To Shopping</a></button>
         
 		 <!-- CHECKOUT API -->

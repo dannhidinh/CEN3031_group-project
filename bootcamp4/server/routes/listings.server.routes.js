@@ -17,8 +17,9 @@ router.route('/')
  */
 router.route('/:listingId')
   .get(users.read)
-  .put(users.updateCart)
+  .put(users.updateCart) 
   .delete(users.delete);
+
 
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle 
