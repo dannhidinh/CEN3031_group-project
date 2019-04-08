@@ -7,45 +7,43 @@
   </head>
   <body class='userPage' ng-app="directoryApp" ng-controller="ListingsController">
     <div class='topBar'>
+      <img class='logo' src='./pictures/logo_transparent.svg' height='150px' width='150px'/>
+      <div class="navBar">
+        <button class="home-link"><a href="index.html">HOME</a></button>
+        <button class="about-link"><a href="#about">ABOUT</a></button>
+        <button class="contact-link"><a href="#contact">CONTACT</a></button>
+        <button class="user-link"><a href="UserPage.html">MY INFO</a></button>
+        <button class="cart-link"><a href="CartPage.html">CART</a></button>
+        <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
+      </div>
+    </div>
+    <div class='userContent'>
+      <div class='loggedIn'>{{currentUser.name}} is Logged in!</div>
       <div class='sideButtons'>
         <button class='signout' ng-click='signOut()'>
           <span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
         </button>
       </div>
-      <img class='logo' src='./pictures/BodegaLogo.PNG' height='150px' width='150px'/>
-      <div class="navBar w3-main w3-content" style="max-width:1200px">
-        <div class="w3-bar w3-black w3-padding-16">   
-          <a href="index.html" class="w3-bar-item w3-button">HOME</a> 
-          <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
-          <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
-      
-          <input class="w3-input w3-half w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="color: black">
-          <i class="fa fa-search w3-xxlarge" ></i>
-          
-          <a href="CartPage.html" class="w3-right w3-bar-item w3-button">CART</a>
-          <!--<i class="fa fa-shopping-cart w3-xxlarge" ></i> -->
-          <a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
-          <!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
-        </div>
-      </div>
-    </div>
-  </div>
-    <div class='userContent'>
-      {{currentUser.name}} is Logged in!
       <div class='infoContainer'>
         <div class='history'>
-          <span>ORDER HISTORY</span>
+          <span class="topTitle">ORDER HISTORY</span>
           <div class='listedItems'>
+            <div class='itemHeaders'>
+              <div class='nameHeader'>Name</div> 
+              <div class='dateHeader'>Date</div> 
+              <div class='descriptionHeader'>Info</div> 
+              <div class='reorderHeader'>Reorder</div>
+            </div>
             <div class='individualItem' ng-repeat= 'orderHist in currentUser.orderHist'>
               <div class='itemName'>{{orderHist.Product}}</div> <!--Place item name data here in {}-->
               <div class='orderDate'>{{orderHist.transaction.getDate()}}</div> <!--Place item last order data here in {}-->
-              <i class='descriptionButton fas fa-info-circle'></i> <!--Link to product page for item ID-->
-              <i class='reorderButton fas fa-plus-circle'></i><!--Link to add item to current user cart-->
+              <div class='descriptionButton'><i class='fas fa-info-circle'></i></div> <!--Link to product page for item ID-->
+              <div class='reorderButton'><i class='fas fa-plus-circle'></i></div> <!--Link to add item to current user cart-->
             </div>
           </div>
         </div>
         <div class='userInfo'>
-          <span>PROFILE INFO</span>
+          <span class="topTitle">PROFILE INFO</span>
           <div class='listedInfo'>
             <div class='mainInfo'>
               <img class='userPic' src='./pictures/ProfileIcon.png' height='100px' width='100px'/> <!--Place user-submitted image here in {} in src-->
@@ -59,12 +57,12 @@
               <button class='myCard'>CARD API HERE</button>
               <!--Link saved payment API here-->
             </div>
-            <div class='changeInfo'>
-              <div class='submittedImg'>Change My Picture</div> <!--Find dropImage API and place here-->
-              <div class='changeName'>Change My Name</div>
-              <div class='changeCell'>Change My Cell</div>
-              <div class='changeEmail'>Change My Email</div>
-            </div>
+            <form class='changeInfo'>
+              <div class='submittedImg'>New Picture</div><input type="file" /><!--Find dropImage API and place here-->
+              <div class='changeName'>New Name</div><input type='text' />
+              <div class='changeCell'>New Cell</div><input type='text' />
+              <div class='changeEmail'>New Email</div><input type='email' />
+            </form>
           </div>
         </div>
       </div>
