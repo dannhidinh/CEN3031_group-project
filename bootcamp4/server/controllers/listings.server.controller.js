@@ -57,10 +57,12 @@ exports.updateCart = function(req, res) {
   });
 */
 
+
 //changes action depending act set here and in controllers; necessary because there can be only one put function
 if(req.query.act == 'add'){
 //used to add to cart, will eventually take in paramenters
   User.findOneAndUpdate({ name: user.name }, { $addToSet: {cart: {productC: req.query.product, quantity: req.query.amount, price: req.query.cost}} }, function(err, user) {
+
     if(err) {
       console.log(err);
       res.status(400).send(err);

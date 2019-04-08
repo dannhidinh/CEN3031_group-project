@@ -4,28 +4,23 @@
     <link rel='stylesheet' href='./styles/CartPageStyles.css'/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body class='cartPage' ng-app="directoryApp" ng-controller="ListingsController">
     <div class='topBar'>
-      <img class='logo' src='./pictures/BodegaLogo.PNG' height='150px' width='150px'/>
-      <div class="navBar w3-main w3-content" style="max-width:1200px">
-        <div class="w3-bar w3-black w3-padding-16">   
-          <a href="index.html" class="w3-bar-item w3-button">HOME</a> 
-          <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
-          <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
-      
-          <input class="w3-input w3-half w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="color: black">
-          <i class="fa fa-search w3-xxlarge" ></i>
-          
-          <a href="CartPage.html" class="w3-right w3-bar-item w3-button">CART</a>
-          <!--<i class="fa fa-shopping-cart w3-xxlarge" ></i> -->
-          <a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
-          <!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
-        </div>
+      <img class='logo' src='./pictures/logo_transparent.svg' height='150px' width='150px'/>
+      <div class="navBar">
+        <button class="home-link"><a href="index.html">HOME</a></button>
+        <button class="about-link"><a href="#about">ABOUT</a></button>
+        <button class="contact-link"><a href="#contact">CONTACT</a></button>
+        <button class="user-link"><a href="UserPage.html">MY INFO</a></button>
+        <button class="cart-link"><a href="CartPage.html">CART</a></button>
+        <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
       </div>
     </div>
     <div class='cartContent'>
-      {{currentUser.name}} is Logged in!
+      <div class='loggedIn'>{{currentUser.name}} is Logged in!</div>
       <span class='title'>SHOPPING CART</span>
       <div class='infoContainer'>
         <div class='cartHeaders'>
@@ -38,7 +33,9 @@
           <div class='itemName'>{{cart.productC}}</div> <!--Place item name data here in {}-->
           <div class='itemQuantity'>{{cart.quantity}}</div> <!--Place item description here in {}-->
           <div class='listingPrice'>{{cart.price}}</div> <!--Place item price data here in {}-->
-          <button class='removeListing' ng-click="removeFromCart(cart._id)">Remove</button>
+
+          <div class='removeListingContainer'><button class='removeButton far fa-trash-alt' ng-click="removeFromCart(cart._id)"></button></div>
+
         </div>
         <div class='separateCalcRow'>
           <!--<button class="calculate" ng-click='finalPrice()'>Done Ordering</button>-->
@@ -53,7 +50,7 @@
         
 		 <!-- CHECKOUT API -->
         <script src="https://checkout.stripe.com/checkout.js"></script>
-        <button class='order' id="customButton">Checkout</button>
+        <button class='order' id="buttonCheckout">Checkout</button>
         <script src="card-stripe/checkout.js"></script>
 
       </div>

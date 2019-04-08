@@ -210,6 +210,7 @@ console.log("used");
 
   }
 //console.log($scope.newUser.email.indexOf('@'));
+
 //checks if email input has '@' to consider it an email, might need more validation
   if ($scope.newUser.email.indexOf('@') < 0 || $scope.newUser.email.indexOf('.') < 0)
   {
@@ -340,6 +341,7 @@ console.log(testPass);
 
   }
 //console.log($scope.newUser.email.indexOf('@'));
+
 //checks if email input has '@' to consider it an email, might need more validation
   if ($scope.newUser.email.indexOf('@') < 0 || $scope.newUser.email.indexOf('.') < 0)
   {
@@ -393,7 +395,6 @@ console.log(testPass);
         });
       });    
 
-    
 //resets newUser values between attempts
     $scope.newUser.name = undefined;
     $scope.newUser.password = undefined;

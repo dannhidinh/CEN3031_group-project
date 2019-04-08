@@ -45,14 +45,14 @@
 		<a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
 		<!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
   </div>
-  {{currentUser.name}} is Logged in!
+  
 
 </div>
 </head>
 <body ng-app="directoryApp" ng-controller="ListingsController">
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content " ng-controller="ListingsController" style="max-width:1200px;margin-top:50px">
-	
+{{currentUser.name}} is Logged in!
 	
   <!-- First Photo Grid
   <div class="w3-row-padding w3-padding-16 w3-center" id="food">
@@ -67,7 +67,7 @@
 	
 	  <!-- First Photo Grid-->
   <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-    <div class="w3-quarter" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+    <div class="w3-quarter">
       <img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="196" height="154">
       <h3>Chicken and Veggies</h3>
       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">More Details</button>
@@ -147,15 +147,15 @@
 		<img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="396" height="354">
 		<div class='productInfo'>
             <div class='productName'>
-              <span>Name: </span><span class='nameContent'>Chips and Queso</span>
+              <span>Name: </span><span class='nameContent'>Chicken and Veggies</span>
             </div>
             <div class='productDescription'>
               <span>Description: </span><span class='descriptionContent'>Yum!</span>
             </div>
             <div class='productPrice'>
-              <span>Price: </span><span class='priceContent'>$5.00</span>
+              <span>Price: </span><span class='priceContent'>$10.00</span>
             </div>
-            <button class='addToCart'>Add to My Cart</button>
+            <button class='addToCart' ng-click="addToCart()">Add to My Cart</button>
           </div>
       </div>
 	  </center>
