@@ -1,40 +1,56 @@
+/* OVERALL*/
 *{
     box-sizing: border-box;
     font-weight: bold;
     font-family: 'Verdana', sans-serif;
   }
-
+/* OVERALL END*/
+/* BODY */
 body {
 	
 	font-family: "Verdana", sans-serif
 	font-weight: bold;
 	color : black;
+	 background-image: linear-gradient(to bottom right, rgb(57, 226, 225), rgb(6, 81, 112));
 }
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display";
-  letter-spacing: 5px;
+/* BODY END*/
+/* TOP BAR*/
+.topBar{
+    order: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #FFFFFF;
+    border: 5px ridge #FCF3A2;
+  }
   
-  .fa {
-  padding: 20px;
-  font-size: 30px;
-  width: 50px;
-  text-align: center;
-  text-decoration: none;
-  margin: 5px 2px;
-}
+  .logo{
+    order: 1;
+  }
+  
+  .navBar{
+    order: 2;
+    width: 70%;
+    border-radius: 5px;
+    border: 3px double #FCF3A2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 75px;
+  }
+  
+  .home-link, .about-link, .contact-link, .cart-link, .login-link, .user-link{
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: white;
+    max-height: 60%;
+    font-size: 1.3vw;
+  }
 
-.fa:hover {
-    opacity: 0.7;
-}
-
-.fa-facebook {
-  background: #3B5998;
-  color: white;
-}
-
-.fa-twitter {
-  background: #55ACEE;
-  color: white;
-}
+/* TOP BAR END */
 
  

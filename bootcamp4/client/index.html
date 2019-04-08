@@ -1,14 +1,18 @@
 <!DOCTYPE html>
+
 <html>
+
 <title>BODEGA HOMEPAGE</title>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- LINKS -->
-	<!-- Bootstrapf or modal-->
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!-- Links and References -->
+<head>
+	<!-- Bootstrap or modal-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	<!-- bootstrap from bootcamp-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<!-- Main Css-->
@@ -24,116 +28,193 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <!-- implementing notifications API -->
 
-<head>
-	<br>
-	<br>
-	<center><img src = "pictures/BodegaLogo.png" alt ="Bodega Logo" width="196" height="154"></center>
-<!-- Top menu -->
-<div class="w3-main w3-content" style="max-width:1200px;margin-top:50px">
-	<div class="w3-bar w3-black w3-padding-16">
-		
-		<a href="index.html" class="w3-bar-item w3-button">HOME</a> 
-		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
-		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
-		<a href="UserPage.html" class="w3-bar-item w3-button">USER PAGE</a>
-	
-		<input class="w3-input w3-third w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="black">
-		<i class="fa fa-search w3-xxlarge" ></i>
-		
-		<a href="CartPage.html" class="w3-right w3-bar-item w3-button">CART</a>
-		<!--<i class="fa fa-shopping-cart w3-xxlarge" ></i> -->
-		<a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
-		<!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
-  </div>
-  {{currentUser.name}} is Logged in!
-
-</div>
 </head>
-<body ng-app="directoryApp" ng-controller="ListingsController">
-<!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content " ng-controller="ListingsController" style="max-width:1200px;margin-top:50px">
-	
-	
-  <!-- First Photo Grid
-  <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-    <div class="w3-quarter" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-	<a href ="ProductPage.html">
-      <img src="pictures/product.jpg" alt="product" >
-      <h3>{{blisting.name}}</h3>
-      <p>{{blisting.description}}</p>
-	  </a>
-    </div>-->
-	
-	
+
+
+<!-- TOP MENU -->
+<header>
+    <div class='topBar'>
+      <img class='logo' src='./pictures/logo_transparent.svg' height='150px' width='150px'/>
+      <div class="navBar">
+        <button class="home-link"><a href="index.html">HOME</a></button>
+        <button class="about-link" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
+		<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
+        <button class="user-link"><a href="UserPage.html">MY INFO</a></button>
+        <button class="cart-link"><a href="CartPage.html">CART</a></button>
+		<!--<button class="cart-link" data-toggle="modal" data-target="#myModalcart">CART</a></button>-->
+        <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
+      </div>
+    </div>
+</header>
+
+<!-- MAIN PAGE CONTENT -->
+<body>
+
+<!-- PRODUCTS -->
+
 	  <!-- First Photo Grid-->
   <div class="w3-row-padding w3-padding-16 w3-center" id="food">
-    <div class="w3-quarter">
-      <img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="196" height="154">
+    <div class="w3-quarter w3-card">
+      <img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="296" height="254">
       <h3>Chicken and Veggies</h3>
-      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal1">More Details</button>
+      <button type="button"  data-toggle="modal" data-target="#myModal1">More Details</button>
     </div>
 	
-     <div class="w3-quarter">
-      <img src="pictures/foods/Mojo pork with rice and beans.jpg" alt="product" width="196" height="154" >
+     <div class="w3-quarter w3-card">
+      <img src="pictures/foods/Mojo pork with rice and beans.jpg" alt="product" width="296" height="254" >
       <h3>Mojo pork with rice and beans</h3>
-	  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">More Details</button>
+	  <button type="button" data-toggle="modal" data-target="#myModal2">More Details</button>
     </div>
 	
-    <div class="w3-quarter">
-      <img src="pictures/foods/Turkey with mash potatoes.jpg" alt="product" width="196" height="154" >
+    <div class="w3-quarter w3-card">
+      <img src="pictures/foods/Turkey with mash potatoes.jpg" alt="product" width="296" height="254" >
       <h3>Turkey with mash potatoes</h3>
-	  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal3">More Details</button>
+	  <button type="button"  data-toggle="modal" data-target="#myModal3">More Details</button>
     </div>
 	
-    <div class="w3-quarter">
-      <img src="pictures/foods/Summer Salad.jpg" alt="product" width="196" height="154" >
+    <div class="w3-quarter w3-card">
+      <img src="pictures/foods/Summer Salad.jpg" alt="product" width="296" height="254" >
       <h3>Summer Salad</h3>
-	  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal4">More Details</button>
+	  <button type="button" data-toggle="modal" data-target="#myModal4">More Details</button>
     </div>
   </div>
-  
 
 
-   <br>
-   <!-- MAP -->
-   <!--ADDRESS-->
-   <center><h1>FIND A BODEGA NEAR YOU</h1></center>
-<!--    <div class="w3-container w3-half w3-card w3-left">
-	<CENTER><h3>STORES NEARBY</h3></CENTER>
-  	<table class="w3-table-all w3-card-4">
-		<tr>
-			<th>NAME</th>
-			<th>ADDRESS</th>
-			
 
-			</tr>
-			<tr>
-			<td>BODEGA AT THE HUB</td>
-			<td>UF HUB ADDRESS</td>
-			</tr>
-			<td>BODEGA AT EXATECH</td>
-			<td>UF HUB ADDRESS</td>
-		</tr>
-	</table>
-  </div> -->
-   
-   <!-- MAP ACTUTAL -->
 
-  <div class "w3-container w3-left">
 
-    <div class="nearestBodega">
-    <link rel="mapStyle w3-left" href="mapbox/map.css">
-    <div id='map' style='width: 1200px; height: 600px;'></div>
-    <script src="mapbox/map.js"></script>
+
+<!-- MAP -->
+	<center><h1>FIND A BODEGA NEAR YOU</h1></center>
+	<div class "w3-container w3-left">
+		<div class="nearestBodega">
+		<link rel="mapStyle" href="mapbox/map.css">
+		<div id='map' style='width: 1200px; height: 600px;'></div>
+			<script src="mapbox/map.js"></script>
+		</div>
+    </div>
+
+
+
+
+<!-- MODALS -->
+
+	<!-- Cart Modal -->
+	<div id="myModalcart" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<center><h4 class="modal-title">SHOPPING CART</h4></center>
+				</div>
+					<div class="modal-body">
+						    <div class='cartContent'>
+								<div class='loggedIn'>{{currentUser.name}} is Logged in!</div>
+						
+								<div class='infoContainer'>
+									<div class='cartHeaders'>
+										<div class='nameHeader'>Product</div> <!--Place item name data here in {}-->
+            							<div class='quantityHeader'>Quantity</div> <!--Place item description here in {}-->
+            							<div class='priceHeader'>Price</div> <!--Place item price data here in {}-->
+            							<div class='removeHeader'>Remove</div>
+        							</div>
+        						<div class='individualCartListing' ng-repeat= 'cart in currentUser.cart'> <!--Repeating Row-->
+         							 <div class='itemName'>{{cart.productC}}</div> <!--Place item name data here in {}-->
+         							 <div class='itemQuantity'>{{cart.quantity}}</div> <!--Place item description here in {}-->
+         							 <div class='listingPrice'>{{cart.price}}</div> <!--Place item price data here in {}-->
+         							 <div class='removeListingContainer'><button class='removeButton far fa-trash-alt'></button></div>
+        						</div>
+        						<div class='separateCalcRow'>
+          							<button class="calculate" ng-click='finalPrice()'>Done Ordering</button>
+          							  <div class="preTax">Before Tax: {{before}}</div>
+           							  <div class='taxInfo'>Tax: {{tax}}</div>
+           							  <div class='finalPrice'>Final: {{final}}</div>
+        						</div>
+      							</div>
+        
+								<!-- CHECKOUT API -->
+								<script src="https://checkout.stripe.com/checkout.js"></script>
+								<button class='order' id="buttonCheckout">Checkout</button>
+								<script src="card-stripe/checkout.js"></script>
+							</div>
+					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
 	</div>
-   </div>
+	
+	<!-- About Modal -->
+	<div id="myModalabout" class="modal fade" role="dialog">
+		<div class="modal-dialog">
 
-  <!-- MAP END -->
-  
-	<br>
-	<br>
-<!-- product 1 Modal -->
-<div id="myModal1" class="modal fade" role="dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<center><h4 class="modal-title">ABOUT US</h4></center>
+				</div>
+				<div class="modal-body">
+						<h3>Collective & Co opened The Bodega marketplace September 2018 inside UF Innovate the Hub. The Bodega exists to provide a premiere lunch experience through fast and reliable service, exceptional customer-to-employee interactions, and high quality, locally-sourced prepared foods. Catering and group orders can be ordered by businesses around the Bodega.</h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Contact Modal -->
+	<div id="myModalcontact" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<center><h4 class="modal-title">CONTACT US</h4></center>
+				</div>
+	 
+				<div class="modal-body">
+					<form action="action_page.php">
+
+						<label for="fname">First Name</label>
+						<br>
+						<input type="text" id="fname" name="firstname" placeholder="Your name..">
+						<br>
+						<label for="lname">Last Name</label>
+						<br>
+						<input type="text" id="lname" name="lastname" placeholder="Your last name..">
+						<br>
+						<label for="email">E-mail</label>
+						<br>
+						<input type="text" id="email" name="lastname" placeholder="Your Email">
+						<br>
+						<label for="subject">Subject</label>
+						<br>
+						<input type="text" id="subject" name="lastname" placeholder="Subject here">
+						<br>
+						<label for="subject">Content</label>
+						<br>
+						<textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+						<br>
+						<input type="submit" value="Submit">
+					</form>
+				</div>
+	  
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- product 1 Modal -->
+	<div id="myModal1" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -166,8 +247,8 @@
 
   </div>
 </div>
-<!--  product2 Modal -->
-<div id="myModal2" class="modal fade" role="dialog">
+	<!--  product2 Modal -->
+	<div id="myModal2" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -200,8 +281,8 @@
 	
   </div>
 </div>
-<!-- product 3 Modal -->
-<div id="myModal3" class="modal fade" role="dialog">
+	<!-- product 3 Modal -->
+	<div id="myModal3" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -234,8 +315,8 @@
 
   </div>
 </div>
-<!-- product 4 Modal -->
-<div id="myModal4" class="modal fade" role="dialog">
+	<!-- product 4 Modal -->
+	<div id="myModal4" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -269,109 +350,28 @@
   </div>
 </div>
 
-<!-- About Modal -->
-<div id="myModalabout" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">ABOUT US</h4>
-      </div>
-	  <center>
-      <div class="modal-body">
-		<p>Collective & Co opened The Bodega marketplace September 2018 inside UF Innovate the Hub. The Bodega exists to provide a premiere lunch experience through fast and reliable service, exceptional customer-to-employee interactions, and high quality, locally-sourced prepared foods. Catering and group orders can be ordered by businesses around the Bodega.</p>
-      </div>
-	  </center>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- Contact Modal -->
-<div id="myModalcontact" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <center><h4 class="modal-title">CONTACT US</h4></center>
-      </div>
-	 
-      <div class="modal-body">
-			<form action="action_page.php">
-
-				<label for="fname">First Name</label>
-				<br>
-				<input type="text" id="fname" name="firstname" placeholder="Your name..">
-				<br>
-				<label for="lname">Last Name</label>
-				<br>
-				<input type="text" id="lname" name="lastname" placeholder="Your last name..">
-				<br>
-				<label for="email">E-mail</label>
-				<br>
-				<input type="text" id="Email" name="lastname" placeholder="Your Email">
-				<br>
-				<label for="subject">Subject</label>
-				<br>
-				<input type="text" id="subject" name="lastname" placeholder="Subject here">
-				<br>
-				<label for="subject">Content</label>
-				<br>
-				<textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-				<br>
-				<input type="submit" value="Submit">
-		  </form>
-	
-      </div>
-	  
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-  <!-- Footer -->
-  <footer class="w3-row-padding padding-32">
-    <div class="w3-third" >
-	<a name="about"></a> 
-      <center><h1>ABOUT</h1></center>
-      <center><p>	Collective & Co opened The Bodega marketplace September 2018 inside UF Innovate the Hub. The Bodega exists to provide a premiere lunch experience through fast and reliable service, exceptional customer-to-employee interactions, and high quality, locally-sourced prepared foods. Catering and group orders can be ordered by businesses around the Bodega by contacting bodegaGNV@gmail.com.</p></center>
-    </div>
-  
-    <div class="w3-third">
-	<a name="contact"></a> 
-      <center><h1>CONTACT US</h1></center>
-		<center><p>Collective & Co. Bodega Email : bodegaGNV@gmail.com. </p></center>
-    </div>
-	
-	<div class="w3-third">
-      <center><h1>SOCIAL MEDIA</h1>
-			<a href="#" class="fa fa-facebook w3-jumbo"></a>
-			<a href="#" class="fa fa-twitter w3-jumbo"></a>
-			<a href="#" class="fa fa-instagram w3-jumbo"></a>
-			</center>
-    </div>
-
-  </footer>
-  
 
 
-<!-- End page content -->
-</div>
+
+
+
+
+
+
+
+	<!-- SCRIPTS -->
+	 <!--cart-->
+	<script src="https://js.stripe.com/v3/"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	 <!-- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+	 <!-- -->
     <script src="js/app.js"></script>
     <script src="js/factories/listingFactory.js"></script>
     <script src="js/controllers/listingController.js"></script> 
+	
 </body>
+
 </html>
