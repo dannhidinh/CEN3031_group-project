@@ -17,7 +17,7 @@ router.route('/')
  */
 router.route('/:listingId')
   .get(users.read)
-  .put(users.updateCart) 
+  .put(users.update) 
   .delete(users.delete);
 
 
