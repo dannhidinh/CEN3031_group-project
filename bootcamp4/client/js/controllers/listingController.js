@@ -38,36 +38,28 @@ console.log("got here");
 */
 //calculates price amounts when button is pressed
     $scope.finalPrice = function(){
-
       var amount = 0;
       for (var i = 0; i < $scope.currentUser.cart.length; i++) {
-
         amount += $scope.currentUser.cart[i].price * $scope.currentUser.cart[i].quantity;
       }
       $scope.before = amount;
-
       var uftax = amount*.06;
       $scope.tax = uftax.toFixed(2);
-
       amount = amount + uftax;
       $scope.final = amount.toFixed(2);
 
-    }
-// STRIPE - implement checkout form
-    $scope.openCheckout = function() {
+      // STRIPE - checkout form
       var checkoutHandler = StripeCheckout.configure({
         key: "pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a",
         image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
         locale: "auto"
       });
       var button = document.getElementById("buttonCheckout");
-      var payment = $scope.finalPrice.amount;
       button.addEventListener("click", function(ev) {
-        var amount = $("#finalPayment").val()*100;
         checkoutHandler.open({
           name: "Checkout",
           description: "Purchase Cart",
-          amount: 2000,
+          amount: ($scope.final)*100,
           token: handleToken
         });
         ev.preventDefault();
@@ -84,7 +76,6 @@ console.log("got here");
         })
       }
     }
-
 
 //carries user between htmls
   window.addEventListener('DOMContentLoaded', (event) => {
