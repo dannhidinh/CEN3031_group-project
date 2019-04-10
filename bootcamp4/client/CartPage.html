@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   </head>
   <body class='cartPage' ng-app="directoryApp" ng-controller="ListingsController">
     <div class='topBar'>
@@ -56,8 +57,7 @@
 		 <!-- CHECKOUT API -->
         <div class='payment' id='finalPayment'ng-click='finalPrice()'>Total Payment: ${{final}}</div>
         <script src="https://checkout.stripe.com/checkout.js"></script>
-        <button class='order' id="buttonCheckout">Checkout</button>
-        <script src = "./card-stripe/checkout.js"></script>
+        <button class='order' id="buttonCheckout" ng-click='openCheckout()'>Checkout</button>
 
       </div>
     </div>

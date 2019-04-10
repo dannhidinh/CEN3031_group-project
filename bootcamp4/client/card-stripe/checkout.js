@@ -16,13 +16,17 @@ var checkoutHandler = StripeCheckout.configure({
 });
 
 var button = document.getElementById("buttonCheckout");
+var domElement = document.querySelector('[ng-controller="ListingsController"]');
+var ngElement = angular.element(domElement);
+var ngElementScope = ngElement.scope();
+var payment = ngElementScope.finalPrice;
 
 button.addEventListener("click", function(ev) {
   var amount = $("#finalPayment").val()*100;
   checkoutHandler.open({
     name: "Checkout",
     description: "Purchase Cart",
-    amount: final, // get amount from listingController
+    amount: payment, // get amount from listingController
     token: handleToken
   });
   ev.preventDefault();
