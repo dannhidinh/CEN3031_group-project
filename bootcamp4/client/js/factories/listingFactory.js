@@ -33,3 +33,5 @@ angular.module('users', []).factory('Users', function($http) {
 
   return methods;
 });
+
+//module.exports = "hello from factory";

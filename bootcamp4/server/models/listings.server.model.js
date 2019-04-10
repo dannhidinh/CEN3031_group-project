@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 var userSchema = new Schema({
   /* your code here */
   name: String,
-  authority: Number, //change to string that directly says 'vendor', 'admin', 'customer', etc. ?
+  authority: String, //change to string that directly says 'vendor', 'admin', 'customer', etc. ?
   email: String,
   phone: String,
   password: Number,
