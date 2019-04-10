@@ -1,3 +1,32 @@
+<<<<<<< HEAD
+{
+    "entries": [
+      {"itemname": "Wheat Wrap", "itemdesc": "Delicious whole wheat vegan wrap",
+      "itemprice": 5.99, "itemexp": "2019-03-29T06:53:38.829Z", "itemcode":  "prod: ",
+        "itempic": "logo.svg", "ivenuser": "Eat80", "ibodnum": 1, "itemqty": 4
+      },
+      {"itemname": "2Wheat Wrap", "itemdesc": "2Delicious whole wheat vegan wrap",
+      "itemprice": 6.99, "itemexp": "2019-03-29T06:53:38.829Z", "itemcode":  "prod: ",
+        "itempic": "logo.svg", "ivenuser": "HarvestT", "ibodnum": 2, "itemqty": 4
+      },
+      { "itemname": "E2Wheat", "itemdesc": "E2Delicious whole wheat",
+       "itemprice": 9.99, "itemexp": "2019-03-29T06:53:38.829Z", "itemcode":  "prod: ",
+         "itempic": "logo.svg", "ivenuser": "Eat80", "ibodnum": 1, "itemqty": 4
+      },
+      { "itemname": "E2 Wrap", "itemdesc": "E2Delicious vegan wrap",
+       "itemprice": 3.99, "itemexp": "2019-03-29T06:53:38.829Z", "itemcode":  "prod: ",
+         "itempic": "logo.svg", "ivenuser": "HarvestT", "ibodnum": 2, "itemqty": 4
+      },
+      { "itemname": "E3Wheat", "itemdesc": "E3Delicious sprouted wheat",
+       "itemprice": 4.99, "itemexp": "2019-03-29T06:53:38.829Z",
+         "ivenuser": "HarvestT", "ibodnum": 1, "itemqty": 4
+      },
+      { "itemname": "E3 Wrap", "itemdesc": "E3Delicious vegan wrap",
+       "itemprice": 7.99, "itemexp": "2019-03-29T06:53:38.829Z", "itemcode":  "prod: ",
+         "itempic": "logo.svg", "ivenuser": "HarvestT", "ibodnum": 1, "itemqty": 4
+      }
+    ]
+=======
 {
     "entries": [
       {
@@ -41,4 +70,5 @@
           }]
       }
     ]
+>>>>>>> 8072be74574c39d6bb433acda32b50b74485dbf7
 }
