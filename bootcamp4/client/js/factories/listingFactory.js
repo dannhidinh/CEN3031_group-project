@@ -18,7 +18,7 @@ angular.module('users', []).factory('Users', function($http) {
        */
     },
 
-    updateCart: function(id, action, itemID, newItem, newQuant, newPrice){
+    update: function(id, action, itemID, newItem, newQuant, newPrice){
       return $http.put('http://localhost:8080/api/users/' + id, {}, { params: { act: action, item: itemID, 
         product: newItem, amount: newQuant, cost: newPrice } });
 

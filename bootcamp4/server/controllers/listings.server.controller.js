@@ -34,7 +34,7 @@ exports.read = function(req, res) {
 };
 
 /* Update a listing */
-exports.updateCart = function(req, res) {
+exports.update = function(req, res) {
   var user = req.user;
   //console.log("used");
   /** TODO **/

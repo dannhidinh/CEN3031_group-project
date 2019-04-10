@@ -49,6 +49,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
 
+//logs in newly sign-uped user
       if (isNew == 'yes') {
         console.log(newInfo.password);
             Users.getAll().then(function(response) {
@@ -81,6 +82,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
         }
       }        
 */
+//updates cart price dynamically
         $scope.finalPrice();
   });
 
@@ -274,7 +276,7 @@ console.log($scope.newItem.productC);
 console.log($scope.newItem.quantity);
 console.log($scope.newItem.price);
 
-      Users.updateCart($scope.currentUser._id, 'add', 0, 
+      Users.update($scope.currentUser._id, 'add', 0, 
         $scope.newItem.productC, $scope.newItem.quantity, $scope.newItem.price).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
@@ -317,7 +319,7 @@ console.log($scope.newItem.price);
       //console.log(itemID);
       //this.currentUser.cart.splice(itemID,1);
       console.log("remove used");
-      Users.updateCart($scope.currentUser._id, 'delete', itemID).then(function(response){
+      Users.update($scope.currentUser._id, 'delete', itemID).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
         for (var i = 0; i < $scope.users.length; i++) {
