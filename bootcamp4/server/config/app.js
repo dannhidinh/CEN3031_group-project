@@ -1,6 +1,7 @@
 var config = require('./config'),
     mongoose = require('mongoose'),
-    express = require('./express');
+    express = require('./express'),
+    stripe = require('stripe')('sk_test_5szqSVkKfzjcxPvMPFSBLMxB00iWi4Ie9i');
 
 module.exports.start = function() {
   var app = express.init();

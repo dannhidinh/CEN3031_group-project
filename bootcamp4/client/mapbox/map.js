@@ -1,10 +1,17 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGFubmhpOTkiLCJhIjoiY2p0ZXJ0eTFjMWxlcjQ0bDZndm1nMHk5eSJ9.nwDTlVR1P1LZEyRKMW4o9g';
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v11',
-  center:[-82.332681, 29.650244],
-  zoom: 10
-});
+
+if (!mapboxgl.supported()) {
+  // alert if user browser doesn't support mapbox
+  alert('Your browser does not support Mapbox GL');
+} else {
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center:[-82.332681, 29.650244],
+    zoom: 10
+  });
+}
+
 
 // load location of Bodega
 map.on('load', function () {
