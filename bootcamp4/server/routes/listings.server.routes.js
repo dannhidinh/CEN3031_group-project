@@ -1,6 +1,8 @@
 /* Dependencies */
-var users = require('../controllers/listings.server.controller.js'),
-    express = require('express'),
+
+var users = require('../controllers/listings.server.controller.js'), 
+    express = require('express'), 
+
     router = express.Router();
 
 /*
@@ -17,8 +19,9 @@ router.route('/')
  */
 router.route('/:listingId')
   .get(users.read)
-  .put(users.updateCart)
+  .put(users.update) 
   .delete(users.delete);
+
 
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle

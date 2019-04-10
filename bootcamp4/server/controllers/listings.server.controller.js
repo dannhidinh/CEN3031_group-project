@@ -6,6 +6,7 @@ console.log("Page used");
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
   On an error you should send a 404 status code, as well as the error message.
   On success (aka no error), you should send the listing(s) as JSON in the response.
+
   HINT: if you are struggling with implementing these functions, refer back to this tutorial
   from assignment 3 https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
  */
@@ -32,9 +33,9 @@ exports.read = function(req, res) {
 };
 
 /* Update a listing */
-exports.updateCart = function(req, res) {
+exports.update = function(req, res) {
   var user = req.user;
-  console.log("used");
+  //console.log("used");
   /** TODO **/
   /* Replace the article's properties with the new properties found in req.body */
   /* Save the article */
@@ -55,25 +56,51 @@ exports.updateCart = function(req, res) {
   });
 */
 
-  User.findOneAndUpdate({ name: user.name }, { $addToSet: {cart: {productC: "Chicken and Veggies", quantity: 1, price: 10.00}} }, function(err, user) {
+
+//changes action depending act set here and in controllers; necessary because there can be only one put function
+if(req.query.act == 'add'){
+//used to add to cart, will eventually take in paramenters
+  User.findOneAndUpdate({ name: user.name }, { $addToSet: {cart: {productC: req.query.product, quantity: req.query.amount, price: req.query.cost}} }, function(err, user) {
+
     if(err) {
       console.log(err);
       res.status(400).send(err);
     }
     else{
-
+      
     }
   });
-
-
+  
+   
   User.findOne({ name: user.name }, function (err, user) {
     if (err) return handleError(err);
-
+    
     else{
       res.json(user);
     }
   });
+  }
+  else if(req.query.act == 'delete'){
 
+  User.findOneAndUpdate({ name: user.name }, { $pull: {cart: {_id: req.query.item}} }, function(err, user) {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+    else{
+      //console.log("got here");
+    }
+  });
+  
+   
+  User.findOne({ name: user.name }, function (err, user) {
+    if (err) return handleError(err);
+    
+    else{
+      res.json(user);
+    }
+  });
+  }
 };
 
 /* Delete a listing */
@@ -111,6 +138,7 @@ exports.list = function(req, res) {
 
 /*
   Middleware: find a listing by its ID, then pass it to the next request handler.
+
   Find the listing using a mongoose query,
         bind it to the request object as the property 'listing',
         then finally call next

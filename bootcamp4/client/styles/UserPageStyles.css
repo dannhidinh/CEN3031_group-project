@@ -2,58 +2,88 @@
     box-sizing: border-box;
     font-weight: bold;
     font-family: 'Verdana', sans-serif;
+
+    text-decoration: none;
+
   }
   
   .userPage{
     text-align: center;
+
+    background-image: linear-gradient(to bottom right, rgb(57, 226, 225), rgb(6, 81, 112));
+
   }
   
   .topBar{
     order: 1;
-    height: 150px;
+
     width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content: space-evenly;
     align-items: center;
+    color: #FFFFFF;
+    border: 5px ridge #FCF3A2;
+
   }
   
   .logo{
     order: 1;
-    margin-bottom: 20px;
-  }
 
+  }
+  
   .navBar{
     order: 2;
-    width: 100%;
+    width: 70%;
+    border-radius: 5px;
+    border: 3px double #FCF3A2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 75px;
+  }
+  
+  .home-link, .about-link, .contact-link, .cart-link, .login-link, .user-link{
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: white;
+    max-height: 60%;
+    font-size: 1.3vw;
+
   }
   .userContent{
     order: 2;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin-top: 130px;
-    width: 100%;
-    border: 1px solid #0B0B0B;
-  }
-  
-  .dropContent{
-    display: none;
-    position: relative;
-    z-index: 5;
+
+    align-items: center;
+    padding: 20px 20px;
     width: 100%;
   }
-  
+
+  .loggedIn{
+    color: #FFFFFF;
+  }
+
+
   .infoContainer{
     order: 2;
     align-self: center;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-items: center;
+
+    align-items: flex-start;
     width: 100%;
     padding: 20px 20px;
   }
+
+  .topTitle{
+    color: #FFFFFF;
+  }
+
   
   .history{
     order: 1;
@@ -65,9 +95,13 @@
   } 
   
   .listedItems{
-    height: 500px;
-    border: 1px solid #0B0B0B;
+
     margin-top: 10px;
+    border: 3px outset #FCF3A2;
+    background-color: #FFFFFF;
+    color: #FC7869;
+    border-radius: 5px;
+
   }
 
   .individualItem{
@@ -75,14 +109,38 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 10px 10px;
-    font-size: 14px;
+
+    font-size: 1vw;
+    margin: 10px 0;
   }
 
-  .descriptionButton, .reorderButton{
+  .itemHeaders{
+    border-bottom: 3px ridge #FCF3A2;
+    color: #FFFFFF;
+    background-color: #FC7869;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.5vw;
+    padding: 10px 0;
+  }
+
+  .nameHeader, .dateHeader, .itemName, .orderDate{
+    height: 100%;
+    width: 25%;
+  }
+
+  .descriptionButton, .reorderButton, .descriptionHeader, .reorderHeader{
+    height: 100%;
+    width: 25%;
+  }
+
+  .fa-info-circle, .fa-plus-circle{
     border-radius: 50%;
-    border: 2px solid #FFFFFF;
-    color: #0B0B0B;
+    border: 2px solid #FCF3A2;
+    color: #FC7869;
+
     cursor: pointer;
     outline: none;
   }
@@ -97,24 +155,42 @@
   }
   
   .listedInfo{
-    height: 500px;
-    border: 1px solid #0B0B0B;
+
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 20px;
+
+    border: 3px outset #FCF3A2;
+    background-color: #FFFFFF;
+    color: #FC7869;
+    border-radius: 5px;
+    padding-bottom: 10px;
+
   }
 
   .mainInfo{
     order: 1;
     width: 100%;
-    height: 40%;
+
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: 12px;
+    justify-content: space-around;
+    font-size: 1vw;
+    background-color: #FC7869;
+    border-bottom: 3px ridge #FCF3A2;
+    color: #FFFFFF;
+    padding: 10px 10px;
+  }
+
+  .userPic{
+    border-radius: 50%;
+    border: 2px solid #FCF3A2;
+    height: 7vw;
+    width: 7vw;
+
   }
 
   .infoData{
@@ -123,7 +199,9 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-left: 20px;
-    height: 40%;
+
+    height: 7vw;
+
     width: 75%;
   }
 
@@ -138,16 +216,32 @@
   .cardContainer{
     order: 2;
     width: 100%;
-    height: 10%
+
+    margin: 20px 20px;
+
   }
 
   .myCard{
     width: 80%;
     height: 100%;
+
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: #FC7869;
+    cursor: pointer;
+
   }
 
   .changeInfo{
     order: 3;
     width: 100%;
-    height: 20%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    font-size: 1vw;
   }

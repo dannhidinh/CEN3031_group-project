@@ -1,0 +1,74 @@
+<<<<<<< HEAD
+{
+    "entries": [
+      {"itemname": "Wheat Wrap", "itemdesc": "Delicious whole wheat vegan wrap",
+      "itemprice": 5.99, "itemexp": "2019-03-29T06:53:38.829Z", "itemcode":  "prod: ",
+        "itempic": "logo.svg", "ivenuser": "Eat80", "ibodnum": 1, "itemqty": 4
+      },
+      {"itemname": "2Wheat Wrap", "itemdesc": "2Delicious whole wheat vegan wrap",
+      "itemprice": 6.99, "itemexp": "2019-03-29T06:53:38.829Z", "itemcode":  "prod: ",
+        "itempic": "logo.svg", "ivenuser": "HarvestT", "ibodnum": 2, "itemqty": 4
+      },
+      { "itemname": "E2Wheat", "itemdesc": "E2Delicious whole wheat",
+       "itemprice": 9.99, "itemexp": "2019-03-29T06:53:38.829Z", "itemcode":  "prod: ",
+         "itempic": "logo.svg", "ivenuser": "Eat80", "ibodnum": 1, "itemqty": 4
+      },
+      { "itemname": "E2 Wrap", "itemdesc": "E2Delicious vegan wrap",
+       "itemprice": 3.99, "itemexp": "2019-03-29T06:53:38.829Z", "itemcode":  "prod: ",
+         "itempic": "logo.svg", "ivenuser": "HarvestT", "ibodnum": 2, "itemqty": 4
+      },
+      { "itemname": "E3Wheat", "itemdesc": "E3Delicious sprouted wheat",
+       "itemprice": 4.99, "itemexp": "2019-03-29T06:53:38.829Z",
+         "ivenuser": "HarvestT", "ibodnum": 1, "itemqty": 4
+      },
+      { "itemname": "E3 Wrap", "itemdesc": "E3Delicious vegan wrap",
+       "itemprice": 7.99, "itemexp": "2019-03-29T06:53:38.829Z", "itemcode":  "prod: ",
+         "itempic": "logo.svg", "ivenuser": "HarvestT", "ibodnum": 1, "itemqty": 4
+      }
+    ]
+=======
+{
+    "entries": [
+      {
+   "bodname": "Bodega at UF Innovate the Hub",
+     "bodaddress": { "bodstreet": "747 SW 2nd Ave", "bodcity": "Gainesville",
+                     "bodstate": "FL", "bodzip": "32601", "bodlat": 0, "bodlong": 1},
+     "boddescr": "Bodega for Innovation and Prototyping",
+     "bodimage": "https://www.facebook.com/2158213541084690/photos/2166658940240150/",
+     "bodurl": "https://www.facebook.com/BodegaAtTheHub/",
+     "Vendor": [{ "venname": "Harvest Thyme1", "venmobile": "(352) 555-5555",
+                  "venaddr": {"venstreet": "100 West West St. ", "vencity": "Gainesville ",
+                              "venstate": "FL ", "venzip": "32609 ", "venlat": 2, "venlong": 3},
+                  "item": [{ "itemname": "Wheat Wrap", "itemdesc": "Delicious whole wheat vegan wrap",
+                                "price": 5.99, "itemexp": "2019-03-29T06:53:38.829Z"},
+                           { "itemname": "2Wheat Wrap", "itemdesc": "2Delicious whole wheat vegan wrap",
+                                "price": 6.99, "itemexp": "2019-03-29T06:53:38.829Z"}
+                          ]
+                }]
+      },
+      {
+        "bodname": "Bodega at Exactech",
+        "bodaddress": { "bodstreet": "2320 NW 66 Ct", "bodcity": "Gainesville",
+          "bodstate": "FL", "bodzip": "32653", "bodlat": 4, "bodlong": 5},
+        "boddescr": "Bodega for Medical Device Complex",
+        "bodimage": "logo.svg",
+        "bodurl": "https://www.exac.com/about-us/",
+        "Vendor": [{ "venname": "EHarvest Thyme 2", "venmobile": "(352) 555-6666",
+                    "venaddr": {"venstreet": "200 West West St. ", "vencity": "Gainesville ",
+                    "venstate": "FL ", "venzip": "32609 ", "venlat": 6, "venlong": 7},
+                   "item": [{ "itemname": "E2Wheat", "itemdesc": "E2Delicious whole wheat",
+                               "price": 9.99, "itemexp": "2019-03-29T06:53:38.829Z"},
+                          { "itemname": "E2 Wrap", "itemdesc": "E2Delicious vegan wrap",
+                              "price": 3.99, "itemexp": "2019-03-29T06:53:38.829Z"}]},
+          { "venname": "EHarvest Thyme 2", "venmobile": "(352) 555-6666",
+            "venaddr": {"venstreet": "200 West West St.", "vencity": "Gainesville ",
+              "venstate": "FL ", "venzip": "32609 ", "venlat": 6, "venlong": 7},
+            "item": [{ "itemname": "E2Wheat", "itemdesc": "E2Delicious whole wheat",
+              "price": 9.99, "itemexp": "2019-03-29T06:53:38.829Z"},
+              { "itemname": "E2 Wrap", "itemdesc": "E2Delicious vegan wrap",
+                "price": 3.99, "itemexp": "2019-03-29T06:53:38.829Z"}]
+          }]
+      }
+    ]
+>>>>>>> 8072be74574c39d6bb433acda32b50b74485dbf7
+}

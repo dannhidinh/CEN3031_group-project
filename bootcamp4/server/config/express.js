@@ -33,6 +33,7 @@ module.exports.init = function() {
 
   /**
   Use the listings router for requests to the api */
+
   app.use('/api/blistings', blistingsRouter);
   app.use('/api/users', listingsRouter);
 
@@ -40,6 +41,7 @@ module.exports.init = function() {
   app.use('/api/card', stripeRouter);
   // STRIPE - CRUD routes
   app.use('/../routes', require('../routes/card.server.routes'));
+
 
 
   /**

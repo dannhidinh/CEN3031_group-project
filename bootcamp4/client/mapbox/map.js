@@ -1,4 +1,5 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiZGFubmhpOTkiLCJhIjoiY2p0ZXJ0eTFjMWxlcjQ0bDZndm1nMHk5eSJ9.nwDTlVR1P1LZEyRKMW4o9g';
+
 if (!mapboxgl.supported()) {
   // alert if user browser doesn't support mapbox
   alert('Your browser does not support Mapbox GL');
@@ -10,6 +11,7 @@ if (!mapboxgl.supported()) {
     zoom: 10
   });
 }
+
 
 // load location of Bodega
 map.on('load', function () {
@@ -72,7 +74,6 @@ map.on('load', function () {
 
 // navigation control
 map.addControl(new mapboxgl.NavigationControl());
-
 
 // geolocate control - locate user
 map.addControl(new mapboxgl.GeolocateControl ({

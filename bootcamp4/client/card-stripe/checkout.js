@@ -16,7 +16,6 @@ button.addEventListener("click", function(ev) {
   });
   ev.preventDefault();
 });
-
 function handleToken(token) {
   fetch("/charge", {
     method: "POST",
