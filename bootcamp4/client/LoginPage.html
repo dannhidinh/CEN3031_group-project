@@ -38,7 +38,7 @@
           <input type='text' ng-model="newUser.name"/></span>
         <span class='signUpItem'>
           <span class='fieldTitle'>Email</span>
-          <input type='text' ng-model="newUser.email"/></span>
+          <input type='email' ng-model="newUser.email"/></span>
         
         <span class='signUpItem'>
           <span class='fieldTitle'>Password</span>
@@ -46,31 +46,12 @@
         
         <span class='signUpItem'>
           <span class='fieldTitle'>Phone Number</span>
-          <input type='text' ng-model="newUser.phone"/></span>
+          <input input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" require ng-model="newUser.phone"/></span>
           <button class='btn btn-primary' ng-click='addListing()'>SIGN UP</button>
           {{upResult}}
       </form>     
-       <!--<button class="test" ng-click="addToCart()">TESTS</button>-->                
+       <!--<button class="test" ng-click="test()">TESTS</button>-->               
     </div>  
-    <div class='venSignUp' ng-controller="ListingsController">
-      <span class='signTitle'>Vendor SIGN UP</span>
-      <form class= 'signForm' id= "venForm" onsubmit="this.reset()">
-        <span class='signUpItem'>
-          <span class='fieldTitle'>Username</span>
-          <input type='text' ng-model="newUser.name"/></span>
-        <span class='signUpItem'>
-          <span class='fieldTitle'>Email</span>
-          <input type='text' ng-model="newUser.email"/></span>
-        
-        <span class='signUpItem'>
-          <span class='fieldTitle'>Password</span>
-          <input type='password' ng-model="newUser.password"/></span>
-        
-          <button class='btn btn-primary' ng-click='addVend()'>SIGN UP</button>
-          {{upResult}}
-      </form>     
-       <!--<button class="test" ng-click="addToCart()">TESTS</button>-->                
-    </div>     
     <div class = "testButton"><a href="UserPage.html" class="w3-right w3-bar-item w3-button">User Page</a></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
