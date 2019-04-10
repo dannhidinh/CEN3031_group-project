@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #searchBar {
   margin: 15px 10px;
 }
@@ -5,4 +6,13 @@
 .tableWrapper {
   max-height: 400px;
   overflow: auto;
+=======
+#searchBar {
+  margin: 15px 10px;
+}
+
+.tableWrapper {
+  max-height: 400px;
+  overflow: auto;
+>>>>>>> 8072be74574c39d6bb433acda32b50b74485dbf7
 }
