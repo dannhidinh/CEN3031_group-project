@@ -1,5 +1,6 @@
-angular.module('users').controller('ListingsController', ['$scope', 'Users',
+angular.module('users').controller('ListingsController', ['$scope', 'Users',  
   function($scope, Users) {
+    //var msg = require('../factories/listingFactory.js');
     /* Get all the listings, then bind it to the scope */
     Users.getAll().then(function(response) {
       $scope.users = response.data;
@@ -10,32 +11,12 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
     $scope.detailedInfo = undefined;
 
 //IGNORE, used for general testing
-/*
-    $scope.otherTest = function(){
-//document.location.reload(true);
-console.log("got here");
-    }
-    $scope.test = function(){
-      //console.log("test");
-      //User.findOne({ name: $scope.currentUser.name }, function (err, user) {
-      //if (err) return handleError(err);
-        //console.log("works");
 
-    //});
-    var test = "as@d.";
-    //console.log(test.indexOf('@'));
-      if (test.indexOf('@') < 0 || test.indexOf('.') < 0)
-  {
-    
-    console.log("not a valid email address");
-    //return;
-  }
-  else
-    console.log("valid");
-  //$scope.otherTest();
+  $scope.test = function(){
+      console.log(msg.test);
 
   }
-*/
+
 //calculates price amounts when button is pressed
     $scope.finalPrice = function(){
       
@@ -52,6 +33,35 @@ console.log("got here");
       amount = amount + uftax;
       $scope.final = amount.toFixed(2);
           
+      
+      // STRIPE - checkout form
+      var checkoutHandler = StripeCheckout.configure({
+        key: "pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a",
+        image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+        locale: "auto"
+      });
+      var button = document.getElementById("buttonCheckout");
+      button.addEventListener("click", function(ev) {
+        checkoutHandler.open({
+          name: "Checkout",
+          description: "Purchase Cart",
+          amount: ($scope.final)*100,
+          token: handleToken
+        });
+        ev.preventDefault();
+      });
+      function handleToken(token) {
+        fetch("/charge", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(token)
+        })
+        .then(output => {
+          if (output.status === "succeeded")
+            document.getElementById("shop").innerHTML = "<p>Purchase complete!</p>";
+        })
+      }
+      
     }
 
 //carries user between htmls
@@ -67,6 +77,7 @@ console.log("got here");
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
 
+//logs in newly sign-uped user
       if (isNew == 'yes') {
         console.log(newInfo.password);
             Users.getAll().then(function(response) {
@@ -99,6 +110,7 @@ console.log("got here");
         }
       }        
 */
+//updates cart price dynamically
         $scope.finalPrice();
   });
 
@@ -192,7 +204,7 @@ console.log("used");
 //or treat as unique username)
   for (var i = 0; i < $scope.users.length; i++) {
     if ($scope.users[i].name == $scope.newUser.name){
-      $scope.upResult = "name is already in use";
+      $scope.upResult = "Name is already in use";
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
         $scope.newUser.email = undefined;
@@ -200,7 +212,7 @@ console.log("used");
       return;
     }
     else if ($scope.users[i].email == $scope.newUser.email){
-      $scope.upResult = "email is already in use";
+      $scope.upResult = "Email is already in use";
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
         $scope.newUser.email = undefined;
@@ -208,19 +220,6 @@ console.log("used");
       return;
     }
 
-  }
-//console.log($scope.newUser.email.indexOf('@'));
-
-//checks if email input has '@' to consider it an email, might need more validation
-  if ($scope.newUser.email.indexOf('@') < 0 || $scope.newUser.email.indexOf('.') < 0)
-  {
-    
-    $scope.upResult = "not a valid email address";
-        $scope.newUser.name = undefined;
-        $scope.newUser.password = undefined;
-        $scope.newUser.email = undefined;
-        $scope.newUser.phone = undefined;    
-    return;
   }
 
 
@@ -256,7 +255,7 @@ console.log(testPass);
 //WHERE USER IS ACTUALLY ADDED DONT REMOVE
 
     Users.create({name: $scope.newUser.name, password: $scope.newUser.password, 
-      email: $scope.newUser.email, phone: $scope.newUser.phone, authority: 0}).then(function(response){
+      email: $scope.newUser.email, phone: $scope.newUser.phone, authority: 'member'}).then(function(response){
       Users.getAll().then(function(response) {
           $scope.users = response.data;
           //console.log("here");
@@ -296,113 +295,7 @@ console.log(testPass);
 
 
     };
-
-//adds new vendor user; authority = 1
-    $scope.addVend = function() {
-    /**TODO
-    *Save the article using the Listings factory. If the object is successfully
-    saved redirect back to the list page. Otherwise, display the error
-      */
-//resets upResults between sign attempts
-      $scope.upResult = "";
-
-//checks if all fields got data
-      if ($scope.newUser.name == undefined || $scope.newUser.password == undefined || 
-        $scope.newUser.email == undefined){
-          
-          $scope.upResult = "Fill in all fields";
-        $scope.newUser.name = undefined;
-        $scope.newUser.password = undefined;
-        $scope.newUser.email = undefined;
-        //$scope.newUser.phone = undefined;
-        return;
-      }
-
-
-//checks if name or email is already in database (maybe dont check name because people share names, 
-//or treat as unique username)
-  for (var i = 0; i < $scope.users.length; i++) {
-    if ($scope.users[i].name == $scope.newUser.name){
-      $scope.upResult = "name is already in use";
-        $scope.newUser.name = undefined;
-        $scope.newUser.password = undefined;
-        $scope.newUser.email = undefined;
-        //$scope.newUser.phone = undefined;      
-      return;
-    }
-    else if ($scope.users[i].email == $scope.newUser.email){
-      $scope.upResult = "email is already in use";
-        $scope.newUser.name = undefined;
-        $scope.newUser.password = undefined;
-        $scope.newUser.email = undefined;
-        //$scope.newUser.phone = undefined;      
-      return;
-    }
-
-  }
-//console.log($scope.newUser.email.indexOf('@'));
-
-//checks if email input has '@' to consider it an email, might need more validation
-  if ($scope.newUser.email.indexOf('@') < 0 || $scope.newUser.email.indexOf('.') < 0)
-  {
     
-    $scope.upResult = "not a valid email address";
-        $scope.newUser.name = undefined;
-        $scope.newUser.password = undefined;
-        $scope.newUser.email = undefined;
-        //$scope.newUser.phone = undefined;    
-    return;
-  }
-
-
-//converts incoming password to hashed number
-      var testPass = $scope.newUser.password;
-      //console.log(testPass);
-        var hash = 0, i, chr;
-        if (testPass.length === 0) return hash;
-        for (i = 0; i < testPass.length; i++) {
-          chr   = testPass.charCodeAt(i);
-            hash  = ((hash << 6) - hash) + chr;
-            hash |= 0; // Convert to 32bit integer
-          }
-          $scope.newUser.password = hash;
-
-//original add code from Nhi, didn't seem to work
-/*
-      $scope.save = function(error) {
-        //console.log("used");
-        if(error) {
-          throw error;
-          console.log('Unable to add listing');
-        }
-      };
-      console.log($scope.newUser);
-      $scope.users.push($scope.newUser);
-      console.log($scope.users[3]);
-      $scope.newUser = {};
-*/
-
-
-
-//WHERE USER IS ACTUALLY ADDED DONT REMOVE
-
-    Users.create({name: $scope.newUser.name, password: $scope.newUser.password, 
-      email: $scope.newUser.email, authority: 1}).then(function(response){
-      Users.getAll().then(function(response) {
-          $scope.users = response.data;
-      }, function(error) {
-          console.log('Unable to add user', error);
-        });
-      });    
-
-//resets newUser values between attempts
-    $scope.newUser.name = undefined;
-    $scope.newUser.password = undefined;
-    $scope.newUser.email = undefined;
-    //$scope.newUser.phone = undefined;
-    document.location.reload(true);
-
-    };    
 
 //adds to cart and refreshes currentUser data
     $scope.addToCart = function(){
@@ -411,7 +304,7 @@ console.log($scope.newItem.productC);
 console.log($scope.newItem.quantity);
 console.log($scope.newItem.price);
 
-      Users.updateCart($scope.currentUser._id, 'add', 0, 
+      Users.update($scope.currentUser._id, 'add', 0, 
         $scope.newItem.productC, $scope.newItem.quantity, $scope.newItem.price).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
@@ -454,7 +347,7 @@ console.log($scope.newItem.price);
       //console.log(itemID);
       //this.currentUser.cart.splice(itemID,1);
       console.log("remove used");
-      Users.updateCart($scope.currentUser._id, 'delete', itemID).then(function(response){
+      Users.update($scope.currentUser._id, 'delete', itemID).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
         for (var i = 0; i < $scope.users.length; i++) {

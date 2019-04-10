@@ -7,7 +7,7 @@ module.exports = {
     uri: 'mongodb://tflowers1:Turtle1@ds161804.mlab.com:61804/tyfadmin',
     //place the URI of your mongo database here.
   },
- port: 8080
+// port: 8080
  //  var port = process.env.PORT || 8080
   // for heroku
 };

@@ -2,11 +2,14 @@
     box-sizing: border-box;
     font-weight: bold;
     font-family: 'Verdana', sans-serif;
+
     text-decoration: none;
+
   }
 
   .loginPage{
     text-align: center;
+
     background-image: linear-gradient(to bottom right, rgb(57, 226, 225), rgb(6, 81, 112));
   }
   
@@ -47,12 +50,14 @@
   }
 
   .loginContent{
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
   }
   
+
   .formsContainer{
     order: 2;
     width: 50%;
@@ -62,15 +67,18 @@
 
   .myLogin, .mySignUp{
     width: 100%;
+
     min-height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
     padding: 20px 20px;
     border: 3px outset #FCF3A2;
     background-color: #FFFFFF;
     color: #FC7869;
+
   }
   
   .logForm{
@@ -93,11 +101,13 @@
   
   .logSubmit{
     margin-top: 20px;
+
     border: 2px outset #FCF3A2;
     background-color: #FC7869;
     color: #FFFFFF;
     cursor: pointer;
     border-radius: 5px;
+
   }
 
   .signForm{
@@ -126,6 +136,7 @@
 
   .signUpSubmit{
     margin-top: 20px;
+
     border: 2px outset #FCF3A2;
     background-color: #FC7869;
     color: #FFFFFF;
@@ -135,4 +146,5 @@
 
   .sideButtons{
     order: 3;
+
   }
