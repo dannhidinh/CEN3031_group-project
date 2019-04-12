@@ -1,15 +1,20 @@
+
 var mongoose = require('mongoose'), 
+
     Schema = mongoose.Schema;
 
 /* Create your schema */
 var userSchema = new Schema({
   /* your code here */
   name: String,
+
   authority: String, //change to string that directly says 'vendor', 'admin', 'customer', etc. ?
+
   email: String,
   phone: String,
   password: Number,
   orderHist: [ { Product : String, transaction : {type: Date}} ], //take out date, save id
+
   cart: [ { productC : String, quantity : Number, price : Number} ], //make array of cards to get transaction ID for them, 
   //save date for credit card, save total price
   //maybe make order history just a list of carts, not its own array.
@@ -87,4 +92,6 @@ var User = mongoose.model('User', userSchema);
 
 
 /* Export the model to make it avaiable to other parts of your Node application */
+
 module.exports = User;
+

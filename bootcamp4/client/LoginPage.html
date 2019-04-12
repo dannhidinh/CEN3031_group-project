@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
   </head>
+
   <body class='loginPage' ng-app="directoryApp" ng-controller="ListingsController">
     <div class='topBar'>
       <img class='logo' src='./pictures/logo_transparent.svg' height='150px' width='150px'/>
@@ -24,12 +25,14 @@
       </div>
     </div>
     <div class="loginContent">
+
       {{currentUser.name}} is Logged in!
       <div class='sideButtons'>
         <button class='signout' ng-click='signOut()'>
           <span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
         </button>
       </div>    
+
       <div class="formsContainer">
         <div class='myLogin' id="logginForm">
           <span class='logTitle'>LOGIN</span>
@@ -66,6 +69,7 @@
           <!--<button class="test" ng-click="addToCart()">TESTS</button>-->                
         </div>  
       </div>
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
       <script src="https://code.angularjs.org/1.4.3/angular.js"></script>

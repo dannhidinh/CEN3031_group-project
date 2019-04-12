@@ -1,4 +1,3 @@
-
 /* Dependencies */
 var mongoose = require('mongoose'),
     User = require('../models/listings.server.model.js');

@@ -2,16 +2,21 @@
     box-sizing: border-box;
     font-weight: bold;
     font-family: 'Verdana', sans-serif;
+
     text-decoration: none;
+
   }
   
   .userPage{
     text-align: center;
+
     background-image: linear-gradient(to bottom right, rgb(57, 226, 225), rgb(6, 81, 112));
+
   }
   
   .topBar{
     order: 1;
+
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -19,10 +24,12 @@
     align-items: center;
     color: #FFFFFF;
     border: 5px ridge #FCF3A2;
+
   }
   
   .logo{
     order: 1;
+
   }
   
   .navBar{
@@ -44,11 +51,13 @@
     color: white;
     max-height: 60%;
     font-size: 1.3vw;
+
   }
   .userContent{
     order: 2;
     display: flex;
     flex-direction: column;
+
     align-items: center;
     padding: 20px 20px;
     width: 100%;
@@ -58,12 +67,14 @@
     color: #FFFFFF;
   }
 
+
   .infoContainer{
     order: 2;
     align-self: center;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+
     align-items: flex-start;
     width: 100%;
     padding: 20px 20px;
@@ -72,6 +83,7 @@
   .topTitle{
     color: #FFFFFF;
   }
+
   
   .history{
     order: 1;
@@ -83,11 +95,13 @@
   } 
   
   .listedItems{
+
     margin-top: 10px;
     border: 3px outset #FCF3A2;
     background-color: #FFFFFF;
     color: #FC7869;
     border-radius: 5px;
+
   }
 
   .individualItem{
@@ -95,6 +109,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+
     font-size: 1vw;
     margin: 10px 0;
   }
@@ -125,6 +140,7 @@
     border-radius: 50%;
     border: 2px solid #FCF3A2;
     color: #FC7869;
+
     cursor: pointer;
     outline: none;
   }
@@ -139,21 +155,25 @@
   }
   
   .listedInfo{
+
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
     border: 3px outset #FCF3A2;
     background-color: #FFFFFF;
     color: #FC7869;
     border-radius: 5px;
     padding-bottom: 10px;
+
   }
 
   .mainInfo{
     order: 1;
     width: 100%;
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -170,6 +190,7 @@
     border: 2px solid #FCF3A2;
     height: 7vw;
     width: 7vw;
+
   }
 
   .infoData{
@@ -178,7 +199,9 @@
     justify-content: space-between;
     align-items: flex-start;
     margin-left: 20px;
+
     height: 7vw;
+
     width: 75%;
   }
 
@@ -193,22 +216,27 @@
   .cardContainer{
     order: 2;
     width: 100%;
+
     margin: 20px 20px;
+
   }
 
   .myCard{
     width: 80%;
     height: 100%;
+
     outline: none;
     border: none;
     background-color: transparent;
     color: #FC7869;
     cursor: pointer;
+
   }
 
   .changeInfo{
     order: 3;
     width: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: space-around;

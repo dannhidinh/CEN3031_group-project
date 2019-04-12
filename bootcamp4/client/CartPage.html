@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://js.stripe.com/v3/"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   </head>
   <body class='cartPage' ng-app="directoryApp" ng-controller="ListingsController">
     <div class='topBar'>
@@ -21,6 +22,7 @@
     </div>
     <div class='cartContent'>
       <div class='loggedIn'>{{currentUser.name}} is Logged in!</div>
+
       <span class='title'>SHOPPING CART</span>
       <div class='infoContainer'>
         <div class='cartHeaders'>
@@ -34,24 +36,26 @@
           <div class='itemQuantity'>{{cart.quantity}}</div> <!--Place item description here in {}-->
           <div class='listingPrice'>{{cart.price}}</div> <!--Place item price data here in {}-->
 
+
           <div class='removeListingContainer'><button class='removeButton far fa-trash-alt' ng-click="removeFromCart(cart._id)"></button></div>
 
         </div>
         <div class='separateCalcRow'>
           <!--<button class="calculate" ng-click='finalPrice()'>Done Ordering</button>-->
+
             <div class="preTax">Before Tax: {{before}}</div>
             <div class='taxInfo'>Tax: {{tax}}</div>
             <div class='finalPrice'>Final: {{final}}</div>
         </div>
       </div>
       <div class='bottomButtons'>
-<a href="orgindex.html" class="w3-right w3-bar-item w3-button">test add</a>
         <button class='backToProducts'><a href='index.html' >Go Back To Shopping</a></button>
-        
+<a href="orgindex.html" class="w3-right w3-bar-item w3-button">test add</a>
 		 <!-- CHECKOUT API -->
+       <!-- <div class='payment' id='finalPayment'ng-click='finalPrice()'>Total Payment: ${{final}}</div> -->
         <script src="https://checkout.stripe.com/checkout.js"></script>
-        <button class='order' id="buttonCheckout">Checkout</button>
-        <script src="card-stripe/checkout.js"></script>
+        <button class='order' id="buttonCheckout" ng-click='finalPrice()'>Checkout</button>
+
 
       </div>
     </div>
@@ -60,6 +64,7 @@
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>
     <script src="js/app.js"></script>
     <script src="js/factories/listingFactory.js"></script>
-    <script src="js/controllers/listingController.js"></script>  
-  </body> 
+
+    <script src="js/controllers/listingController.js"></script>
+  </body>
 </html>
