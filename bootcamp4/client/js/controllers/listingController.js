@@ -295,14 +295,15 @@ console.log("used");
       */
 
       for (var i = 0; i < $scope.users.length; i++) {
-        if($scope.users[i].name === testName && $scope.users[i].password === hash){
+        if(($scope.users[i].name === testName && $scope.users[i].password === hash) || 
+          ($scope.users[i].email === testName && $scope.users[i].password === hash)){
           $scope.currentUser = $scope.users[i];
           break;
         }
       }
 
       if ($scope.currentUser == null) {
-        $scope.result = "Incorrect Username or Password";
+        $scope.result = "Incorrect Username/Email or Password";
       }
       else{
         $scope.result = "";
