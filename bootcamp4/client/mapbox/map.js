@@ -19,7 +19,7 @@ map.on('load', function () {
     if (error) throw error;
     map.addImage("custom-marker", image);
     map.addLayer({
-      id: "markers",
+      id: "locations",
       type: "symbol",
       source: {
         type: "geojson",
@@ -29,14 +29,14 @@ map.on('load', function () {
             {
               type: 'Feature',
               properties: {"title": "Bodega at the Hub",
-                           "description": "<p>This be a description lolz.",
+                           "description": "<h>BODEGA AT INNOVATE THE HUB</h><div>747 SW 2nd Ave</div><div>Gainesville, Florida 32601</div>",
                            "icon": "marker"},
               geometry: {type: "Point",coordinates: [ -82.3327, 29.6502]}
             },
             {
               type: 'Feature',
               properties: {"title": "Bodega at Exactech",
-                           "description": "<p></p>",
+                           "description": "<h>BODEGA AT EXACTECH INC.</h><div>2320 NW 66 Ct</div><div>Gainesville, Florida 32653</div>",
                            "icon": "marker"},
               geometry: {type: "Point", coordinates: [ -82.356005, 29.717539]}
             }
@@ -51,10 +51,13 @@ map.on('load', function () {
         "text-font": ["Arial Unicode MS Bold"],
         "text-offset": [0, 1],
         "text-anchor": "top",
+      },
+      paint: {
+        "text-color": "#000000"
       }
     });
   });
-  map.on('click', 'places', function (e) {
+  map.on('click', 'locations', function (e) {
     var coordinates = e.features[0].geometry.coordinates.slice();
     var description = e.features[0].properties.description;
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {

@@ -23,9 +23,9 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 	 <!-- next 3 lines are mapbox api implementations-->
+	  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <!-- implementing notifications API -->
 
 </head>
@@ -51,9 +51,9 @@
 <body>
 
 <!-- PRODUCTS -->
-	
+
 	<!-- STYLE NEEDED FOR BUTTONS -->
-	
+
 	  <!-- First Photo Grid-->
   <div class="photo_grid" id="food">
     <div class="card">
@@ -61,19 +61,19 @@
       <span class="item_name">Chicken and Veggies</span>
       <button type="button"  data-toggle="modal" data-target="#myModal1">More Details</button>
     </div>
-	
+
      <div class="card">
       <img src="pictures/foods/Mojo pork with rice and beans.jpg" alt="product" width="80%" height="60%" >
       <span class="item_name">Mojo pork with rice and beans</span>
 	  <button type="button" data-toggle="modal" data-target="#myModal2">More Details</button>
     </div>
-	
+
     <div class="card">
       <img src="pictures/foods/Turkey with mash potatoes.jpg" alt="product" width="80%" height="60%" >
       <span class="item_name">Turkey with mash potatoes</span>
 	  <button type="button"  data-toggle="modal" data-target="#myModal3">More Details</button>
     </div>
-	
+
     <div class="card">
       <img src="pictures/foods/Summer Salad.jpg" alt="product" width="80%" height="60%" >
       <span class="item_name">Summer Salad</span>
@@ -87,8 +87,8 @@
 		<div class="nearestBodega">
 		<link rel="mapStyle" href="mapbox/map.css">
 		<div id='map' style='width: 800px; height: 400px;'>
-			<script src="mapbox/map.js"></script>
 		</div>
+		<script src="mapbox/map.js"></script>
   </div>
 
 
@@ -109,7 +109,7 @@
 					<div class="modal-body">
 						    <div class='cartContent'>
 								<div class='loggedIn'>{{currentUser.name}} is Logged in!</div>
-						
+
 								<div class='infoContainer'>
 									<div class='cartHeaders'>
 										<div class='nameHeader'>Product</div> <!--Place item name data here in {}-->
@@ -130,11 +130,10 @@
            							  <div class='finalPrice'>Final: {{final}}</div>
         						</div>
       							</div>
-        
+
 								<!-- CHECKOUT API -->
 								<script src="https://checkout.stripe.com/checkout.js"></script>
-								<button class='order' id="buttonCheckout">Checkout</button>
-								<script src="card-stripe/checkout.js"></script>
+								<button class='order' id="buttonCheckout" ng-click="finalPrice()">Checkout</button>
 							</div>
 					</div>
 				<div class="modal-footer">
@@ -144,7 +143,7 @@
 
 		</div>
 	</div>
-	
+
 	<!-- About Modal -->
 	<div id="myModalabout" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -175,7 +174,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<center><h4 class="modal-title">CONTACT US</h4></center>
 				</div>
-	 
+
 				<div class="modal-body">
 					<form action="action_page.php">
 
@@ -202,7 +201,7 @@
 						<input type="submit" value="Submit">
 					</form>
 				</div>
-	  
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
@@ -219,11 +218,11 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<center><h4 class="modal-title">SIGN UP AND LOG IN</h4></center>
 				</div>
-	 
+
 				<div class="modal-body">
-			
+
 					</div>
-	  
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
@@ -295,7 +294,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-	
+
   </div>
 </div>
 	<!-- product 3 Modal -->
@@ -374,7 +373,7 @@
 	 <!-- -->
     <script src="js/app.js"></script>
     <script src="js/factories/listingFactory.js"></script>
-    <script src="js/controllers/listingController.js"></script> 
-	
+    <script src="js/controllers/listingController.js"></script>
+
 </body>
 </html>

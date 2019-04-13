@@ -7,8 +7,6 @@ var keyPublishable = 'pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a',
     bodyParser = require('body-parser');
 
 router.post("/charge", (req, res) => {
-  //let amount = 999;
-
   stripe.customers.create({
     email: req.body.email,
     card: req.body.id
