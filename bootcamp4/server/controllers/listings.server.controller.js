@@ -59,7 +59,7 @@ exports.update = function(req, res) {
 
 //changes action depending act set here and in controllers; necessary because there can be only one put function
 if(req.query.act == 'add'){
-//used to add to cart, will eventually take in paramenters
+//used to add to cart, can now take parameter!
   User.findOneAndUpdate({ name: user.name }, { $addToSet: {cart: {productC: req.query.product, quantity: req.query.amount, price: req.query.cost}} }, function(err, user) {
 
     if(err) {
@@ -80,6 +80,7 @@ if(req.query.act == 'add'){
     }
   });
   }
+  //used to delete from cart
   else if(req.query.act == 'delete'){
 
   User.findOneAndUpdate({ name: user.name }, { $pull: {cart: {_id: req.query.item}} }, function(err, user) {
@@ -101,6 +102,90 @@ if(req.query.act == 'add'){
     }
   });
   }
+
+//used to change username in user page
+  else if(req.query.act == 'newName'){
+  
+  var newName = req.query.product;
+  console.log(user.name);
+  console.log(newName);
+  
+  User.findOneAndUpdate({ name: user.name }, {name: newName}, function(err, user) {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+    else{
+      //console.log("got here");
+    }
+  });
+  
+   
+  User.findOne({ email: user.email }, function (err, user) {
+    if (err) return handleError(err);
+    
+    else{
+      console.log("new users name " + user.name);
+      res.json(user);
+    }
+  }); 
+     
+  }
+
+//used to change phone in userpage
+  else if(req.query.act == 'newTel'){
+  
+  var newTel = req.query.product;
+  
+  User.findOneAndUpdate({ name: user.name }, {phone: newTel}, function(err, user) {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+    else{
+      //console.log("got here");
+    }
+  });
+  
+   
+  User.findOne({ name: user.name }, function (err, user) {
+    if (err) return handleError(err);
+    
+    else{
+      //console.log("new users name " + user.name);
+      res.json(user);
+    }
+  }); 
+     
+  }  
+
+//used to change email in user page
+  else if(req.query.act == 'newMail'){
+  
+  var newMail = req.query.product;
+  
+  User.findOneAndUpdate({ name: user.name }, {email: newMail}, function(err, user) {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+    else{
+      //console.log("got here");
+    }
+  });
+  
+   
+  User.findOne({ name: user.name }, function (err, user) {
+    if (err) return handleError(err);
+    
+    else{
+      //console.log("new users name " + user.name);
+      res.json(user);
+    }
+  }); 
+     
+  } 
+
 };
 
 /* Delete a listing */

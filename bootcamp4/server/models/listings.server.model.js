@@ -16,6 +16,7 @@ var userSchema = new Schema({
   orderHist: [ { Product : String, transaction : {type: Date}} ], //take out date, save id
 
   cart: [ { productC : String, quantity : Number, price : Number} ], //make array of cards to get transaction ID for them, 
+  //trans: [ cart: [ { productC : String, quantity : Number, price : Number} ] ]
   //save date for credit card, save total price
   //maybe make order history just a list of carts, not its own array.
   created_at: {type: Date},
