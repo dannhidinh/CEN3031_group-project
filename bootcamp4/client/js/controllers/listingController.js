@@ -17,6 +17,147 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
   }
 
+  $scope.newName = function(name){
+    console.log(name);
+      if (name == undefined || name == ""){
+        return;
+      }
+
+  for (var i = 0; i < $scope.users.length; i++) {
+    if ($scope.users[i].name == name){
+      $scope.newResult = "Name is already in use";     
+      return;
+    }
+  }
+
+      Users.update($scope.currentUser._id, 'newName', 0, 
+        name).then(function(response){
+      Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        for (var i = 0; i < $scope.users.length; i++) {
+          if($scope.users[i].name === name){
+            $scope.currentUser = $scope.users[i];
+            break;
+          }
+        }
+        //console.log($scope.currentUser);
+        if ($scope.currentUser == null) {
+          $scope.result = "Incorrect Username or Password";
+        }
+        else{
+          $scope.result = "";
+        }
+
+        if (typeof(Storage) !== "undefined") {
+          var curr = $scope.currentUser;
+          //console.log(curr);
+          console.log($scope.currentUser.name);
+          // Store
+          sessionStorage.setItem("current", JSON.stringify(curr));
+        } 
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+
+        //$scope.finalPrice();
+
+      }, function(error) {
+          console.log('Unable to retrieve listings:', error);
+        });
+      }); 
+  }
+
+  $scope.newTel = function(tel){
+      console.log(tel);
+      if (tel == undefined || tel == ""){
+        return;
+      }
+      Users.update($scope.currentUser._id, 'newTel', 0, 
+        tel).then(function(response){
+      Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        for (var i = 0; i < $scope.users.length; i++) {
+          if($scope.users[i].name === $scope.currentUser.name){
+            $scope.currentUser = $scope.users[i];
+            break;
+          }
+        }
+        //console.log($scope.currentUser);
+        if ($scope.currentUser == null) {
+          $scope.result = "Incorrect Username or Password";
+        }
+        else{
+          $scope.result = "";
+        }
+
+        if (typeof(Storage) !== "undefined") {
+          var curr = $scope.currentUser;
+          //console.log(curr);
+          //console.log($scope.currentUser.name);
+          // Store
+          sessionStorage.setItem("current", JSON.stringify(curr));
+        } 
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+
+        //$scope.finalPrice();
+
+      }, function(error) {
+          console.log('Unable to retrieve listings:', error);
+        });
+      });     
+  }
+
+  $scope.newMail = function(newMail){
+    if (newMail == undefined || newMail == ""){
+        return;
+    }
+  for (var i = 0; i < $scope.users.length; i++) {
+    if ($scope.users[i].email == newMail){
+      $scope.newResult = "Email is already in use";      
+      return;
+    }
+
+  }
+      Users.update($scope.currentUser._id, 'newMail', 0, 
+        newMail).then(function(response){
+      Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        for (var i = 0; i < $scope.users.length; i++) {
+          if($scope.users[i].name === $scope.currentUser.name){
+            $scope.currentUser = $scope.users[i];
+            break;
+          }
+        }
+        //console.log($scope.currentUser);
+        if ($scope.currentUser == null) {
+          $scope.result = "Incorrect Username or Password";
+        }
+        else{
+          $scope.result = "";
+        }
+
+        if (typeof(Storage) !== "undefined") {
+          var curr = $scope.currentUser;
+          //console.log(curr);
+          //console.log($scope.currentUser.name);
+          // Store
+          sessionStorage.setItem("current", JSON.stringify(curr));
+        } 
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+
+        //$scope.finalPrice();
+
+      }, function(error) {
+          console.log('Unable to retrieve listings:', error);
+        });
+      });    
+
+  }
+
 //calculates price amounts when button is pressed
     $scope.finalPrice = function(){
       
@@ -154,14 +295,15 @@ console.log("used");
       */
 
       for (var i = 0; i < $scope.users.length; i++) {
-        if($scope.users[i].name === testName && $scope.users[i].password === hash){
+        if(($scope.users[i].name === testName && $scope.users[i].password === hash) || 
+          ($scope.users[i].email === testName && $scope.users[i].password === hash)){
           $scope.currentUser = $scope.users[i];
           break;
         }
       }
 
       if ($scope.currentUser == null) {
-        $scope.result = "Incorrect Username or Password";
+        $scope.result = "Incorrect Username/Email or Password";
       }
       else{
         $scope.result = "";

@@ -58,11 +58,15 @@
               <button class='myCard'>CARD API HERE</button>
               <!--Link saved payment API here-->
             </div>
-            <form class='changeInfo'>
+            <form class='changeInfo' onsubmit="this.reset()">
               <div class='submittedImg'>New Picture</div><input type="file" /><!--Find dropImage API and place here-->
-              <div class='changeName'>New Name</div><input type='text' />
-              <div class='changeCell'>New Cell</div><input type='text' />
-              <div class='changeEmail'>New Email</div><input type='email' />
+              <div class='changeName'>New Name</div><input type='text' ng-model="newUN"/>
+              <button class="changeName" ng-click="newName(newUN)">Change</button>
+              <div class='changeCell'>New Cell</div><input type='tel' name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" ng-model="newCell"/>
+              <button class="changeCell" ng-click="newTel(newCell)">Change</button>
+              <div class='changeEmail'>New Email</div><input type='email' ng-model="newE"/>
+              <button class="changeEmail" ng-click="newMail(newE)">Change</button>
+              {{newResult}}
             </form>
           </div>
         </div>
