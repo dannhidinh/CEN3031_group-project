@@ -38,12 +38,18 @@
       <div class="navBar">
         <button class="home-link"><a href="index.html">HOME</a></button>
         <button class="about-link" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
-		<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
+				<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
         <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : 'UserPage.html')}}">MY INFO</a></button>
         <button class="cart-link"><a href="CartPage.html">CART</a></button>
 		<!--<button class="cart-link" data-toggle="modal" data-target="#myModalcart">CART</a></button>-->
-        <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
-      </div>
+				<button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
+			</div>
+			<div class='sideButtons'>
+				Welcome {{currentUser.name}}!
+				<button class='signout' ng-click='signOut()'>
+					<span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
+				</button>
+			</div>  
     </div>
 </header>
 

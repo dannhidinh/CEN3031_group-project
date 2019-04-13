@@ -23,16 +23,14 @@
         <button class="cart-link"><a href="CartPage.html">CART</a></button>
         <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
       </div>
-    </div>
-    <div class="loginContent">
-
-      {{currentUser.name}} is Logged in!
       <div class='sideButtons'>
+        Welcome {{currentUser.name}}!
         <button class='signout' ng-click='signOut()'>
           <span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
         </button>
-      </div>    
-
+      </div>  
+    </div>
+    <div class="loginContent">
       <div class="formsContainer">
         <div class='myLogin' id="logginForm">
           <span class='logTitle'>LOGIN</span>

@@ -17,6 +17,12 @@
         <button class="cart-link"><a href="CartPage.html">CART</a></button>
         <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
       </div>
+      <div class='sideButtons'>
+        Welcome {{currentUser.name}}!
+        <button class='signout' ng-click='signOut()'>
+          <span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
+        </button>
+      </div>  
     </div>
     <div class='userContent'>
       <div class='loggedIn'>{{currentUser.name}} is Logged in!</div>
