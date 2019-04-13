@@ -15,7 +15,7 @@
         <button class="home-link"><a href="index.html">HOME</a></button>
         <button class="about-link"><a href="#about">ABOUT</a></button>
         <button class="contact-link"><a href="#contact">CONTACT</a></button>
-        <button class="user-link"><a href="UserPage.html">MY INFO</a></button>
+        <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : 'UserPage.html')}}">MY INFO</a></button>
         <button class="cart-link"><a href="CartPage.html">CART</a></button>
         <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
       </div>

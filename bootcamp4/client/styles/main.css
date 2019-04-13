@@ -108,3 +108,7 @@ button{
 .map-title{
   margin-bottom: 20px;
 }
+
+#myModalabout, #myModalcontact{
+  color: black;
+}

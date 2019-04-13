@@ -19,7 +19,7 @@
         <button class="home-link"><a href="index.html">HOME</a></button>
         <button class="about-link"><a href="#about">ABOUT</a></button>
         <button class="contact-link"><a href="#contact">CONTACT</a></button>
-        <button class="user-link"><a href="UserPage.html">MY INFO</a></button>
+        <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : 'UserPage.html')}}">MY INFO</a></button>
         <button class="cart-link"><a href="CartPage.html">CART</a></button>
         <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
       </div>
@@ -36,7 +36,7 @@
       <div class="formsContainer">
         <div class='myLogin' id="logginForm">
           <span class='logTitle'>LOGIN</span>
-          <form class='logForm' onsubmit="this.reset()">
+          <form class='logForm' action="index.html" onsubmit="this.reset()">
             <span class='logInItem'>Username/Email</span>
             <input class='logInItem' type='text' ng-model="nm"/>
             <span class='logInItem'>Password</span>
@@ -48,7 +48,7 @@
         </div>
         <div class='mySignUp' ng-controller="ListingsController">
           <span class='signTitle'>SIGN UP</span>
-          <form class= 'signForm' id= "myForm" onsubmit="this.reset()" action="">
+          <form class= 'signForm' id= "myForm" action="index.html" onsubmit="this.reset()" action="">
             <span class='signUpItem'>
               <span class='fieldTitle'>Username</span>
               <input type='text' ng-model="newUser.name"/></span>

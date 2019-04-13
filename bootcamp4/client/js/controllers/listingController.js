@@ -15,7 +15,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
   $scope.test = function(){
       console.log(msg.test);
 
-  }
+  };
 
 //calculates price amounts when button is pressed
     $scope.finalPrice = function(){
