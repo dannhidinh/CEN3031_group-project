@@ -1,4 +1,3 @@
-
 /* Dependencies */
 var mongoose = require('mongoose'),
     User = require('../models/listings.server.model.js');
@@ -34,9 +33,9 @@ exports.read = function(req, res) {
 };
 
 /* Update a listing */
-exports.updateCart = function(req, res) {
+exports.update = function(req, res) {
   var user = req.user;
-  console.log("used");
+  //console.log("used");
   /** TODO **/
   /* Replace the article's properties with the new properties found in req.body */
   /* Save the article */
@@ -57,7 +56,12 @@ exports.updateCart = function(req, res) {
   });
 */
 
-  User.findOneAndUpdate({ name: user.name }, { $addToSet: {cart: {productC: "pen", quantity: 4, price: 1.50}} }, function(err, user) {
+
+//changes action depending act set here and in controllers; necessary because there can be only one put function
+if(req.query.act == 'add'){
+//used to add to cart, will eventually take in paramenters
+  User.findOneAndUpdate({ name: user.name }, { $addToSet: {cart: {productC: req.query.product, quantity: req.query.amount, price: req.query.cost}} }, function(err, user) {
+
     if(err) {
       console.log(err);
       res.status(400).send(err);
@@ -75,7 +79,28 @@ exports.updateCart = function(req, res) {
       res.json(user);
     }
   });
+  }
+  else if(req.query.act == 'delete'){
+
+  User.findOneAndUpdate({ name: user.name }, { $pull: {cart: {_id: req.query.item}} }, function(err, user) {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+    else{
+      //console.log("got here");
+    }
+  });
   
+   
+  User.findOne({ name: user.name }, function (err, user) {
+    if (err) return handleError(err);
+    
+    else{
+      res.json(user);
+    }
+  });
+  }
 };
 
 /* Delete a listing */

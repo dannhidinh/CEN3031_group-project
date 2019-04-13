@@ -4,12 +4,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
-  <body ng-app="directoryApp">
+
+  <body ng-app="directoryApp" ng-controller="ListingsController">
+    {{currentUser.name}} is Logged in!
+
     <div class="container">
       <div class="row">
         <h1>UF Directory App</h1>
       </div>
-      <div class="row" ng-controller="ListingsController">
+
+      <div class="row">
+
         <div class="col-md-6">
           <div class="input-group" id="searchBar">
             <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
@@ -22,19 +27,20 @@
                 <th>Building Name</th>
                 <th></th>
               </tr>
-              <tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-                <td>{{listing.code}}</td>
-                <td>{{listing.name}}</td>
+              <tr ng-repeat="cart in currentUser.cart | filter: query" ng-click="showDetails($index)">
+                <td>{{cart.productC}}</td>
+                <td>{{cart.price}}</td>
+
                 <td ng-click="deleteListing(listing._id)"><span style="color: red;" class="glyphicon glyphicon-remove"></span></td>
               </tr>
             </table>
           </div>
           <form novalidate class="simple-form">
             <h2>Add New Listing</h2>
-            Code: <input type="text" ng-model="newListing.code" /><br />
-            Name: <input type="text" ng-model="newListing.name" /><br />
-            Address: <input type="text" ng-model="newListing.address" /><br />
-            <button class="btn btn-primary" ng-click="addListing()">Add Listing</button>
+            Name: <input type="text" ng-model="newItem.productC" /><br />
+            quant: <input type="text" ng-model="newItem.quantity" /><br />
+            price: <input type="text" ng-model="newItem.price" /><br />
+            <button class="btn btn-primary" ng-click="addToCart()">Add Listing</button>
           </form>
         </div>
         <div class="col-md-6">
@@ -46,6 +52,9 @@
           </div>
         </div>
       </div>
+
+      <a href="index.html" class="w3-right w3-bar-item w3-button">back</a>
+
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>

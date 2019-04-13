@@ -1,5 +1,6 @@
-angular.module('users').controller('ListingsController', ['$scope', 'Users',
+angular.module('users').controller('ListingsController', ['$scope', 'Users',  
   function($scope, Users) {
+    //var msg = require('../factories/listingFactory.js');
     /* Get all the listings, then bind it to the scope */
     Users.getAll().then(function(response) {
       $scope.users = response.data;
@@ -10,20 +11,12 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
     $scope.detailedInfo = undefined;
 
 //IGNORE, used for general testing
-/*
-    $scope.test = function(){
-      console.log($scope.currentUser._id);
-      //User.findOne({ name: $scope.currentUser.name }, function (err, user) {
-      //if (err) return handleError(err);
-        //console.log("works");
 
-    //});
+  $scope.test = function(){
+      console.log(msg.test);
 
-    for (var i = 0; i < $scope.currentUser.cart.length; i++) {
-      console.log($scope.currentUser.cart[i]);
-    }
   }
-*/
+
 //calculates price amounts when button is pressed
     $scope.finalPrice = function(){
       
@@ -32,7 +25,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
         
         amount += $scope.currentUser.cart[i].price * $scope.currentUser.cart[i].quantity;
       }
-      $scope.before = amount;
+      $scope.before = amount.toFixed(2);
 
       var uftax = amount*.06;
       $scope.tax = uftax.toFixed(2);
@@ -40,16 +33,85 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       amount = amount + uftax;
       $scope.final = amount.toFixed(2);
           
+      
+      // STRIPE - checkout form
+      var checkoutHandler = StripeCheckout.configure({
+        key: "pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a",
+        image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+        locale: "auto"
+      });
+      var button = document.getElementById("buttonCheckout");
+      button.addEventListener("click", function(ev) {
+        checkoutHandler.open({
+          name: "Checkout",
+          description: "Purchase Cart",
+          amount: ($scope.final)*100,
+          token: handleToken
+        });
+        ev.preventDefault();
+      });
+      function handleToken(token) {
+        fetch("/charge", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(token)
+        })
+        .then(output => {
+          if (output.status === "succeeded")
+            document.getElementById("shop").innerHTML = "<p>Purchase complete!</p>";
+        })
+      }
+      
     }
 
+//carries user between htmls
   window.addEventListener('DOMContentLoaded', (event) => {
 
+
       if (typeof(Storage) !== "undefined") {
+          // Retrieve
+          var isNew = JSON.parse(sessionStorage.getItem("checksIf"));
+          var newInfo = JSON.parse(sessionStorage.getItem("info"));
+        } 
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+
+//logs in newly sign-uped user
+      if (isNew == 'yes') {
+        console.log(newInfo.password);
+            Users.getAll().then(function(response) {
+            $scope.users = response.data;
+            $scope.loggedIn(newInfo.name, newInfo.password);
+          }, function(error) {
+            console.log('Unable to retrieve listings:', error);
+          });
+        
+        isNew = 'no';
+        sessionStorage.setItem("checksIf", JSON.stringify(isNew));
+      }
+
+
+      if (typeof(Storage) !== "undefined") {
+          // Retrieve
+          $scope.currentUser = JSON.parse(sessionStorage.getItem("current"));
+        } 
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+/*
+      if (isNew === 'yes') {
+        if (typeof(Storage) !== "undefined") {
+          console.log("logs user in");
           // Retrieve
           $scope.currentUser = JSON.parse(sessionStorage.getItem("current"));
         } else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
+      }        
+*/
+//updates cart price dynamically
+        $scope.finalPrice();
   });
 
   $scope.signOut = function(){
@@ -61,7 +123,10 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
 
     $scope.loggedIn = function(testName, testPass){
+console.log("used");
 
+
+//console.log($scope.users[2].name);
         if ($scope.currentUser != null){
           $scope.result = "Sign out current user";
           return;
@@ -113,7 +178,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       }
 
     };
-
+//adds new customer user; authority = 0
     $scope.addListing = function() {
 	  /**TODO
 	  *Save the article using the Listings factory. If the object is successfully
@@ -139,21 +204,22 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 //or treat as unique username)
   for (var i = 0; i < $scope.users.length; i++) {
     if ($scope.users[i].name == $scope.newUser.name){
-      $scope.upResult = "name is already in use";
+      $scope.upResult = "Name is already in use";
+        $scope.newUser.name = undefined;
+        $scope.newUser.password = undefined;
+        $scope.newUser.email = undefined;
+        $scope.newUser.phone = undefined;      
       return;
     }
     else if ($scope.users[i].email == $scope.newUser.email){
-      $scope.upResult = "email is already in use";
+      $scope.upResult = "Email is already in use";
+        $scope.newUser.name = undefined;
+        $scope.newUser.password = undefined;
+        $scope.newUser.email = undefined;
+        $scope.newUser.phone = undefined;      
       return;
     }
 
-  }
-
-//checks if email input has '@' to consider it an email, might need more validation
-  if ($scope.newUser.email.indexOf('@') != 0)
-  {
-    $scope.upResult = "not a valid email address";
-    return;
   }
 
 
@@ -185,32 +251,61 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 */
 
 
-
+console.log(testPass);
 //WHERE USER IS ACTUALLY ADDED DONT REMOVE
 
     Users.create({name: $scope.newUser.name, password: $scope.newUser.password, 
-      email: $scope.newUser.email, phone: $scope.newUser.phone}).then(function(response){
+      email: $scope.newUser.email, phone: $scope.newUser.phone, authority: 'member'}).then(function(response){
       Users.getAll().then(function(response) {
           $scope.users = response.data;
+          //console.log("here");
+          //$scope.loggedIn($scope.newUser.name, testPass);
       }, function(error) {
-          console.log('Unable to retrieve listings:', error);
+          console.log('Unable to add user', error);
         });
       });    
+     
+
+      if (typeof(Storage) !== "undefined") {
+        var isNew = 'yes';
+        $scope.newUser.password = testPass;
+        var newInfo = $scope.newUser;
+//console.log("stores yes and info");
+        // Store
+        sessionStorage.setItem("checksIf", JSON.stringify(isNew));
+        sessionStorage.setItem("info", JSON.stringify(newInfo));
+      } 
+      else {
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+      }
+      
+    //$scope.loggedIn($scope.newUser.name, testPass);
+  
+
+
+
+   document.location.reload(true);
 
 
 //resets newUser values between attempts
-    $scope.newUser.name = undefined;
-    $scope.newUser.password = undefined;
-    $scope.newUser.email = undefined;
-    $scope.newUser.phone = undefined;
+    //$scope.newUser.name = undefined;
+    //$scope.newUser.password = undefined;
+    //$scope.newUser.email = undefined;
+    //$scope.newUser.phone = undefined;
 
 
     };
+    
 
 //adds to cart and refreshes currentUser data
     $scope.addToCart = function(){
 
-      Users.updateCart($scope.currentUser._id).then(function(response){
+console.log($scope.newItem.productC);
+console.log($scope.newItem.quantity);
+console.log($scope.newItem.price);
+
+      Users.update($scope.currentUser._id, 'add', 0, 
+        $scope.newItem.productC, $scope.newItem.quantity, $scope.newItem.price).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
         for (var i = 0; i < $scope.users.length; i++) {
@@ -236,7 +331,51 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
         } 
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-        }          
+        }
+
+        $scope.finalPrice();
+
+      }, function(error) {
+          console.log('Unable to retrieve listings:', error);
+        });
+      }); 
+
+    }
+
+    $scope.removeFromCart = function(itemID){
+      //console.log($scope.currentUser._id);
+      //console.log(itemID);
+      //this.currentUser.cart.splice(itemID,1);
+      console.log("remove used");
+      Users.update($scope.currentUser._id, 'delete', itemID).then(function(response){
+      Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        for (var i = 0; i < $scope.users.length; i++) {
+          if($scope.users[i].name === $scope.currentUser.name){
+            $scope.currentUser = $scope.users[i];
+            break;
+          }
+        }
+        //console.log($scope.currentUser);
+        if ($scope.currentUser == null) {
+          $scope.result = "Incorrect Username or Password";
+        }
+        else{
+          $scope.result = "";
+        }
+
+        if (typeof(Storage) !== "undefined") {
+          var curr = $scope.currentUser;
+          //console.log(curr);
+
+          // Store
+          sessionStorage.setItem("current", JSON.stringify(curr));
+        } 
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }   
+
+        $scope.finalPrice();       
       }, function(error) {
           console.log('Unable to retrieve listings:', error);
         });

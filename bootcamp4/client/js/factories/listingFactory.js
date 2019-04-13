@@ -18,10 +18,16 @@ angular.module('users', []).factory('Users', function($http) {
        */
     },
 
-    updateCart: function(id){
-      return $http.put('http://localhost:8080/api/users/' + id);
 
-    }
+    update: function(id, action, itemID, newItem, newQuant, newPrice){
+      return $http.put('http://localhost:8080/api/users/' + id, {}, { params: { act: action, item: itemID, 
+        product: newItem, amount: newQuant, cost: newPrice } });
+
+    },
+
+    //removeCart: function(id, itemID){
+    //  return $http.put('http://localhost:8080/api/users/' + id, {}, { params: { item: itemID } });
+    //}
 
     
 
@@ -29,3 +35,5 @@ angular.module('users', []).factory('Users', function($http) {
 
   return methods;
 });
+
+//module.exports = "hello from factory";
