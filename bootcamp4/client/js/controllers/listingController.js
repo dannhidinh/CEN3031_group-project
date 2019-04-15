@@ -1,4 +1,4 @@
-angular.module('users').controller('ListingsController', ['$scope', 'Users',  
+angular.module('users').controller('ListingsController', ['$scope', 'Users',
   function($scope, Users) {
     //var msg = require('../factories/listingFactory.js');
     /* Get all the listings, then bind it to the scope */
@@ -19,10 +19,10 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
 //calculates price amounts when button is pressed
     $scope.finalPrice = function(){
-      
+
       var amount = 0;
       for (var i = 0; i < $scope.currentUser.cart.length; i++) {
-        
+
         amount += $scope.currentUser.cart[i].price * $scope.currentUser.cart[i].quantity;
       }
       $scope.before = amount.toFixed(2);
@@ -32,9 +32,10 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
       amount = amount + uftax;
       $scope.final = amount.toFixed(2);
-          
-      
+
+
       // STRIPE - checkout form
+
       var checkoutHandler = StripeCheckout.configure({
         key: "pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a",
         image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -61,7 +62,6 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
             document.getElementById("shop").innerHTML = "<p>Purchase complete!</p>";
         })
       }
-      
     }
 
 //carries user between htmls
@@ -72,7 +72,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
           // Retrieve
           var isNew = JSON.parse(sessionStorage.getItem("checksIf"));
           var newInfo = JSON.parse(sessionStorage.getItem("info"));
-        } 
+        }
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
@@ -86,7 +86,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
           }, function(error) {
             console.log('Unable to retrieve listings:', error);
           });
-        
+
         isNew = 'no';
         sessionStorage.setItem("checksIf", JSON.stringify(isNew));
       }
@@ -95,7 +95,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       if (typeof(Storage) !== "undefined") {
           // Retrieve
           $scope.currentUser = JSON.parse(sessionStorage.getItem("current"));
-        } 
+        }
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
@@ -108,7 +108,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
         } else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
-      }        
+      }
 */
 //updates cart price dynamically
         $scope.finalPrice();
@@ -150,7 +150,7 @@ console.log("used");
         }
         else
           console.log("Email and/or Password may be wrong. Sign up if you don't have an account.");
-      });      
+      });
       */
 
       for (var i = 0; i < $scope.users.length; i++) {
@@ -172,7 +172,7 @@ console.log("used");
 
         // Store
         sessionStorage.setItem("current", JSON.stringify(curr));
-      } 
+      }
       else {
         document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
       }
@@ -188,9 +188,9 @@ console.log("used");
       $scope.upResult = "";
 
 //checks if all fields got data
-      if ($scope.newUser.name == undefined || $scope.newUser.password == undefined || 
+      if ($scope.newUser.name == undefined || $scope.newUser.password == undefined ||
         $scope.newUser.email == undefined || $scope.newUser.phone == undefined){
-          
+
           $scope.upResult = "Fill in all fields";
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
@@ -200,7 +200,7 @@ console.log("used");
       }
 
 
-//checks if name or email is already in database (maybe dont check name because people share names, 
+//checks if name or email is already in database (maybe dont check name because people share names,
 //or treat as unique username)
   for (var i = 0; i < $scope.users.length; i++) {
     if ($scope.users[i].name == $scope.newUser.name){
@@ -208,7 +208,7 @@ console.log("used");
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
         $scope.newUser.email = undefined;
-        $scope.newUser.phone = undefined;      
+        $scope.newUser.phone = undefined;
       return;
     }
     else if ($scope.users[i].email == $scope.newUser.email){
@@ -216,7 +216,7 @@ console.log("used");
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
         $scope.newUser.email = undefined;
-        $scope.newUser.phone = undefined;      
+        $scope.newUser.phone = undefined;
       return;
     }
 
@@ -254,7 +254,7 @@ console.log("used");
 console.log(testPass);
 //WHERE USER IS ACTUALLY ADDED DONT REMOVE
 
-    Users.create({name: $scope.newUser.name, password: $scope.newUser.password, 
+    Users.create({name: $scope.newUser.name, password: $scope.newUser.password,
       email: $scope.newUser.email, phone: $scope.newUser.phone, authority: 'member'}).then(function(response){
       Users.getAll().then(function(response) {
           $scope.users = response.data;
@@ -263,8 +263,8 @@ console.log(testPass);
       }, function(error) {
           console.log('Unable to add user', error);
         });
-      });    
-     
+      });
+
 
       if (typeof(Storage) !== "undefined") {
         var isNew = 'yes';
@@ -274,13 +274,13 @@ console.log(testPass);
         // Store
         sessionStorage.setItem("checksIf", JSON.stringify(isNew));
         sessionStorage.setItem("info", JSON.stringify(newInfo));
-      } 
+      }
       else {
         document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
       }
-      
+
     //$scope.loggedIn($scope.newUser.name, testPass);
-  
+
 
 
 
@@ -295,7 +295,7 @@ console.log(testPass);
 
 
     };
-    
+
 
 //adds to cart and refreshes currentUser data
     $scope.addToCart = function(){
@@ -304,7 +304,7 @@ console.log($scope.newItem.productC);
 console.log($scope.newItem.quantity);
 console.log($scope.newItem.price);
 
-      Users.update($scope.currentUser._id, 'add', 0, 
+      Users.update($scope.currentUser._id, 'add', 0,
         $scope.newItem.productC, $scope.newItem.quantity, $scope.newItem.price).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
@@ -328,7 +328,7 @@ console.log($scope.newItem.price);
 
           // Store
           sessionStorage.setItem("current", JSON.stringify(curr));
-        } 
+        }
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
@@ -338,7 +338,7 @@ console.log($scope.newItem.price);
       }, function(error) {
           console.log('Unable to retrieve listings:', error);
         });
-      }); 
+      });
 
     }
 
@@ -370,16 +370,16 @@ console.log($scope.newItem.price);
 
           // Store
           sessionStorage.setItem("current", JSON.stringify(curr));
-        } 
+        }
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-        }   
+        }
 
-        $scope.finalPrice();       
+        $scope.finalPrice();
       }, function(error) {
           console.log('Unable to retrieve listings:', error);
         });
-      }); 
+      });
     }
 
     $scope.deleteListing = function(id) {

@@ -1,27 +1,41 @@
-// Dependencies
-var keyPublishable = 'pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a',
-    keySecret = 'sk_test_5szqSVkKfzjcxPvMPFSBLMxB00iWi4Ie9i',
-    express = require('express'),
-    router = express.Router(),
-    stripe = require('stripe')(keySecret),
-    bodyParser = require('body-parser');
+// import Dependencies
+var router = require('express').Router(),
+    keys = require('../config/config'),
+    stripe = require('stripe')(keys.stripe.keySecret),;
 
-router.post("/charge", (req, res) => {
-  stripe.customers.create({
-    email: req.body.email,
-    card: req.body.id
+router.post('/charge', (req, res, next) => {
+  // get stripe token from client
+  var stripeToken = req.body.stripeToken;
+  // calculate charge
+  var payment = Math.round(req.body.amount*100);
+  // create stripe customer
+  stripe.customers.create()
+  //create customer bank account
+  .then(function(customer) {
+    return stripe.customers.createSource(customer.id, {
+      source: stripeToken.id
+    });
   })
-  .then(customer =>
-    stripe.charges.create({
-      amount,
-      description: "Sample Charge",
-      currency: "usd",
-      customer: customer.id
-    }))
-  .then(charge => res.send(charge))
-  .catch(err => {
-    console.log("Error:", err);
-    res.status(500).send({error: "Purchase Failed"});
+  // create charging payment object
+  .then(function(source) {
+    return stripe.charges.create({
+      amount: payment,
+      currency: 'usd',
+      customer: source.customer
+    });
+  })
+  .then(function(charge) {
+    res.json({
+      success: true,
+      message: 'Payment successful!'
+    });
+  })
+  // catch errors
+  .catch(function(err){
+    res.json({
+      success: false,
+      message: 'An error occured. Payment failed.'
+    });
   });
 });
 
