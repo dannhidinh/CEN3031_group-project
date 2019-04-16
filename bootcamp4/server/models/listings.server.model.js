@@ -22,8 +22,17 @@ var userSchema = new Schema({
   //maybe make order history just a list of carts, not its own array.
   created_at: {type: Date},
   updated_at: {type: Date},
-  
-  //products: [{ type: Schema.Types.ObjectId, ref: 'productSchema' }]
+
+  /* This Schema encompasses the inventory within the vendor at a bodega*/
+    itemname: {type: String, required: true},
+    itemdesc: String,
+    itemprice: Number,
+    itemexp: {type: Date},
+    itemqty: Number,
+    itemcode: String,
+    itempic: String,
+    ibodnum: {type: Number, required: true},
+    ivenuser: {type: String, required: true},
 
 
 
