@@ -1,3 +1,4 @@
+//var Data = require('../models/listings.server.model.js');
 angular.module('users').controller('ListingsController', ['$scope', 'Users',  
   function($scope, Users) {
     //var msg = require('../factories/listingFactory.js');
@@ -13,8 +14,25 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 //IGNORE, used for general testing
 
   $scope.test = function(){
-      console.log(msg.test);
+      //console.log(msg.test);
 
+  }
+
+  $scope.addProduct = function(){
+console.log($scope.newItem.item);
+console.log($scope.newItem.quant);
+console.log($scope.newItem.cost);
+
+      Users.create({item: $scope.newItem.item, quant: $scope.newItem.quant, 
+      cost: $scope.newItem.cost, authority: 'product'}).then(function(response){
+      Users.getAll().then(function(response) {
+          $scope.users = response.data;
+          //console.log("here");
+          //$scope.loggedIn($scope.newUser.name, testPass);
+      }, function(error) {
+          console.log('Unable to add user', error);
+        });
+      });
   }
 
   $scope.newName = function(name){
@@ -294,6 +312,10 @@ console.log("used");
       });      
       */
 
+//for (var i = 0; i < $scope.users.length; i++) {
+// console.log($scope.users[i].name);
+//}
+
       for (var i = 0; i < $scope.users.length; i++) {
         if(($scope.users[i].name === testName && $scope.users[i].password === hash) || 
           ($scope.users[i].email === testName && $scope.users[i].password === hash)){
@@ -319,6 +341,8 @@ console.log("used");
         document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
       }
 
+      //console.log($scope.currentUser);
+
     };
 //adds new customer user; authority = 0
     $scope.addListing = function() {
@@ -331,11 +355,12 @@ console.log("used");
 
 //checks if all fields got data
       if ($scope.newUser.name == undefined || $scope.newUser.password == undefined || 
-        $scope.newUser.email == undefined || $scope.newUser.phone == undefined){
+        $scope.newUser.email == undefined || $scope.newUser.phone == undefined || $scope.newUser.vpassword == undefined){
           
           $scope.upResult = "Fill in all fields";
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
+        $scope.newUser.vpassword = undefined;
         $scope.newUser.email = undefined;
         $scope.newUser.phone = undefined;
         return;
@@ -349,6 +374,7 @@ console.log("used");
       $scope.upResult = "Name is already in use";
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
+        $scope.newUser.vpassword = undefined;
         $scope.newUser.email = undefined;
         $scope.newUser.phone = undefined;      
       return;
@@ -357,13 +383,19 @@ console.log("used");
       $scope.upResult = "Email is already in use";
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
+        $scope.newUser.vpassword = undefined;
         $scope.newUser.email = undefined;
         $scope.newUser.phone = undefined;      
       return;
     }
 
   }
+  console.log($scope.newUser.password);
+  console.log($scope.newUser.vpassword);
 
+  if ($scope.newUser.password != $scope.vpassword) {
+    $scope.upResult = "Passwords did not match";
+  }
 
 //converts incoming password to hashed number
       var testPass = $scope.newUser.password;
@@ -393,7 +425,6 @@ console.log("used");
 */
 
 
-console.log(testPass);
 //WHERE USER IS ACTUALLY ADDED DONT REMOVE
 
     Users.create({name: $scope.newUser.name, password: $scope.newUser.password, 
