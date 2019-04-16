@@ -27,9 +27,10 @@
                 <th>Building Name</th>
                 <th></th>
               </tr>
-              <tr ng-repeat="cart in currentUser.cart | filter: query" ng-click="showDetails($index)">
-                <td>{{cart.productC}}</td>
-                <td>{{cart.price}}</td>
+              <tr ng-repeat="user in users | filter: query" ng-show="user.authority == 'product' && user.quant > 0" ng-click="showDetails($index)">
+                <td>{{user.item}}</td>
+                <td>{{user.quant}}</td>
+                <td>{{user.cost}}</td>
 
                 <td ng-click="deleteListing(listing._id)"><span style="color: red;" class="glyphicon glyphicon-remove"></span></td>
               </tr>
@@ -37,10 +38,10 @@
           </div>
           <form novalidate class="simple-form">
             <h2>Add New Listing</h2>
-            Name: <input type="text" ng-model="newItem.productC" /><br />
-            quant: <input type="text" ng-model="newItem.quantity" /><br />
-            price: <input type="text" ng-model="newItem.price" /><br />
-            <button class="btn btn-primary" ng-click="addToCart()">Add Listing</button>
+            Name: <input type="text" ng-model="newItem.item" /><br />
+            quant: <input type="text" ng-model="newItem.quant" /><br />
+            price: <input type="text" ng-model="newItem.cost" /><br />
+            <button class="btn btn-primary" ng-click="addProduct()">Add Listing</button>
           </form>
         </div>
         <div class="col-md-6">

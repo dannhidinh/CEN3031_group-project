@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
     Schema = mongoose.Schema;
 
+
 /* Create your schema */
 var userSchema = new Schema({
   /* your code here */
@@ -22,14 +23,14 @@ var userSchema = new Schema({
   created_at: {type: Date},
   updated_at: {type: Date},
   
-  
+  //products: [{ type: Schema.Types.ObjectId, ref: 'productSchema' }]
+
 
 
 /*
-
 //suggested schema for products
   item: String, //product name
-  quantity: Number, //amount dropping off/amount left
+  quant: Number, //amount dropping off/amount left
   cost: Number, //price of single product
   descrption: String, //textbox with extra info on product, eg nutrition, vegan or not, etc.
   exp: {type: Date}, //maybe instead take in string in format mm/dd/yyyy?; 
@@ -42,7 +43,8 @@ var userSchema = new Schema({
   bodname: String, //name of bodega product is dropped off at; maybe use numbers to designate them?
   bodaddr: String, //same questions as venaddr
 //documents seperated by item, with vendor, bodega, etc. being extra info
-
+*/
+/*
 //or
 vendor: String, //name of vendor
 venaddr: String, //same as above
@@ -75,6 +77,8 @@ stock: [ { item: String, quantity: Number, cost: Number, description: String, ex
 
 });
 
+
+
 /* create a 'pre' function that adds the updated_at (and created_at if not already there) property */
 userSchema.pre('save', function(next) {
   /* your code here */
@@ -87,12 +91,32 @@ userSchema.pre('save', function(next) {
 
   next();
 });
+/*
+var productSchema = new Schema({
+  item: String, //product name
+  quant: Number, //amount dropping off/amount left
+  cost: Number, //price of single product
+  descrption: String, //textbox with extra info on product, eg nutrition, vegan or not, etc.
+  exp: {type: Date}, //maybe instead take in string in format mm/dd/yyyy?; 
+  //other function could take in current date and convert to same format as string then compare
+  
+  vendor: String, //name of vendor providing product, can automatically take from currentUser.name when logged in vendor adds item
+  venaddr: String, //address(s) of vendor, one string or seperate strings for street, city, zip, etc.; 
+  //coordinates necessary? asked for in sign up process or after?
+  
+  bodname: String, //name of bodega product is dropped off at; maybe use numbers to designate them?
+  bodaddr: String, //same questions as venaddr
 
+});
+var Product = mongoose.model('Product', productSchema);
+*/
 /* Use your schema to instantiate a Mongoose model */
 var User = mongoose.model('User', userSchema);
 
 
+
 /* Export the model to make it avaiable to other parts of your Node application */
 
+//module.exports = Product;
 module.exports = User;
-
+//module.exports = {User, Product};
