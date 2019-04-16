@@ -48,18 +48,19 @@
         </div>
         <div class='mySignUp' ng-controller="ListingsController">
           <span class='signTitle'>SIGN UP</span>
-          <form class= 'signForm' id= "myForm" onsubmit="this.reset()" action="">
+          <form class= 'signForm' id= "myForm" onsubmit="this.reset()">
             <span class='signUpItem'>
               <span class='fieldTitle'>Username</span>
               <input type='text' ng-model="newUser.name"/></span>
             <span class='signUpItem'>
               <span class='fieldTitle'>Email</span>
-              <input type='email' ng-model="newUser.email"/></span>
-            
+              <input type='email' ng-model="newUser.email"/></span>            
             <span class='signUpItem'>
               <span class='fieldTitle'>Password</span>
               <input type='password' ng-model="newUser.password"/></span>
-            
+            <span class='signUpItem'>
+              <span class='fieldTitle'>Verify Password</span>
+              <input type='password' ng-model="newUser.vpassword"/></span>            
             <span class='signUpItem'>
               <span class='fieldTitle'>Phone Number</span>
               <input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" ng-model="newUser.phone"/></span>
