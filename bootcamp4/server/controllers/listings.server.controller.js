@@ -1,6 +1,9 @@
 /* Dependencies */
 var mongoose = require('mongoose'),
+    //{User, Product} = require('../models/listings.server.model.js');
     User = require('../models/listings.server.model.js');
+    //Produc = require('../models/listings.server.model.js');
+    //Data = require('../models/listings.server.model.js');
 console.log("Page used");
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
@@ -10,12 +13,60 @@ console.log("Page used");
   HINT: if you are struggling with implementing these functions, refer back to this tutorial
   from assignment 3 https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
  */
+ //console.log(Data.User);
+/*
+  Data.User.findOne({ name: 'Steven' }, function (err, usert) {
+    if (err) return handleError(err);
+    
+    else{
+      console.log("found User: " + usert);
+      //res.json(usert);
+    }
+  });
 
+  Data.Product.findOne({ item: 'burgers' }, function (err, usert) {
+    if (err) return handleError(err);
+    
+    else{
+      console.log("found Product: " + usert);
+      //res.json(usert);
+    }
+  });  
+*/
+
+//var MongoClient = require('mongodb').MongoClient;
+//var url = "mongodb://127.0.0.1:27017/";
+/*
+//MongoClient.connect(db.uri, function(err, db) {
+  //if (err) throw err;
+  //var dbo = db("bodega_users");
+  db.uri.collection('users').aggregate([
+    { $lookup:
+       {
+         from: 'products',
+         localField: 'name',
+         foreignField: 'item',
+         as: 'prods'
+       }
+     }
+    ]).toArray(function(err, res) {
+    if (err) throw err;
+    console.log(JSON.stringify(res));
+    //db.close();
+  });
+//});
+*/
 /* Create a listing */
 exports.create = function(req, res) {
   /* Instantiate a Listing */
-  var user = new User(req.body);
+console.log("authority: " + req.body.authority);
+//  if(req.body.authority == 'product'){
+//    var user = new Product(req.body);
+//  }
+//  else
+    var user = new User(req.body);
   /* Then save the listing */
+  
   user.save(function(err) {
     if(err) {
       console.log(err);
@@ -24,6 +75,10 @@ exports.create = function(req, res) {
       res.json(user);
     }
   });
+
+
+
+  
 };
 
 /* Show the current listing */
@@ -209,7 +264,7 @@ exports.list = function(req, res) {
   /** TODO **/
   /* Your code here */
   var user = req.user;
-  User.find().sort('email').exec(function(err, users) {
+  User.find().sort('._id').exec(function(err, users) {
     if(err) {
       console.log(err);
       res.status(400).send(err);
