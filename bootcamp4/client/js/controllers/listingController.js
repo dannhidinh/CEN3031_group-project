@@ -393,8 +393,9 @@ console.log("used");
   console.log($scope.newUser.password);
   console.log($scope.newUser.vpassword);
 
-  if ($scope.newUser.password != $scope.vpassword) {
+  if ($scope.newUser.password != $scope.newUser.vpassword) {
     $scope.upResult = "Passwords did not match";
+    return;
   }
 
 //converts incoming password to hashed number
@@ -476,6 +477,12 @@ console.log("used");
 console.log($scope.newItem.productC);
 console.log($scope.newItem.quantity);
 console.log($scope.newItem.price);
+//var practice = JSON.stringify($scope.currentUser.orderHist[1].cart)
+//console.log($scope.currentUser.orderHist[0]._id);
+
+//var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
+//console.log(cartID);
+
 
       Users.update($scope.currentUser._id, 'add', 0, 
         $scope.newItem.productC, $scope.newItem.quantity, $scope.newItem.price).then(function(response){
@@ -553,6 +560,63 @@ console.log($scope.newItem.price);
           console.log('Unable to retrieve listings:', error);
         });
       }); 
+    }
+
+    $scope.toHist = function(){
+  
+  //JSON.parse(sessionStorage.getItem("current"))
+      console.log($scope.currentUser.cart.length);
+      //var practice = JSON.stringify($scope.currentUser.cart);
+      //console.log(JSON.parse(practice));
+
+      if ($scope.currentUser.cart.length == 0) {
+        console.log("Cart is empty");
+        console.log($scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id);
+        var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
+        $scope.transID = cartID.substr(14,6);
+        return;
+      }
+
+
+      Users.update($scope.currentUser._id, 'toHist', 0, 0, 0, 0, $scope.currentUser.cart).then(function(response){
+      Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        for (var i = 0; i < $scope.users.length; i++) {
+          if($scope.users[i].name === $scope.currentUser.name){
+            $scope.currentUser = $scope.users[i];
+            break;
+          }
+        }
+        //console.log($scope.currentUser);
+        if ($scope.currentUser == null) {
+          $scope.result = "Incorrect Username or Password";
+        }
+        else{
+          $scope.result = "";
+        }
+
+        if (typeof(Storage) !== "undefined") {
+          var curr = $scope.currentUser;
+          //console.log(curr);
+
+          // Store
+          sessionStorage.setItem("current", JSON.stringify(curr));
+        } 
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+
+        console.log($scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id);
+        var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
+        $scope.transID = cartID.substr(14, 6);
+
+        $scope.finalPrice();
+
+      }, function(error) {
+          console.log('Unable to retrieve listings:', error);
+        });
+      });       
+        
     }
 
     $scope.deleteListing = function(id) {
