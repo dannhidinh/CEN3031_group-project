@@ -25,6 +25,15 @@ var userSchema = new Schema({
   
   //products: [{ type: Schema.Types.ObjectId, ref: 'productSchema' }]
 
+    itemname: {type: String, required: true},
+    itemdesc: String,
+    itemprice: Number,
+    itemexp: {type: Date},
+    itemqty: Number,
+    itemcode: String,
+    itempic: String,
+    ibodnum: {type: Number, required: true},
+    ivenuser: {type: String, required: true},
 
 
 /*

@@ -145,7 +145,7 @@ if(req.query.act == 'add'){
     });
 */
     User.findOneAndUpdate({ name: user.name }, 
-      {$push: {cart: {productC: req.query.product, quantity: req.query.amount, price: req.query.cost}} }, 
+      {$push: {cart: {itemID: req.query.item, productC: req.query.product, quantity: req.query.amount, price: req.query.cost}} }, 
       function(err, user) {
 
       if(err) {

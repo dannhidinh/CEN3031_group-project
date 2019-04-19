@@ -13,8 +13,11 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
 //IGNORE, used for general testing
 
-  $scope.test = function(){
-      //console.log(msg.test);
+  $scope.test = function(id, name, qty, cost){
+      console.log(id);
+      console.log(name);
+      console.log(qty);
+      console.log(cost);
 
   }
 
@@ -472,11 +475,12 @@ console.log("used");
     
 
 //adds to cart and refreshes currentUser data
-    $scope.addToCart = function(){
+    $scope.addToCart = function(id, name, qty, cost){
 
-console.log($scope.newItem.productC);
-console.log($scope.newItem.quantity);
-console.log($scope.newItem.price);
+console.log(id);
+console.log(name);
+console.log(qty);
+console.log(cost);
 //var practice = JSON.stringify($scope.currentUser.orderHist[1].cart)
 //console.log($scope.currentUser.orderHist[0]._id);
 
@@ -484,8 +488,8 @@ console.log($scope.newItem.price);
 //console.log(cartID);
 
 
-      Users.update($scope.currentUser._id, 'add', 0, 
-        $scope.newItem.productC, $scope.newItem.quantity, $scope.newItem.price).then(function(response){
+      Users.update($scope.currentUser._id, 'add', id, 
+        name, qty, cost).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
         for (var i = 0; i < $scope.users.length; i++) {
@@ -573,7 +577,7 @@ console.log($scope.newItem.price);
         console.log("Cart is empty");
         console.log($scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id);
         var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
-        $scope.transID = cartID.substr(14,6);
+        $scope.transID = cartID.substr(18,6).toUpperCase();
         return;
       }
 
@@ -608,7 +612,7 @@ console.log($scope.newItem.price);
 
         console.log($scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id);
         var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
-        $scope.transID = cartID.substr(14, 6);
+        $scope.transID = cartID.substr(18, 6).toUpperCase();
 
         $scope.finalPrice();
 
