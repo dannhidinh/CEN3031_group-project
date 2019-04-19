@@ -46,11 +46,7 @@
         </div>
         <div class='mySignUp' ng-controller="ListingsController">
           <span class='signTitle'>SIGN UP</span>
-<<<<<<< HEAD
-          <form class= 'signForm' id= "myForm" action="index.html" onsubmit="this.reset()" action="">
-=======
-          <form class= 'signForm' id= "myForm" onsubmit="this.reset()">
->>>>>>> 85d42efb7dde9c68e1284c2fe307a823e891763e
+          <form class= 'signForm' id= "myForm" action="index.html" onsubmit="this.reset()">
             <span class='signUpItem'>
               <span class='fieldTitle'>Username</span>
               <input type='text' ng-model="newUser.name"/></span>
@@ -59,10 +55,10 @@
               <input type='email' ng-model="newUser.email"/></span>            
             <span class='signUpItem'>
               <span class='fieldTitle'>Password</span>
-              <input type='password' ng-model="newUser.password"/></span>
+              <input type='password' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" ng-model="newUser.password"/></span>
             <span class='signUpItem'>
               <span class='fieldTitle'>Verify Password</span>
-              <input type='password' ng-model="newUser.vpassword"/></span>            
+              <input type='password' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" ng-model="newUser.vpassword"/></span>            
             <span class='signUpItem'>
               <span class='fieldTitle'>Phone Number</span>
               <input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" ng-model="newUser.phone"/></span>

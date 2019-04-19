@@ -395,6 +395,7 @@ console.log("used");
 
   if ($scope.newUser.password != $scope.vpassword) {
     $scope.upResult = "Passwords did not match";
+    return;
   }
 
 //converts incoming password to hashed number
