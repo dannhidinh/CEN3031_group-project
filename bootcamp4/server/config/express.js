@@ -5,7 +5,7 @@ var path = require('path'),
     //cors = require('cors'),
     bodyParser = require('body-parser'),
     config = require('./config'),
-    blistingsRouter = require('../routes/blistings.server.routes'),
+    //blistingsRouter = require('../routes/blistings.server.routes'),
     listingsRouter = require('../routes/listings.server.routes'),
     stripeRouter = require('../routes/card.server.routes'); // FOR STRIPE
 
@@ -34,7 +34,7 @@ module.exports.init = function() {
   /**
   Use the listings router for requests to the api */
 
-  app.use('/api/blistings', blistingsRouter);
+  //app.use('/api/blistings', blistingsRouter);
   app.use('/api/users', listingsRouter);
 
   // STRIPE - API route

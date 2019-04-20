@@ -195,10 +195,13 @@ if(req.query.act == 'add'){
     //console.log(req.query.cart);
     var converted = JSON.parse(req.query.cart);
     //console.log(converted[0].productC);
-    //console.log(user.orderHist);
+    console.log(req.query.cost);
+    var final = req.query.cost.toString(req.query.cost);
+    console.log(final);
 //for (var i = Things.length - 1; i >= 0; i--) {
 //  Things[i]
 //}
+
   for (var i = 0; i < converted.length; i++) {
     //console.log(converted[i].itemID);
     //console.log(converted[i].quantity);
@@ -218,7 +221,7 @@ if(req.query.act == 'add'){
   }
 
 
-    User.findOneAndUpdate({ name: user.name }, { $push: {orderHist: {cart: converted} } }, function(err, user) {
+    User.findOneAndUpdate({ name: user.name }, { $push: {orderHist: {total: final, cart: converted} } }, function(err, user) {
       if(err) {
         console.log(err);
         res.status(400).send(err);

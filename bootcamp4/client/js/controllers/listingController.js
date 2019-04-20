@@ -21,10 +21,11 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
   }
 
+//adds product from homepage to curretUser's cart
   $scope.addProduct = function(){
-console.log($scope.newItem.item);
-console.log($scope.newItem.quant);
-console.log($scope.newItem.cost);
+//console.log($scope.newItem.item);
+//console.log($scope.newItem.quant);
+//console.log($scope.newItem.cost);
 
       Users.create({item: $scope.newItem.item, quant: $scope.newItem.quant, 
       cost: $scope.newItem.cost, authority: 'product'}).then(function(response){
@@ -38,54 +39,55 @@ console.log($scope.newItem.cost);
       });
   }
 
+//method to change currentUser's username; also checks if new name is already in use
   $scope.newName = function(name){
     console.log(name);
       if (name == undefined || name == ""){
         return;
       }
 
-  for (var i = 0; i < $scope.users.length; i++) {
-    if ($scope.users[i].name == name){
-      $scope.newResult = "Name is already in use";     
-      return;
+    for (var i = 0; i < $scope.users.length; i++) {
+      if ($scope.users[i].name == name){
+        $scope.newResult = "Name is already in use";     
+        return;
+      }
     }
-  }
 
-      Users.update($scope.currentUser._id, 'newName', 0, 
-        name).then(function(response){
-      Users.getAll().then(function(response) {
-        $scope.users = response.data;
-        for (var i = 0; i < $scope.users.length; i++) {
-          if($scope.users[i].name === name){
-            $scope.currentUser = $scope.users[i];
-            break;
-          }
+    Users.update($scope.currentUser._id, 'newName', 0, 
+      name).then(function(response){
+    Users.getAll().then(function(response) {
+      $scope.users = response.data;
+      for (var i = 0; i < $scope.users.length; i++) {
+        if($scope.users[i].name === name){
+          $scope.currentUser = $scope.users[i];
+          break;
         }
-        //console.log($scope.currentUser);
-        if ($scope.currentUser == null) {
-          $scope.result = "Incorrect Username or Password";
-        }
-        else{
-          $scope.result = "";
-        }
+      }
+    //console.log($scope.currentUser);
+    if ($scope.currentUser == null) {
+      $scope.result = "Incorrect Username or Password";
+    }
+    else{
+      $scope.result = "";
+    }
 
-        if (typeof(Storage) !== "undefined") {
-          var curr = $scope.currentUser;
-          //console.log(curr);
-          console.log($scope.currentUser.name);
-          // Store
-          sessionStorage.setItem("current", JSON.stringify(curr));
-        } 
-        else {
-          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-        }
+    if (typeof(Storage) !== "undefined") {
+      var curr = $scope.currentUser;
+      //console.log(curr);
+      console.log($scope.currentUser.name);
+      // Store
+      sessionStorage.setItem("current", JSON.stringify(curr));
+    } 
+    else {
+      document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }
 
-        //$scope.finalPrice();
+      //$scope.finalPrice();
 
-      }, function(error) {
-          console.log('Unable to retrieve listings:', error);
-        });
-      }); 
+    }, function(error) {
+        console.log('Unable to retrieve listings:', error);
+      });
+    }); 
   }
 
   $scope.newTel = function(tel){
@@ -261,17 +263,7 @@ console.log($scope.newItem.cost);
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
-/*
-      if (isNew === 'yes') {
-        if (typeof(Storage) !== "undefined") {
-          console.log("logs user in");
-          // Retrieve
-          $scope.currentUser = JSON.parse(sessionStorage.getItem("current"));
-        } else {
-          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-        }
-      }        
-*/
+
 //updates cart price dynamically
         $scope.finalPrice();
   });
@@ -302,23 +294,6 @@ console.log("used");
             hash |= 0; // Convert to 32bit integer
           }
 
-//cant get mongoose methods to work, leaving this here to try again later
-      /*
-      $scope.users.findOne({ name: testName, password: hash }, function (err, user) {
-        if (err) return handleError(err);
-
-        if (user != null){
-          console.log(user.name + " Logged in!\n");
-        }
-        else
-          console.log("Email and/or Password may be wrong. Sign up if you don't have an account.");
-      });      
-      */
-
-//for (var i = 0; i < $scope.users.length; i++) {
-// console.log($scope.users[i].name);
-//}
-
       for (var i = 0; i < $scope.users.length; i++) {
         if(($scope.users[i].name === testName && $scope.users[i].password === hash) || 
           ($scope.users[i].email === testName && $scope.users[i].password === hash)){
@@ -343,8 +318,6 @@ console.log("used");
       else {
         document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
       }
-
-      //console.log($scope.currentUser);
 
     };
 //adds new customer user; authority = 0
@@ -477,17 +450,17 @@ console.log("used");
 //adds to cart and refreshes currentUser data
     $scope.addToCart = function(id, name, qty, cost){
 
-console.log(id);
-console.log(name);
-console.log(qty);
-console.log(cost);
+//console.log(id);
+//console.log(name);
+//console.log(qty);
+//console.log(cost);
 //var practice = JSON.stringify($scope.currentUser.orderHist[1].cart)
 //console.log($scope.currentUser.orderHist[0]._id);
 
 //var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
 //console.log(cartID);
 
-
+//Pass the specific id of the item gotten, name of item, qty wanted, and cost/item
       Users.update($scope.currentUser._id, 'add', id, 
         name, qty, cost).then(function(response){
       Users.getAll().then(function(response) {
@@ -569,7 +542,14 @@ console.log(cost);
     $scope.toHist = function(){
   
   //JSON.parse(sessionStorage.getItem("current"))
-      console.log($scope.currentUser.cart.length);
+      var date = new Date;
+      date = date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear();
+      //console.log(date);
+
+      for (var i = 0; i < $scope.currentUser.cart.length; i++) {
+        $scope.currentUser.cart[i].trans = date;
+        console.log($scope.currentUser.cart[i].trans);
+      }
       //var practice = JSON.stringify($scope.currentUser.cart);
       //console.log(JSON.parse(practice));
 
@@ -582,7 +562,7 @@ console.log(cost);
       }
 
 
-      Users.update($scope.currentUser._id, 'toHist', 0, 0, 0, 0, $scope.currentUser.cart).then(function(response){
+      Users.update($scope.currentUser._id, 'toHist', 0, 0, 0, $scope.final, $scope.currentUser.cart).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
         for (var i = 0; i < $scope.users.length; i++) {
