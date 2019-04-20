@@ -69,10 +69,10 @@
             <table class="table table-striped table-hover">
               <tr>
                 <th>Name</th>
-                <th>quant</th>
-                <th>price</th>
+                <th>Quantity Available</th>
+                <th>Price/Item</th>
               </tr>
-              <tr ng-repeat="user in users | filter: query" ng-show= "user.authority == 'product' && user.itemqty > 0" ng-click="addToCart(user._id, user.itemname, user.itemqty, user.itemprice)">
+              <tr ng-repeat="user in users | filter: query" ng-show= "user.authority == 'product' && user.itemqty > 0" ng-click="addToCart(user._id, user.itemname, 1, user.itemprice)">
                 <td>{{user.itemname}}</td>
                 <td>{{user.itemqty}}</td>
                 <td>{{user.itemprice}}</td>

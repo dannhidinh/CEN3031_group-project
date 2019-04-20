@@ -199,6 +199,24 @@ if(req.query.act == 'add'){
 //for (var i = Things.length - 1; i >= 0; i--) {
 //  Things[i]
 //}
+  for (var i = 0; i < converted.length; i++) {
+    //console.log(converted[i].itemID);
+    //console.log(converted[i].quantity);
+    //console.log(converted[i].itemID);
+    //console.log(product.itemname);
+    //var newQTY = product.itemqty - converted[i].quantity;
+            
+    User.findOneAndUpdate({ _id: converted[i].itemID }, { $inc: { itemqty: converted[i].quantity*-1 } }, function(err, user) {
+      if(err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+    });
+      
+
+    
+  }
+
 
     User.findOneAndUpdate({ name: user.name }, { $push: {orderHist: {cart: converted} } }, function(err, user) {
       if(err) {
