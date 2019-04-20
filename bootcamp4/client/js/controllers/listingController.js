@@ -617,8 +617,11 @@ console.log("used");
       this.users.splice(id, 1);
     };
 
+
     $scope.showDetails = function(index) {
+	
       $scope.detailedInfo = $scope.users[index];
+	  console.log($scope.detailedInfo);
     };
   }
 ]);
