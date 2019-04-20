@@ -108,3 +108,58 @@ button{
 .map-title{
   margin-bottom: 20px;
 }
+
+#myModalabout, #myModalcontact{
+  color: black;
+}
+
+.sideButtons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  order: 3;
+}
+
+.signout{
+  border: 2px outset #FCF3A2;
+  background-color: #FC7869;
+  color: #FFFFFF;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.searchbar{
+	float:center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+
+}
+.searchbar input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+
+}
+
+.searchbar button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background-color: #FC7869;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+.searchbar select {
+  float :left;
+  padding: 8px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}

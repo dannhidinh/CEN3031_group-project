@@ -29,14 +29,14 @@ map.on('load', function () {
             {
               type: 'Feature',
               properties: {"title": "Bodega at the Hub",
-                           "description": "<h>BODEGA AT INNOVATE THE HUB</h><div>747 SW 2nd Ave</div><div>Gainesville, Florida 32601</div>",
+                           "description": "<h><u>BODEGA AT INNOVATE THE HUB</u></h><div>747 SW 2nd Ave</div><div>Gainesville, Florida 32601</div>",
                            "icon": "marker"},
               geometry: {type: "Point",coordinates: [ -82.3327, 29.6502]}
             },
             {
               type: 'Feature',
               properties: {"title": "Bodega at Exactech",
-                           "description": "<h>BODEGA AT EXACTECH INC.</h><div>2320 NW 66 Ct</div><div>Gainesville, Florida 32653</div>",
+                           "description": "<h><u>BODEGA AT EXACTECH INC.</u></h><div>2320 NW 66 Ct</div><div>Gainesville, Florida 32653</div>",
                            "icon": "marker"},
               geometry: {type: "Point", coordinates: [ -82.356005, 29.717539]}
             }

@@ -1,3 +1,4 @@
+//var Data = require('../models/listings.server.model.js');
 angular.module('users').controller('ListingsController', ['$scope', 'Users',
   function($scope, Users) {
     //var msg = require('../factories/listingFactory.js');
@@ -13,7 +14,165 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 //IGNORE, used for general testing
 
   $scope.test = function(){
-      console.log(msg.test);
+      //console.log(msg.test);
+
+  };
+
+  $scope.addProduct = function(){
+console.log($scope.newItem.item);
+console.log($scope.newItem.quant);
+console.log($scope.newItem.cost);
+
+      Users.create({item: $scope.newItem.item, quant: $scope.newItem.quant,
+      cost: $scope.newItem.cost, authority: 'product'}).then(function(response){
+      Users.getAll().then(function(response) {
+          $scope.users = response.data;
+          //console.log("here");
+          //$scope.loggedIn($scope.newUser.name, testPass);
+      }, function(error) {
+          console.log('Unable to add user', error);
+        });
+      });
+  }
+
+  $scope.newName = function(name){
+    console.log(name);
+      if (name == undefined || name == ""){
+        return;
+      }
+
+  for (var i = 0; i < $scope.users.length; i++) {
+    if ($scope.users[i].name == name){
+      $scope.newResult = "Name is already in use";
+      return;
+    }
+  }
+
+      Users.update($scope.currentUser._id, 'newName', 0,
+        name).then(function(response){
+      Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        for (var i = 0; i < $scope.users.length; i++) {
+          if($scope.users[i].name === name){
+            $scope.currentUser = $scope.users[i];
+            break;
+          }
+        }
+        //console.log($scope.currentUser);
+        if ($scope.currentUser == null) {
+          $scope.result = "Incorrect Username or Password";
+        }
+        else{
+          $scope.result = "";
+        }
+
+        if (typeof(Storage) !== "undefined") {
+          var curr = $scope.currentUser;
+          //console.log(curr);
+          console.log($scope.currentUser.name);
+          // Store
+          sessionStorage.setItem("current", JSON.stringify(curr));
+        }
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+
+        //$scope.finalPrice();
+
+      }, function(error) {
+          console.log('Unable to retrieve listings:', error);
+        });
+      });
+  }
+
+  $scope.newTel = function(tel){
+      console.log(tel);
+      if (tel == undefined || tel == ""){
+        return;
+      }
+      Users.update($scope.currentUser._id, 'newTel', 0,
+        tel).then(function(response){
+      Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        for (var i = 0; i < $scope.users.length; i++) {
+          if($scope.users[i].name === $scope.currentUser.name){
+            $scope.currentUser = $scope.users[i];
+            break;
+          }
+        }
+        //console.log($scope.currentUser);
+        if ($scope.currentUser == null) {
+          $scope.result = "Incorrect Username or Password";
+        }
+        else{
+          $scope.result = "";
+        }
+
+        if (typeof(Storage) !== "undefined") {
+          var curr = $scope.currentUser;
+          //console.log(curr);
+          //console.log($scope.currentUser.name);
+          // Store
+          sessionStorage.setItem("current", JSON.stringify(curr));
+        }
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+
+        //$scope.finalPrice();
+
+      }, function(error) {
+          console.log('Unable to retrieve listings:', error);
+        });
+      });
+  }
+
+  $scope.newMail = function(newMail){
+    if (newMail == undefined || newMail == ""){
+        return;
+    }
+  for (var i = 0; i < $scope.users.length; i++) {
+    if ($scope.users[i].email == newMail){
+      $scope.newResult = "Email is already in use";
+      return;
+    }
+
+  }
+      Users.update($scope.currentUser._id, 'newMail', 0,
+        newMail).then(function(response){
+      Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        for (var i = 0; i < $scope.users.length; i++) {
+          if($scope.users[i].name === $scope.currentUser.name){
+            $scope.currentUser = $scope.users[i];
+            break;
+          }
+        }
+        //console.log($scope.currentUser);
+        if ($scope.currentUser == null) {
+          $scope.result = "Incorrect Username or Password";
+        }
+        else{
+          $scope.result = "";
+        }
+
+        if (typeof(Storage) !== "undefined") {
+          var curr = $scope.currentUser;
+          //console.log(curr);
+          //console.log($scope.currentUser.name);
+          // Store
+          sessionStorage.setItem("current", JSON.stringify(curr));
+        }
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+
+        //$scope.finalPrice();
+
+      }, function(error) {
+          console.log('Unable to retrieve listings:', error);
+        });
+      });
 
   }
 
@@ -33,9 +192,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       amount = amount + uftax;
       $scope.final = amount.toFixed(2);
 
-
       // STRIPE - checkout form
-
       var checkoutHandler = StripeCheckout.configure({
         key: "pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a",
         image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -153,15 +310,20 @@ console.log("used");
       });
       */
 
+//for (var i = 0; i < $scope.users.length; i++) {
+// console.log($scope.users[i].name);
+//}
+
       for (var i = 0; i < $scope.users.length; i++) {
-        if($scope.users[i].name === testName && $scope.users[i].password === hash){
+        if(($scope.users[i].name === testName && $scope.users[i].password === hash) ||
+          ($scope.users[i].email === testName && $scope.users[i].password === hash)){
           $scope.currentUser = $scope.users[i];
           break;
         }
       }
 
       if ($scope.currentUser == null) {
-        $scope.result = "Incorrect Username or Password";
+        $scope.result = "Incorrect Username/Email or Password";
       }
       else{
         $scope.result = "";
@@ -177,6 +339,8 @@ console.log("used");
         document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
       }
 
+      //console.log($scope.currentUser);
+
     };
 //adds new customer user; authority = 0
     $scope.addListing = function() {
@@ -189,11 +353,12 @@ console.log("used");
 
 //checks if all fields got data
       if ($scope.newUser.name == undefined || $scope.newUser.password == undefined ||
-        $scope.newUser.email == undefined || $scope.newUser.phone == undefined){
+        $scope.newUser.email == undefined || $scope.newUser.phone == undefined || $scope.newUser.vpassword == undefined){
 
           $scope.upResult = "Fill in all fields";
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
+        $scope.newUser.vpassword = undefined;
         $scope.newUser.email = undefined;
         $scope.newUser.phone = undefined;
         return;
@@ -207,6 +372,7 @@ console.log("used");
       $scope.upResult = "Name is already in use";
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
+        $scope.newUser.vpassword = undefined;
         $scope.newUser.email = undefined;
         $scope.newUser.phone = undefined;
       return;
@@ -215,13 +381,20 @@ console.log("used");
       $scope.upResult = "Email is already in use";
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
+        $scope.newUser.vpassword = undefined;
         $scope.newUser.email = undefined;
         $scope.newUser.phone = undefined;
       return;
     }
 
   }
+  console.log($scope.newUser.password);
+  console.log($scope.newUser.vpassword);
 
+  if ($scope.newUser.password != $scope.vpassword) {
+    $scope.upResult = "Passwords did not match";
+    return;
+  }
 
 //converts incoming password to hashed number
       var testPass = $scope.newUser.password;
@@ -251,7 +424,6 @@ console.log("used");
 */
 
 
-console.log(testPass);
 //WHERE USER IS ACTUALLY ADDED DONT REMOVE
 
     Users.create({name: $scope.newUser.name, password: $scope.newUser.password,
@@ -398,6 +570,25 @@ console.log($scope.newItem.price);
 
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.users[index];
+    };
+
+    $scope.isMember = function(index) {
+      if($scope.users[index].authority == "member")
+        return true;
+      else
+        return false;
+    };
+    $scope.isVendor = function(index) {
+      if($scope.users[index].authority == "vendor")
+        return true;
+      else
+        return false;
+    };
+    $scope.isProduct = function(index) {
+      if($scope.users[index].authority == "product")
+        return true;
+      else
+        return false;
     };
   }
 ]);
