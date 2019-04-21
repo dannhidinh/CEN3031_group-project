@@ -144,18 +144,9 @@ button{
   font-size: 17px;
   border: none;
 
+
 }
 
-.searchbar button {
-  float: right;
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background-color: #FC7869;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-}
 .searchbar select {
   float :left;
   padding: 8px;
@@ -163,5 +154,24 @@ button{
   font-size: 17px;
   border: none;
 }
+
+/* Table */
+.tableWrapper
+{
+	float: center;
+	margin : auto;
+	width : 80%;
+	background-color: white;
+}
+#atable tr:hover {background-color: #ddd;}
+
+#ctable th {
+
+  background-color: #4CAF50;
+  color: white;
+}
+/* table end */
+
+
 
 

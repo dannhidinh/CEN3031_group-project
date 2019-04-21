@@ -41,11 +41,18 @@
               <div class='descriptionHeader'>Info</div> 
               <div class='reorderHeader'>Reorder</div>
             </div>
-            <div class='individualItem' ng-repeat= 'orderHist in currentUser.orderHist'>
-              <div class='itemName'>{{orderHist.Product}}</div> <!--Place item name data here in {}-->
-              <div class='orderDate'>{{orderHist.transaction.getDate()}}</div> <!--Place item last order data here in {}-->
-              <div class='descriptionButton'><i class='fas fa-info-circle'></i></div> <!--Link to product page for item ID-->
-              <div class='reorderButton'><i class='fas fa-plus-circle'></i></div> <!--Link to add item to current user cart-->
+            <div class='tableWrapper' ng-repeat= 'orderHist in currentUser.orderHist'>
+              <table class="table table-striped table-hover">
+                               
+                <tr ng-repeat= 'cart in orderHist.cart'>
+                <td class='itemName'>{{cart.productC}}</td> <!--Place item name data here in {}-->
+                <!--Place item last order data here in {}-->
+                <td class='ordertime'>{{cart.trans}}</td>
+                <td class='descriptionButton'><i class='fas fa-info-circle'></i></td> <!--Link to product page for item ID-->
+                <td class='reorderButton'><i class='fas fa-plus-circle'></i></td> <!--Link to add item to current user cart-->
+                </tr>
+                <td class='orderprice'>{{orderHist.total}}</td>
+              </table>
             </div>
           </div>
         </div>
