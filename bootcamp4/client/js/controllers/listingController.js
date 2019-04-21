@@ -619,6 +619,7 @@ console.log("used");
 
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.users[index];
+      console.log($scope.detailedInfo);
     };
   }
 ]);
