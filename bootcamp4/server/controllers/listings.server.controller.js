@@ -216,7 +216,8 @@ console.log(req.query.act);
     var converted = JSON.parse(req.query.cart);
     //console.log(converted[0].productC);
     console.log(req.query.cost);
-    var final = req.query.cost.toString(req.query.cost);
+    var final = req.query.cost.toString();
+    //final = "Total Price (w/tax): " + final;
     console.log(final);
 //for (var i = Things.length - 1; i >= 0; i--) {
 //  Things[i]

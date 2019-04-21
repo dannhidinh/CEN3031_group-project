@@ -891,7 +891,8 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
     $scope.showDetails = function(index) {
 	
       $scope.detailedInfo = $scope.users[index];
-	  console.log($scope.detailedInfo);
+
+      console.log($scope.detailedInfo);
     };
   }
 ]);

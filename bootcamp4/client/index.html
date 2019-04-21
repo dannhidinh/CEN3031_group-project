@@ -71,7 +71,7 @@
 			</select> 
 		</form>
 	</div>
-	
+
 	<!-- Table of products -->
     <div class="tableWrapper" >
         <table class="table" id="atable">
@@ -81,6 +81,7 @@
                 <th>Product Price</th>
 				<th>More Details</th>
 				<th>Add to Cart</th>
+
               </tr>
               <tr ng-repeat="user in users | filter: query" ng-show= "user.authority == 'product' && user.itemqty > 0" >
                 <td>{{user.itemname}}</td>

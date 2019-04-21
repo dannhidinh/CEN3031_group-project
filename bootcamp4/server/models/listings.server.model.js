@@ -14,7 +14,6 @@ var userSchema = new Schema({
   email: String,
   phone: String,
   password: Number,
-  //orderHist: [ { Product : String, transaction : {type: Date}} ], //take out date, save id
 
   cart: [ { itemID: String, productC : String, quantity : Number, price : Number, trans: String} ], //make array of cards to get transaction ID for them, 
   orderHist: [ {total: String, cart: [ { itemID: String, productC : String, quantity : Number, price : Number, trans: String} ]} ],
@@ -23,16 +22,6 @@ var userSchema = new Schema({
   created_at: {type: Date},
   updated_at: {type: Date},
 
-  /* This Schema encompasses the inventory within the vendor at a bodega*/
-    itemname: {type: String, required: true},
-    itemdesc: String,
-    itemprice: Number,
-    itemexp: {type: Date},
-    itemqty: Number,
-    itemcode: String,
-    itempic: String,
-    ibodnum: {type: Number, required: true},
-    ivenuser: {type: String, required: true},
 
     itemname: {type: String},
     itemdesc: String,
