@@ -19,7 +19,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       console.log(qty);
       console.log(cost);
 
-  }
+  };
 
 //adds product from homepage to curretUser's cart
   $scope.addProduct = function(){
@@ -589,6 +589,132 @@ console.log("used");
 
 
     };
+
+//adds new customer user; authority = 0
+$scope.addVendor = function() {
+  /**TODO
+  *Save the article using the Listings factory. If the object is successfully
+  saved redirect back to the list page. Otherwise, display the error
+    */
+//resets upResults between sign attempts
+    $scope.upResult = "";
+
+//checks if all fields got data
+    if ($scope.newUser.name == undefined || $scope.newUser.password == undefined || 
+      $scope.newUser.email == undefined || $scope.newUser.phone == undefined || $scope.newUser.vpassword == undefined){
+        
+        $scope.upResult = "Fill in all fields";
+      $scope.newUser.name = undefined;
+      $scope.newUser.password = undefined;
+      $scope.newUser.vpassword = undefined;
+      $scope.newUser.email = undefined;
+      $scope.newUser.phone = undefined;
+      return;
+    }
+
+
+//checks if name or email is already in database (maybe dont check name because people share names, 
+//or treat as unique username)
+for (var i = 0; i < $scope.users.length; i++) {
+  if ($scope.users[i].name == $scope.newUser.name){
+    $scope.upResult = "Name is already in use";
+      $scope.newUser.name = undefined;
+      $scope.newUser.password = undefined;
+      $scope.newUser.vpassword = undefined;
+      $scope.newUser.email = undefined;
+      $scope.newUser.phone = undefined;      
+    return;
+  }
+  else if ($scope.users[i].email == $scope.newUser.email){
+    $scope.upResult = "Email is already in use";
+      $scope.newUser.name = undefined;
+      $scope.newUser.password = undefined;
+      $scope.newUser.vpassword = undefined;
+      $scope.newUser.email = undefined;
+      $scope.newUser.phone = undefined;      
+    return;
+  }
+
+}
+console.log($scope.newUser.password);
+console.log($scope.newUser.vpassword);
+
+if ($scope.newUser.password != $scope.newUser.vpassword) {
+  $scope.upResult = "Passwords did not match";
+  return;
+}
+
+//converts incoming password to hashed number
+    var testPass = $scope.newUser.password;
+    //console.log(testPass);
+      var hash = 0, i, chr;
+      if (testPass.length === 0) return hash;
+      for (i = 0; i < testPass.length; i++) {
+        chr   = testPass.charCodeAt(i);
+          hash  = ((hash << 6) - hash) + chr;
+          hash |= 0; // Convert to 32bit integer
+        }
+        $scope.newUser.password = hash;
+
+//original add code from Nhi, didn't seem to work
+/*
+    $scope.save = function(error) {
+      //console.log("used");
+      if(error) {
+        throw error;
+        console.log('Unable to add listing');
+      }
+    };
+    console.log($scope.newUser);
+    $scope.users.push($scope.newUser);
+    console.log($scope.users[3]);
+    $scope.newUser = {};
+*/
+
+
+//WHERE USER IS ACTUALLY ADDED DONT REMOVE
+
+  Users.create({name: $scope.newUser.name, password: $scope.newUser.password, 
+    email: $scope.newUser.email, phone: $scope.newUser.phone, authority: 'vendor'}).then(function(response){
+    Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        //console.log("here");
+        //$scope.loggedIn($scope.newUser.name, testPass);
+    }, function(error) {
+        console.log('Unable to add user', error);
+      });
+    });    
+   
+
+    if (typeof(Storage) !== "undefined") {
+      var isNew = 'yes';
+      $scope.newUser.password = testPass;
+      var newInfo = $scope.newUser;
+//console.log("stores yes and info");
+      // Store
+      sessionStorage.setItem("checksIf", JSON.stringify(isNew));
+      sessionStorage.setItem("info", JSON.stringify(newInfo));
+    } 
+    else {
+      document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+    }
+    
+  //$scope.loggedIn($scope.newUser.name, testPass);
+
+
+
+
+ document.location.reload(true);
+
+
+//resets newUser values between attempts
+  //$scope.newUser.name = undefined;
+  //$scope.newUser.password = undefined;
+  //$scope.newUser.email = undefined;
+  //$scope.newUser.phone = undefined;
+
+
+  };
     
 
 //adds to cart and refreshes currentUser data

@@ -25,7 +25,8 @@
 	 <!-- next 3 lines are mapbox api implementations-->
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+		<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- implementing notifications API -->
 
 </head>
@@ -33,17 +34,23 @@
 
 <!-- TOP MENU -->
 <header>
-    <div class='topBar'>
+    <div class='topBar' ng-app="directoryApp" ng-controller="ListingsController">
       <img class='logo' src='./pictures/logo_transparent.svg' height='150px' width='150px'/>
       <div class="navBar">
         <button class="home-link"><a href="index.html">HOME</a></button>
         <button class="about-link" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
-		<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
-        <button class="user-link"><a href="UserPage.html">MY INFO</a></button>
+				<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
+        <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : 'UserPage.html')}}">MY INFO</a></button>
         <button class="cart-link"><a href="CartPage.html">CART</a></button>
 		<!--<button class="cart-link" data-toggle="modal" data-target="#myModalcart">CART</a></button>-->
-        <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
-      </div>
+				<button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
+			</div>
+			<div class='sideButtons'>
+				Welcome {{currentUser.name}}!
+				<button class='signout' ng-click='signOut()'>
+					<span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
+				</button>
+			</div>  
     </div>
 </header>
 
@@ -57,9 +64,10 @@
 		 <form action="/action_page.php">
 			<input type="text" placeholder="Search" ng-model="query">
 			
-			<select>
+			<select class="bodegaDropdown">
 				<option value="0">Bodega At Hub</option>
 				<option value="1">Bodega At Exactech</option>
+				<option value="2">Bodega TBD</option>
 			</select> 
 		</form>
 	</div>
@@ -67,7 +75,7 @@
 	<!-- Table of products -->
     <div class="tableWrapper" >
         <table class="table" id="atable">
-              <tr>
+              <tr class="tableHeaders">
                 <th>Product</th>
                 <th>Quantity Available</th>
                 <th>Product Price</th>
