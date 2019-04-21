@@ -1,148 +1,154 @@
 <!DOCTYPE html>
 <html>
-<title>BODEGA ADMIN</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+	<head>
+	<title>BODEGA ADMIN</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="styles/admin.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+	</head>
 
-<head>
-	<br>
-	<br>
-	<center><img src = "pictures/BodegaLogo.png" alt ="Bodega Logo" width="196" height="154"></center>
-<!-- Top menu -->
-<div class="w3-main w3-content" style="max-width:1200px;margin-top:50px">
-	<div class="w3-bar w3-black w3-padding-16">
-		
-		<a href="index.html" class="w3-bar-item w3-button">HOME</a> 
-		<a href="#about" class="w3-bar-item w3-button">ABOUT</a>
-		<a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
-	
-		<input class="w3-input w3-third w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="black">
-		<i class="fa fa-search w3-xxlarge" ></i>
-		
+<header>
+    <div class='topBar' ng-app="directoryApp" ng-controller="ListingsController">
+      <img class='logo' src='./pictures/logo_transparent.svg' height='150px' width='150px'/>
+      <div class="navBar">
+        <button class="home-link"><a href="index.html">HOME</a></button>
+        <button class="about-link" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
+				<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
+        <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : 'UserPage.html')}}">MY INFO</a></button>
+        <button class="cart-link"><a href="CartPage.html">CART</a></button>
+		<!--<button class="cart-link" data-toggle="modal" data-target="#myModalcart">CART</a></button>-->
+				<button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
+			</div>
+			<div class='sideButtons'>
+				Welcome {{currentUser.name}}!
+				<button class='signout' ng-click='signOut()'>
+					<span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
+				</button>
+			</div>  
+    </div>
+</header>
 
-		<a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
-		<!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
-  </div>
-
-</div>
-</head>
-<body>
 <!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content " style="max-width:1200px;margin-top:50px" ng-controller="ListingsController">
-	<CENTER><H2> ADMIN PAGE </H2></CENTER>
+<body class="adminPage" ng-app="directoryApp" ng-controller="ListingsController">
+	<span class="page-title"> ADMIN PAGE </span>
 
-  <!-- orders-->
-  <div class="w3-row-padding w3-padding-16" >
-	<CENTER><h3>ORDERS</h3></CENTER>
-	<table class="w3-table-all w3-card-4">
-		<tr>
-			<th>ORDER</th>
-			<th>NAME</th>
-			<th>EMAIL</th>
-			<TH>ORDER DETAILS</TH>
-			<TH>AMOUNT</TH>
+	<div class="content-container">
+		<div class="table-containers">
+			<!-- orders-->
+			<div class="orders-container" >
+					<span class="orders-title">ORDERS</span>
+					<div class="orders-box">
+						<div class="orders-headers-container">
+							<div class="orders-header">ORDER</div>
+							<div class="orders-header">NAME</div>
+							<div class="orders-header">EMAIL</div>
+							<div class="orders-header">DETAILS</div>
+							<div class="orders-header">AMOUNT</div>
+						</div>	
+						<div class="orders-listings-container" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+							<div class="orders-listing">{{listing.order}}</div>
+							<div class="orders-listing">{{users.name}}</div>
+							<div class="orders-listing">{{users.email}}</div>
+							<div class="orders-listing">{{listing.details}}</div> 
+							<div class="orders-listing">{{listing.amount}}</div>
+						</div>
+					</div>
+				</div>
+				
+			<!--inventory -->
+			<div class="inventory-container">
+				<span class="inventory-title">INVENTORY</span>
+				<div class="inventory-box">
+					<div class="inventory-headers-container">
+						<div class="inventory-header">ID</div>
+						<div class="inventory-header">NAME</div>
+						<div class="inventory-header">QUANTITY</div>
+					</div>
+					<div class="inventory-listings-container" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+						<div class="inventory-listing">{{listing.itemid}}</div>
+						<div class="inventory-listing">{{listing.name}}</div>
+						<div class="inventory-listing">{{listing.quantity}}</div>
+					</div>
+				</div>
+			</div>
+				
+			<!--USERS -->
+			<div class="users-container">
+				<span class="users-title">USERS</span>
+				<div class="users-box">
+					<div class="users-headers-container">
+						<div class="users-header">ID</div>
+						<div class="users-header">NAME</div>
+						<div class="users-header">EMAIL</div>
+						<div class="users-header">PHONE</div>
+					</div>
+					<div class="users-listings-container" ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
+						<div class="users-listing">{{user.id}}</div>
+						<div class="users-listing">{{users.name}}</div>
+						<div class="users-listing">{{users.email}}</div>
+						<div class="users-listing">{{users.phone}}</div>
+					</div>
+				</div>
+			</div>
+				
+			<!--ANALYTICS -->
+			<div class="analytics-container">
+				<span class="analytics-title">ANALYTCS</span>
+				<div class="analytics-box">
+					<div class="analytics-headers-container">
+						<div class="analytics-header">BEST SELLER</div>
+						<div class="analytics-header">SOME DATA</div>
+						<div class="analytics-header">WORST SELLER</div>
+					</div>
+					<div class="analytics-listings-container">
+						<div class="analytics-listing">BANANA</div>
+						<div class="analytics-listing">DATA</div>
+						<div class="analytics-listing">BRUSSEL SPROUTS</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-			</tr>
-			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-                <td>{{listing.order}}</td>
-                <td>{{users.name}}</td>
-				<td>{{users.email}}</td>
-                <td>{{listing.details}}</td> 
-                <td>{{listing.amount}}</td>
-		</tr>
-	</table>
-  </div>
-  
-      <!--inventory -->
-  <div class="w3-row-padding w3-padding-16">
-	<CENTER><h3>INVENTORY</h3></CENTER>
-  	<table class="w3-table-all w3-card-4">
-		<tr>
-			<th>FOOD ID</th>
-			<th>NAME</th>
-			<th>QUANITY</th>
-			<!-- ng repeat table -->
-			</tr>
-			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-                <td>{{listing.itemid}}</td>
-                <td>{{listing.name}}</td> 
-                <td>{{listing.quantity}}</td>
-		</tr>
-	</table>
-  </div>
-  
-  <!--USERS -->
-  <div class="w3-row-padding w3-padding-16 w3-half">
-	<CENTER><h3>USERS</h3></CENTER>
-  	<table class="w3-table-all w3-card-4">
-		<tr>
-			<th>USER ID</th>
-			<th>NAME</th>
-			<th>EMAIL</th>
-			<th>PHONE</th>
-			<!-- ng repeat table -->
-			</tr>
-			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-                <td>{{user.id}}</td>
-                <td>{{users.name}}</td>
-				<td>{{users.email}}</td>
-				<td>{{users.phone}}</td>
-		</tr>
-	</table>
-  </div>
-  
-    <!--ANALYTICS -->
-  <div class="w3-row-padding w3-padding-16 w3-third w3-right">
-	<CENTER><h3>ANALYTICS</h3></CENTER>
-  	<table class="w3-table-all w3-card-4">
-		<tr>
-			<th>BEST SELLER</th>
-			<th>SOME DATA</th>
-			<th>WORST SELLER</th>
-			<!-- ng repeat table -->
-			</tr>
-			<tr>
-			<td>BANANA</td>
-			<td>DATA</td>
-			<td>BRUSSEL SPROUTS</td>
-		</tr>
-	</table>
-  </div>
-  
-  </div> <!-- END MAIN CONTENT -->
-   <br>
-   <br>
-   
-  <!-- Footer -->
-  <footer class="w3-row-padding padding-32">
-    <div class="w3-third" >
-	<a name="about"></a> 
-      <center><h1>ABOUT</h1></center>
-      <center><p>	Collective & Co opened The Bodega marketplace September 2018 inside UF Innovate the Hub. The Bodega exists to provide a premiere lunch experience through fast and reliable service, exceptional customer-to-employee interactions, and high quality, locally-sourced prepared foods. Catering and group orders can be ordered by businesses around the Bodega by contacting bodegaGNV@gmail.com.</p></center>
-    </div>
-  
-    <div class="w3-third">
-	<a name="contact"></a> 
-      <center><h1>CONTACT US</h1></center>
-		<center><p>Collective & Co. Bodega Email : bodegaGNV@gmail.com. </p></center>
-    </div>
-	
-	<div class="w3-third">
-      <center><h1>SOCIAL MEDIA</h1>
-			<a href="#" class="fa fa-facebook w3-jumbo"></a>
-			<a href="#" class="fa fa-twitter w3-jumbo"></a>
-			<a href="#" class="fa fa-instagram w3-jumbo"></a>
-			</center>
-    </div>
-
-  </footer>
-
-<!-- End page content -->
-</div>
+		<div class="vendor-signup-container">
+			<div class='mySignUp' ng-controller="ListingsController">
+				<span class='signTitle'>SIGN UP</span>
+				<form class= 'signForm' id= "myForm" action="index.html" onsubmit="this.reset()">
+					<span class='signUpItem'>
+						<span class='fieldTitle'>Username</span>
+						<input type='text' ng-model="newUser.name"/></span>
+					<span class='signUpItem'>
+						<span class='fieldTitle'>Email</span>
+						<input type='email' ng-model="newUser.email"/></span>            
+					<span class='signUpItem'>
+						<span class='fieldTitle'>Password</span>
+						<input type='password' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" ng-model="newUser.password"/></span>
+					<span class='signUpItem'>
+						<span class='fieldTitle'>Verify Password</span>
+						<input type='password' pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" ng-model="newUser.vpassword"/></span>            
+					<span class='signUpItem'>
+						<span class='fieldTitle'>Phone Number</span>
+						<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" ng-model="newUser.phone"/></span>
+						<button class='btn btn-primary signUpSubmit' ng-click='addVendor()'>SIGN UP</button>
+						{{upResult}}
+				</form>     
+				<!--<button class="test" ng-click="addToCart()">TESTS</button>-->                
+			</div>  
+		</div>
+	</div> 
 </body>
+
+	<script src="https://js.stripe.com/v3/"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+	<script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+	
+	<script src="js/app.js"></script>
+	<script src="js/factories/listingFactory.js"></script>
+	<script src="js/controllers/listingController.js"></script> 
 </html>

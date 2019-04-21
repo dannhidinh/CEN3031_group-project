@@ -109,6 +109,26 @@ button{
   margin-bottom: 20px;
 }
 
+#myModalabout, #myModalcontact{
+  color: black;
+}
+
+.sideButtons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  order: 3;
+}
+
+.signout{
+  border: 2px outset #FCF3A2;
+  background-color: #FC7869;
+  color: #FFFFFF;
+  cursor: pointer;
+  border-radius: 5px;
+}
 .searchbar{
 	float:center;
 	display: flex;
@@ -141,8 +161,16 @@ button{
 	float: center;
 	margin : auto;
 	width : 80%;
-	background-color: white;
+  background-color: white;
+  border: 3px outset #FCF3A2;
 }
+
+.tableHeaders{
+  border-bottom: 3px ridge #FCF3A2;
+  color: #FFFFFF;
+  background-color: #FC7869;
+}
+
 #atable tr:hover {background-color: #ddd;}
 
 #ctable th {
