@@ -13,12 +13,17 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
 //IGNORE, used for general testing
 
-  $scope.test = function(){
-      //console.log(msg.test);
+  $scope.test = function(id, name, qty, cost){
+      console.log(id);
+      console.log(name);
+      console.log(qty);
+      console.log(cost);
 
   }
 
+//adds product from homepage to curretUser's cart
   $scope.addProduct = function(){
+
 console.log($scope.newItem.itemname);
 console.log($scope.newItem.itemqty);
 console.log($scope.newItem.itemprice);
@@ -29,6 +34,7 @@ console.log($scope.newItem.itemprice);
           itemexp: $scope.newItem.itemexp, itemcode: $scope.newItem.itemcode, itempic: $scope.newItem.itempic,
           ibodnum: $scope.newItem.ibodnum, ivenuser: $scope.newItem.ivenuser,
           itemprice: $scope.newItem.itemprice, authority: 'product'}).then(function(response){
+
       Users.getAll().then(function(response) {
           $scope.users = response.data;
           //console.log("here");
@@ -39,17 +45,20 @@ console.log($scope.newItem.itemprice);
       });
   }
 
+//method to change currentUser's username; also checks if new name is already in use
   $scope.newName = function(name){
     console.log(name);
       if (name == undefined || name == ""){
         return;
       }
 
-  for (var i = 0; i < $scope.users.length; i++) {
-    if ($scope.users[i].name == name){
-      $scope.newResult = "Name is already in use";     
-      return;
+    for (var i = 0; i < $scope.users.length; i++) {
+      if ($scope.users[i].name == name){
+        $scope.newResult = "Name is already in use";     
+        return;
+      }
     }
+
   }
 //Uses the record id, action name, followed by values or variables to pass.
       Users.update($scope.currentUser._id, 'newName', 0, 
@@ -81,12 +90,13 @@ console.log($scope.newItem.itemprice);
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
 
-        //$scope.finalPrice();
 
-      }, function(error) {
-          console.log('Unable to retrieve listings:', error);
-        });
-      }); 
+      //$scope.finalPrice();
+
+    }, function(error) {
+        console.log('Unable to retrieve listings:', error);
+      });
+    }); 
   }
 
     $scope.newItemName = function(iname){
@@ -397,17 +407,7 @@ console.log($scope.newItem.itemprice);
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
-/*
-      if (isNew === 'yes') {
-        if (typeof(Storage) !== "undefined") {
-          console.log("logs user in");
-          // Retrieve
-          $scope.currentUser = JSON.parse(sessionStorage.getItem("current"));
-        } else {
-          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-        }
-      }        
-*/
+
 //updates cart price dynamically
         $scope.finalPrice();
   });
@@ -438,23 +438,6 @@ console.log("used");
             hash |= 0; // Convert to 32bit integer
           }
 
-//cant get mongoose methods to work, leaving this here to try again later
-      /*
-      $scope.users.findOne({ name: testName, password: hash }, function (err, user) {
-        if (err) return handleError(err);
-
-        if (user != null){
-          console.log(user.name + " Logged in!\n");
-        }
-        else
-          console.log("Email and/or Password may be wrong. Sign up if you don't have an account.");
-      });      
-      */
-
-//for (var i = 0; i < $scope.users.length; i++) {
-// console.log($scope.users[i].name);
-//}
-
       for (var i = 0; i < $scope.users.length; i++) {
         if(($scope.users[i].name === testName && $scope.users[i].password === hash) || 
           ($scope.users[i].email === testName && $scope.users[i].password === hash)){
@@ -479,8 +462,6 @@ console.log("used");
       else {
         document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
       }
-
-      //console.log($scope.currentUser);
 
     };
 //adds new customer user; authority = 0
@@ -532,8 +513,9 @@ console.log("used");
   console.log($scope.newUser.password);
   console.log($scope.newUser.vpassword);
 
-  if ($scope.newUser.password != $scope.vpassword) {
+  if ($scope.newUser.password != $scope.newUser.vpassword) {
     $scope.upResult = "Passwords did not match";
+    return;
   }
 
 //converts incoming password to hashed number
@@ -610,14 +592,21 @@ console.log("used");
     
 
 //adds to cart and refreshes currentUser data
-    $scope.addToCart = function(){
+    $scope.addToCart = function(id, name, qty, cost){
 
-console.log($scope.newItem.productC);
-console.log($scope.newItem.quantity);
-console.log($scope.newItem.price);
+//console.log(id);
+//console.log(name);
+//console.log(qty);
+//console.log(cost);
+//var practice = JSON.stringify($scope.currentUser.orderHist[1].cart)
+//console.log($scope.currentUser.orderHist[0]._id);
 
-      Users.update($scope.currentUser._id, 'add', 0, 
-        $scope.newItem.productC, $scope.newItem.quantity, $scope.newItem.price).then(function(response){
+//var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
+//console.log(cartID);
+
+//Pass the specific id of the item gotten, name of item, qty wanted, and cost/item
+      Users.update($scope.currentUser._id, 'add', id, 
+        name, qty, cost).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
         for (var i = 0; i < $scope.users.length; i++) {
@@ -694,6 +683,70 @@ console.log($scope.newItem.price);
       }); 
     }
 
+    $scope.toHist = function(){
+  
+  //JSON.parse(sessionStorage.getItem("current"))
+      var date = new Date;
+      date = date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear();
+      //console.log(date);
+
+      for (var i = 0; i < $scope.currentUser.cart.length; i++) {
+        $scope.currentUser.cart[i].trans = date;
+        console.log($scope.currentUser.cart[i].trans);
+      }
+      //var practice = JSON.stringify($scope.currentUser.cart);
+      //console.log(JSON.parse(practice));
+
+      if ($scope.currentUser.cart.length == 0) {
+        console.log("Cart is empty");
+        console.log($scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id);
+        var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
+        $scope.transID = cartID.substr(18,6).toUpperCase();
+        return;
+      }
+
+
+      Users.update($scope.currentUser._id, 'toHist', 0, 0, 0, $scope.final, $scope.currentUser.cart).then(function(response){
+      Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        for (var i = 0; i < $scope.users.length; i++) {
+          if($scope.users[i].name === $scope.currentUser.name){
+            $scope.currentUser = $scope.users[i];
+            break;
+          }
+        }
+        //console.log($scope.currentUser);
+        if ($scope.currentUser == null) {
+          $scope.result = "Incorrect Username or Password";
+        }
+        else{
+          $scope.result = "";
+        }
+
+        if (typeof(Storage) !== "undefined") {
+          var curr = $scope.currentUser;
+          //console.log(curr);
+
+          // Store
+          sessionStorage.setItem("current", JSON.stringify(curr));
+        } 
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
+
+        console.log($scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id);
+        var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
+        $scope.transID = cartID.substr(18, 6).toUpperCase();
+
+        $scope.finalPrice();
+
+      }, function(error) {
+          console.log('Unable to retrieve listings:', error);
+        });
+      });       
+        
+    }
+
     $scope.deleteListing = function(id) {
 	   /**TODO
         Delete the article using the Listings factory. If the removal is successful,
@@ -708,8 +761,11 @@ console.log($scope.newItem.price);
       this.users.splice(id, 1);
     };
 
+
     $scope.showDetails = function(index) {
+	
       $scope.detailedInfo = $scope.users[index];
+	  console.log($scope.detailedInfo);
     };
   }
 ]);

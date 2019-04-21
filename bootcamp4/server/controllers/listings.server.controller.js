@@ -89,46 +89,90 @@ exports.read = function(req, res) {
 
 /* Update a listing */
 exports.update = function(req, res) {
-    var user = req.user;
-    //console.log("used");
-    /** TODO **/
-    /* Replace the article's properties with the new properties found in req.body */
-    /* Save the article */
-    /*
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.password = req.body.password;
-    user.phone = req.body.phone;
-    //listing.address = req.body.address;
-    user.save(function(err) {
-      if(err) {
-        console.log(err);
-        res.status(400).send(err);
-      }
-      else {
-        res.json(user);
-      }
-    });
-  */
+
+  var user = req.user;
+  //console.log("used");
+  /** TODO **/
+  /* Replace the article's properties with the new properties found in req.body */
+  /* Save the article */
+  /*
+  user.name = req.body.name;
+  user.email = req.body.email;
+  user.password = req.body.password;
+  user.phone = req.body.phone;
+  //listing.address = req.body.address;
+  user.save(function(err) {
+    if(err) {
+      console.log(err);
+      res.status(400).send(err);
+    }
+    else {
+      res.json(user);
+    }
+  });
+*/
+console.log(req.query.act);
 
 
 //changes action depending act set here and in controllers; necessary because there can be only one put function
     if (req.query.act == 'add') {
 //used to add to cart, can now take parameter!
-        User.findOneAndUpdate({name: user.name}, {
-            $addToSet: {
-                cart: {
-                    productC: req.query.product,
-                    quantity: req.query.amount,
-                    price: req.query.cost
-                }
-            }
-        }, function (err, user) {
 
-            if (err) {
-                console.log(err);
-                res.status(400).send(err);
-            } else {
+  console.log(user.name);
+  console.log(req.query.item);
+  console.log(req.query.product);
+  console.log(req.query.amount);
+  console.log(req.query.cost);
+  //console.log(user.orderHist[0]._id);
+/* 
+    User.findOneAndUpdate({ name: user.name, "orderHist._id": user.orderHist[user.orderHist.length-1]._id }, 
+      {$addToSet: {"orderHist.$.cart": {productC: req.query.product, quantity: req.query.amount, price: req.query.cost}} }, 
+      function(err, user) {
+
+      if(err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+      else{
+        
+      }
+    });
+    
+     
+    User.findOne({ name: user.name }, function (err, user) {
+      if (err) return handleError(err);
+      
+      else{
+        res.json(user);
+      }
+    });
+*/
+    User.findOneAndUpdate({ name: user.name }, 
+      {$push: {cart: {itemID: req.query.item, productC: req.query.product, quantity: req.query.amount, price: req.query.cost}} }, 
+      function(err, user) {
+
+      if(err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+      else{
+        
+      }
+    });
+    
+     
+    User.findOne({ name: user.name }, function (err, user) {
+      if (err) return handleError(err);
+      
+      else{
+        res.json(user);
+      }
+    });
+  
+  }
+  
+  //used to delete from cart
+  else if(req.query.act == 'delete'){
 
             }
         });
@@ -164,6 +208,70 @@ exports.update = function(req, res) {
         });
     }
 
+  });
+  }
+  else if(req.query.act == 'toHist'){
+    //console.log(user.name);
+    //console.log(req.query.cart);
+    var converted = JSON.parse(req.query.cart);
+    //console.log(converted[0].productC);
+    console.log(req.query.cost);
+    var final = req.query.cost.toString(req.query.cost);
+    console.log(final);
+//for (var i = Things.length - 1; i >= 0; i--) {
+//  Things[i]
+//}
+
+  for (var i = 0; i < converted.length; i++) {
+    //console.log(converted[i].itemID);
+    //console.log(converted[i].quantity);
+    //console.log(converted[i].itemID);
+    //console.log(product.itemname);
+    //var newQTY = product.itemqty - converted[i].quantity;
+            
+    User.findOneAndUpdate({ _id: converted[i].itemID }, { $inc: { itemqty: converted[i].quantity*-1 } }, function(err, user) {
+      if(err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+    });
+      
+
+    
+  }
+
+
+    User.findOneAndUpdate({ name: user.name }, { $push: {orderHist: {total: final, cart: converted} } }, function(err, user) {
+      if(err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+      else{
+        //console.log("got here");
+      }
+    });
+
+
+    User.findOneAndUpdate({ name: user.name }, { $set: {cart: [] } }, function(err, user) {
+      if(err) {
+        console.log(err);
+        res.status(400).send(err);
+      }
+      else{
+        //console.log("got here");
+      }
+    });    
+     
+    User.findOne({ name: user.name }, function (err, user) {
+      if (err) return handleError(err);
+      
+      else{
+        //console.log(user.name);
+        res.json(user);
+      }
+    });
+
+  }
 //used to change username in user page
     else if (req.query.act == 'newName') {
 

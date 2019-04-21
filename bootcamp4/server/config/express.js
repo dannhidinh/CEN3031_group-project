@@ -5,6 +5,7 @@ var path = require('path'),
     //cors = require('cors'),
     bodyParser = require('body-parser'),
     config = require('./config'),
+
     listingsRouter = require('../routes/listings.server.routes'),
     stripeRouter = require('../routes/card.server.routes'); // FOR STRIPE
 
@@ -32,7 +33,9 @@ module.exports.init = function() {
   /**
   Use the listings router for requests to the api */
 
+
    app.use('/api/users', listingsRouter);
+
 
   // STRIPE - API route
   app.use('/api/card', stripeRouter);

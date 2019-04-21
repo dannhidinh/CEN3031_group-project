@@ -48,15 +48,14 @@
 </header>
 
 <!-- MAIN PAGE CONTENT -->
-<body>
+<body ng-app="directoryApp" ng-controller="ListingsController">
 
 <!-- PRODUCTS -->
 		
 	<!-- Search Bar and Drop down choice. -->
 	<div class = "searchbar">
 		 <form action="/action_page.php">
-			<input type="text" placeholder="Search.." name="search">
-			<button type="submit"><i class="fa fa-search"></i></button>
+			<input type="text" placeholder="Search" ng-model="query">
 			
 			<select>
 				<option value="0">Bodega At Hub</option>
@@ -65,8 +64,27 @@
 		</form>
 	</div>
 	
-	
-	  <!-- First Photo Grid-->
+	<!-- Table of products -->
+    <div class="tableWrapper" >
+        <table class="table" id="atable">
+              <tr>
+                <th>Product</th>
+                <th>Quantity Available</th>
+                <th>Product Price</th>
+				<th>More Details</th>
+				<th>Add to Cart</th>
+              </tr>
+              <tr ng-repeat="user in users | filter: query" ng-show= "user.authority == 'product' && user.itemqty > 0" >
+                <td>{{user.itemname}}</td>
+                <td>{{user.itemqty}}</td>
+                <td>{{user.itemprice}}</td>
+				<td><button type="button"  data-toggle="modal" data-target="#myModal1" ng-click="showDetails($index)">More Details</button></td>
+				<td><button type="button"  ng-click="addToCart(user._id, user.itemname, 1, user.itemprice)">Add to Cart</button></td>
+              </tr>
+        </table>
+    </div>	
+		  
+<!-- 	  First Photo Grid
   <div class="photo_grid" id="food">
     <div class="card">
       <img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="80%" height="60%">
@@ -91,7 +109,7 @@
       <span class="item_name">Summer Salad</span>
 	  <button type="button" data-toggle="modal" data-target="#myModal4">More Details</button>
     </div>
-  </div>
+  </div> -->
 
 <!-- MAP -->
 	<div class="map-box-element">
@@ -108,55 +126,6 @@
 
 <!-- MODALS -->
 
-	<!-- Cart Modal -->
-	<div id="myModalcart" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<center><h4 class="modal-title">SHOPPING CART</h4></center>
-				</div>
-					<div class="modal-body">
-						    <div class='cartContent'>
-								<div class='loggedIn'>{{currentUser.name}} is Logged in!</div>
-						
-								<div class='infoContainer'>
-									<div class='cartHeaders'>
-										<div class='nameHeader'>Product</div> <!--Place item name data here in {}-->
-            							<div class='quantityHeader'>Quantity</div> <!--Place item description here in {}-->
-            							<div class='priceHeader'>Price</div> <!--Place item price data here in {}-->
-            							<div class='removeHeader'>Remove</div>
-        							</div>
-        						<div class='individualCartListing' ng-repeat= 'cart in currentUser.cart'> <!--Repeating Row-->
-         							 <div class='itemName'>{{cart.productC}}</div> <!--Place item name data here in {}-->
-         							 <div class='itemQuantity'>{{cart.quantity}}</div> <!--Place item description here in {}-->
-         							 <div class='listingPrice'>{{cart.price}}</div> <!--Place item price data here in {}-->
-         							 <div class='removeListingContainer'><button class='removeButton far fa-trash-alt'></button></div>
-        						</div>
-        						<div class='separateCalcRow'>
-          							<button class="calculate" ng-click='finalPrice()'>Done Ordering</button>
-          							  <div class="preTax">Before Tax: {{before}}</div>
-           							  <div class='taxInfo'>Tax: {{tax}}</div>
-           							  <div class='finalPrice'>Final: {{final}}</div>
-        						</div>
-      							</div>
-        
-								<!-- CHECKOUT API -->
-								<script src="https://checkout.stripe.com/checkout.js"></script>
-								<button class='order' id="buttonCheckout">Checkout</button>
-								<script src="card-stripe/checkout.js"></script>
-							</div>
-					</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-
-		</div>
-	</div>
-	
 	<!-- About Modal -->
 	<div id="myModalabout" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -222,50 +191,29 @@
 		</div>
 	</div>
 
-	<!-- Signup/Login Modal -->
-	<div id="myModalsignuplogin" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<center><h4 class="modal-title">SIGN UP AND LOG IN</h4></center>
-				</div>
-	 
-				<div class="modal-body">
-			
-					</div>
-	  
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- product 1 Modal -->
-	<div id="myModal1" class="modal fade" role="dialog">
+	<div id="myModal1" class="modal fade" role="dialog" ng-app="directoryApp" ng-controller="ListingsController">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Chicken and Veggies</h4>
+        <h4 class="modal-title">{{detailedInfo}}</h4>
       </div>
 	  <center>
-      <div class="modal-body">
-		<img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="396" height="354">
+	  {{detailedInfo}}
+      <div class="modal-body" style="color:black;">
 		<div class='productInfo'>
             <div class='productName'>
-              <span>Name: </span><span class='nameContent'>Chips and Queso</span>
+              <span>Product: </span><span class='nameContent'>{{detailedInfo.itemname}}</span>
             </div>
             <div class='productDescription'>
-              <span>Description: </span><span class='descriptionContent'>Yum!</span>
+              <span>Description: </span><span class='descriptionContent'>{{detailedInfo.desc}}</span>
             </div>
             <div class='productPrice'>
-              <span>Price: </span><span class='priceContent'>$5.00</span>
+              <span>Price: </span><span class='priceContent'>{{detailedInfo.itemprice}}</span>
             </div>
-            <button class='addToCart'>Add to My Cart</button>
           </div>
       </div>
 	  </center>
@@ -273,6 +221,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
+
 
   </div>
 </div>
@@ -322,7 +271,7 @@
       </div>
 	  <center>
       <div class="modal-body">
-		<img src="pictures/foods/Turkey with mash potatoes.jpg"" alt="product" width="396" height="354">
+		<img src="pictures/foods/Turkey with mash potatoes.jpg" alt="product" width="396" height="354">
 			<div class='productInfo'>
             <div class='productName'>
               <span>Name: </span><span class='nameContent'>Chips and Queso</span>
