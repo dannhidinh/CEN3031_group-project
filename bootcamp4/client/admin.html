@@ -2,14 +2,14 @@
 <html>
 	<head>
 	<title>BODEGA ADMIN</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="styles/admin.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-</head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="styles/admin.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+	</head>
 
 <header>
     <div class='topBar' ng-app="directoryApp" ng-controller="ListingsController">
@@ -33,7 +33,7 @@
 </header>
 
 <!-- !PAGE CONTENT! -->
-<body class="adminPage" ng-controller="ListingsController">
+<body class="adminPage" ng-app="directoryApp" ng-controller="ListingsController">
 	<span class="page-title"> ADMIN PAGE </span>
 
 	<div class="content-container">
@@ -132,7 +132,7 @@
 					<span class='signUpItem'>
 						<span class='fieldTitle'>Phone Number</span>
 						<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" ng-model="newUser.phone"/></span>
-						<button class='btn btn-primary signUpSubmit' ng-click='addListing()'>SIGN UP</button>
+						<button class='btn btn-primary signUpSubmit' ng-click='addVendor()'>SIGN UP</button>
 						{{upResult}}
 				</form>     
 				<!--<button class="test" ng-click="addToCart()">TESTS</button>-->                

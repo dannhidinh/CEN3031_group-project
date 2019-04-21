@@ -161,8 +161,16 @@ button{
 	float: center;
 	margin : auto;
 	width : 80%;
-	background-color: white;
+  background-color: white;
+  border: 3px outset #FCF3A2;
 }
+
+.tableHeaders{
+  border-bottom: 3px ridge #FCF3A2;
+  color: #FFFFFF;
+  background-color: #FC7869;
+}
+
 #atable tr:hover {background-color: #ddd;}
 
 #ctable th {

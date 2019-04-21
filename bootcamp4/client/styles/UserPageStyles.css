@@ -262,3 +262,7 @@
     cursor: pointer;
     border-radius: 5px;
   }
+
+  .tableWrapper{
+    width: inherit;
+  }
