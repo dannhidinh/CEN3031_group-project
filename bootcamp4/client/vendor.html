@@ -9,115 +9,123 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
 <head>
-	<br>
-	<br>
-	<center><img src = "pictures/BodegaLogo.png" alt ="Bodega Logo" width="196" height="154"></center>
 <!-- Top menu -->
-<div class="w3-main w3-content" style="max-width:1200px;margin-top:50px">
-	<div class="w3-bar w3-black w3-padding-16">
-		
-		<a href="index.html" class="w3-bar-item w3-button">HOME</a> 
-		<a href="#about" class="w3-bar-item w3-button">ABOUT</a>
-		<a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
-	
-		<input class="w3-input w3-third w3-border w3-round-large w3-light-gray" type="text" placeholder="Search..." style="black">
-		<i class="fa fa-search w3-xxlarge" ></i>
-		
-
-		<!--<i class="fa fa-shopping-cart w3-xxlarge" ></i> -->
-		<a href="LoginPage.html" class="w3-right w3-bar-item w3-button">LOG IN</a>
-		<!-- <i class="fa fa-sign-in w3-xxlarge" ></i> -->
-  </div>
-
-</div>
+	<div class='topBar'>
+		<img class='logo' src='./pictures/logo_transparent.svg' height='150px' width='150px'/>
+		<div class="navBar">
+			<button class="home-link"><a href="index.html">HOME</a></button>
+			<button class="about-link" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
+			<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
+			<button class="user-link"><a href="UserPage.html">MY INFO</a></button>
+			<button class="cart-link"><a href="CartPage.html">CART</a></button>
+			<!--<button class="cart-link" data-toggle="modal" data-target="#myModalcart">CART</a></button>-->
+			<button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
+		</div>
+	</div>
 </head>
-<body>
+<body ng-app="directoryApp">
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content " style="max-width:1200px;margin-top:50px" ng-controller="ListingsController">
-	<CENTER><H2> VENDOR PAGE </H2></CENTER>
-
-  
+	<div class="w3-container w3-light-gray" ng-show="user.authority == 'product'">
+		<h2>Vendor: {{user.ivenuser}}</h2>
+	</div>
       <!--inventory -->
   <div class="w3-row-padding w3-padding-16 w3-half">
-	<CENTER><h3>VENDOR INVENTORY</h3></CENTER>
-  	<table class="w3-table-all w3-card-4">
+	  <div class="w3-container w3-light-gray">
+		  <h2>Vendor Inventory</h2>
+	  </div>  	<table class="w3-table-all w3-card-4">
 		<tr>
-			<th>FOOD ID</th>
 			<th>NAME</th>
-			<th>QUANITY</th>
+			<th>QTY</th>
+			<th>Price</th>
 			<!-- ng repeat table -->
 			</tr>
-			<tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-                <td>{{listing.itemid}}</td>
-                <td>{{listing.name}}</td> 
-                <td>{{listing.quantity}}</td>
+			<tr ng-repeat="user in users | filter: query" ng-show="user.authority == 'product'" ng-click="showDetails($index)">
+                <td>{{user.itemname}}</td>
+                <td>{{user.itemqty}}</td>
+				<td>{{user.itemprice}}</td>
 		</tr>
 	</table>
   </div>
   
-  <!--ADD inventory -->
+  <!--Update inventory -->
   <div class="w3-row-padding w3-padding-16 w3-half">
-	<CENTER><h3>ADD PRODUCTS</h3></CENTER>
 	 <div class="w3-card-4">
 
 	<div class="w3-container w3-light-gray">
-		<h2>Product Additon Form</h2>
+		<h2>Product Update Form</h2>
 	</div>
 	<br>
-	<form class="w3-container">
+	<form class="w3-container" class='changeInfo' onsubmit="this.reset()">
 
-	<label>Product Name:</label>
-	<input class="w3-input" type="text">
+		<div class='changeName'>Change Name</div><input placeholder='{{detailedinfo.itemname}}' type='text'/>
+		<button class="changeName" ng-click="newItemName()">Change</button>
 
-	<label>Product Description:</label>
-	<input class="w3-input" type="text">
+		<div class='changeDesc'>Change Description</div><input type='text'/>
+		<button class="changeDesc" ng-click="newItemDesc()">Change</button>
 	
-	<label>Product Expiration:</label>
-	<input class="w3-input" type="text">
+		<div class='changeExp'>Change Exp Date</div><input type='date'/>
+		<button class="changeExp" ng-click="newItemExp()">Change</button>
+
+		<div class='changePrice'>Change Price</div><input type='number'/>
+		<button class="changePrice" ng-click="newItemPrice()">Change</button>
 	
-	<label>Product Price:</label>
-	<input class="w3-input" type="text">
-	
-	<label>Product Image:</label>
-	<input type="file" name="datasize" size="30">
+		<div class='submittedImg'>New Image</div><input type="file" name="datasize" size="30" /><!--Find dropImage API and place here-->
+
 	<br>
 
-</form>
-
-</div> 
-
+    </form>
   </div>
-  
+</div>
+
+	<!--ADD inventory -->
+	<div class="w3-row-padding w3-padding-16 w3-half">
+		<CENTER><h3>ADD PRODUCT</h3></CENTER>
+		<div class="w3-card-4">
+
+			<div class="w3-container w3-light-gray">
+				<h2>Product Addition Form</h2>
+			</div>
+			<br>
+			<form class="w3-container">
+
+				<label>Product Name:</label>
+				<input class="w3-input" type="text">
+
+				<label>Product Description:</label>
+				<input class="w3-input" type="text">
+
+				<label>Product Expiration:</label>
+				<input class="w3-input" type="text">
+
+				<label>Product Price:</label>
+				<input class="w3-input" type="text">
+
+				<label>Product Image:</label>
+				<input type="file" name="datasize" size="30">
+				<br>
+
+			</form>
+
+		</div>
+
+	</div>
+
   
   </div> <!-- END MAIN CONTENT -->
-   <br>
-   <br>
    
-  <!-- Footer -->
-  <footer class="w3-row-padding padding-32">
-    <div class="w3-third" >
-	<a name="about"></a> 
-      <center><h1>ABOUT</h1></center>
-      <center><p>	Collective & Co opened The Bodega marketplace September 2018 inside UF Innovate the Hub. The Bodega exists to provide a premiere lunch experience through fast and reliable service, exceptional customer-to-employee interactions, and high quality, locally-sourced prepared foods. Catering and group orders can be ordered by businesses around the Bodega by contacting bodegaGNV@gmail.com.</p></center>
-    </div>
-  
-    <div class="w3-third">
-	<a name="contact"></a> 
-      <center><h1>CONTACT US</h1></center>
-		<center><p>Collective & Co. Bodega Email : bodegaGNV@gmail.com. </p></center>
-    </div>
-	
-	<div class="w3-third">
-      <center><h1>SOCIAL MEDIA</h1>
-			<a href="#" class="fa fa-facebook w3-jumbo"></a>
-			<a href="#" class="fa fa-twitter w3-jumbo"></a>
-			<a href="#" class="fa fa-instagram w3-jumbo"></a>
-			</center>
-    </div>
-
-  </footer>
 
 <!-- End page content -->
-</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+<script src="https://code.angularjs.org/1.4.3/angular.js"></script>
+<!-- -->
+<script src="js/app.js"></script>
+<script src="js/factories/listingFactory.js"></script>
+<script src="js/controllers/listingController.js"></script>
+
 </body>
 </html>

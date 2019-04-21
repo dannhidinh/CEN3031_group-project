@@ -89,6 +89,7 @@ exports.read = function(req, res) {
 
 /* Update a listing */
 exports.update = function(req, res) {
+
   var user = req.user;
   //console.log("used");
   /** TODO **/
@@ -112,9 +113,11 @@ exports.update = function(req, res) {
 */
 console.log(req.query.act);
 
+
 //changes action depending act set here and in controllers; necessary because there can be only one put function
-if(req.query.act == 'add'){
+    if (req.query.act == 'add') {
 //used to add to cart, can now take parameter!
+
   console.log(user.name);
   console.log(req.query.item);
   console.log(req.query.product);
@@ -171,23 +174,40 @@ if(req.query.act == 'add'){
   //used to delete from cart
   else if(req.query.act == 'delete'){
 
-  User.findOneAndUpdate({ name: user.name }, { $pull: {cart: {_id: req.query.item}} }, function(err, user) {
-    if(err) {
-      console.log(err);
-      res.status(400).send(err);
+            }
+        });
+
+
+        User.findOne({name: user.name}, function (err, user) {
+            if (err) return handleError(err);
+
+            else {
+                res.json(user);
+            }
+        });
     }
-    else{
-      //console.log("got here");
+    //used to delete from cart
+    else if (req.query.act == 'delete') {
+
+        User.findOneAndUpdate({name: user.name}, {$pull: {cart: {_id: req.query.item}}}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+
+
+        User.findOne({name: user.name}, function (err, user) {
+            if (err) return handleError(err);
+
+            else {
+                res.json(user);
+            }
+        });
     }
-  });
-  
-   
-  User.findOne({ name: user.name }, function (err, user) {
-    if (err) return handleError(err);
-    
-    else{
-      res.json(user);
-    }
+
   });
   }
   else if(req.query.act == 'toHist'){
@@ -231,6 +251,7 @@ if(req.query.act == 'add'){
       }
     });
 
+
     User.findOneAndUpdate({ name: user.name }, { $set: {cart: [] } }, function(err, user) {
       if(err) {
         console.log(err);
@@ -252,88 +273,185 @@ if(req.query.act == 'add'){
 
   }
 //used to change username in user page
-  else if(req.query.act == 'newName'){
-  
-  var newName = req.query.product;
-  console.log(user.name);
-  console.log(newName);
-  
-  User.findOneAndUpdate({ name: user.name }, {name: newName}, function(err, user) {
-    if(err) {
-      console.log(err);
-      res.status(400).send(err);
+    else if (req.query.act == 'newName') {
+
+        var newName = req.query.product;
+        console.log(user.name);
+        console.log(newName);
+
+        User.findOneAndUpdate({name: user.name}, {name: newName}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+
+
+        User.findOne({email: user.email}, function (err, user) {
+            if (err) return handleError(err);
+
+            else {
+                console.log("new users name " + user.name);
+                res.json(user);
+            }
+        });
+
     }
-    else{
-      //console.log("got here");
-    }
-  });
-  
-   
-  User.findOne({ email: user.email }, function (err, user) {
-    if (err) return handleError(err);
-    
-    else{
-      console.log("new users name " + user.name);
-      res.json(user);
-    }
-  }); 
-     
-  }
 
 //used to change phone in userpage
-  else if(req.query.act == 'newTel'){
-  
-  var newTel = req.query.product;
-  
-  User.findOneAndUpdate({ name: user.name }, {phone: newTel}, function(err, user) {
-    if(err) {
-      console.log(err);
-      res.status(400).send(err);
+    else if (req.query.act == 'newTel') {
+
+        var newTel = req.query.product;
+
+        User.findOneAndUpdate({name: user.name}, {phone: newTel}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+
+
+        User.findOne({name: user.name}, function (err, user) {
+            if (err) return handleError(err);
+
+            else {
+                //console.log("new users name " + user.name);
+                res.json(user);
+            }
+        });
+
     }
-    else{
-      //console.log("got here");
-    }
-  });
-  
-   
-  User.findOne({ name: user.name }, function (err, user) {
-    if (err) return handleError(err);
-    
-    else{
-      //console.log("new users name " + user.name);
-      res.json(user);
-    }
-  }); 
-     
-  }  
 
 //used to change email in user page
-  else if(req.query.act == 'newMail'){
-  
-  var newMail = req.query.product;
-  
-  User.findOneAndUpdate({ name: user.name }, {email: newMail}, function(err, user) {
-    if(err) {
-      console.log(err);
-      res.status(400).send(err);
-    }
-    else{
-      //console.log("got here");
-    }
-  });
-  
-   
-  User.findOne({ name: user.name }, function (err, user) {
-    if (err) return handleError(err);
-    
-    else{
-      //console.log("new users name " + user.name);
-      res.json(user);
-    }
-  }); 
-     
-  } 
+    else if (req.query.act == 'newMail') {
 
+        var newMail = req.query.product;
+
+        User.findOneAndUpdate({name: user.name}, {email: newMail}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+
+
+        User.findOne({name: user.name}, function (err, user) {
+            if (err) return handleError(err);
+
+            else {
+                //console.log("new users name " + user.name);
+                res.json(user);
+            }
+        });
+
+    }
+/*
+// the following else blocks are used to change vendor fields
+    else if (req.query.act == 'newItemQty') {
+        var newiqty = req.query.item;
+//user is name of entire document (row) that contains users, vendors, items, transactions...)
+        User.findOneAndUpdate({_id: user._id}, {itemqty: newiqty}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+    } else if (req.query.act == 'newItemPrice') {
+        var newiprice = req.query.item;
+        User.findOneAndUpdate({_id: user._id}, {itemprice: newiprice}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+    } else if (req.query.act == 'newItemExp') {
+        var newiexp = req.query.item;
+//user is name of entire document (row) that contains users, vendors, items, transactions...)
+        User.findOneAndUpdate({_id: user._id}, {itemexp: newiexp}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+    } else if (req.query.act == 'newItemDesc') {
+        var newidesc = req.query.item;
+//user is name of entire document (row) that contains users, vendors, items, transactions...)
+        User.findOneAndUpdate({_id: user._id}, {itemdesc: newidesc}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+    } else if (req.query.act == 'newItemCode') {
+        var newicode = req.query.item;
+//user is name of entire document (row) that contains users, vendors, items, transactions...)
+        User.findOneAndUpdate({_id: user._id}, {itemcode: newicode}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+    } else if (req.query.act == 'newItemName') {
+        var newiname = req.query.item;
+//user is name of entire document (row) that contains users, vendors, items, transactions...)
+        User.findOneAndUpdate({_id: user._id}, {itemname: newiname}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+    } else if (req.query.act == 'newItemPic') {
+        var newipic = req.query.item;
+//user is name of entire document (row) that contains users, vendors, items, transactions...)
+        User.findOneAndUpdate({_id: user._id}, {itempic: newipic}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+    } else if (req.query.act == 'newIBodNum') {
+        var newibnum = req.query.item;
+//user is name of entire document (row) that contains users, vendors, items, transactions...)
+        User.findOneAndUpdate({_id: user._id}, {ibodnum: newibnum}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+    } else if (req.query.act == 'newIVenUser') {
+        var newiven = req.query.item;
+        User.findOneAndUpdate({_id: user._id}, {ivenuser: newiven}, function (err, user) {
+            if (err) {
+                console.log(err);
+                res.status(400).send(err);
+            } else {
+                //console.log("got here");
+            }
+        });
+    }
+*/
 };
 
 /* Delete a listing */

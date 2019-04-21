@@ -23,12 +23,18 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
 //adds product from homepage to curretUser's cart
   $scope.addProduct = function(){
-//console.log($scope.newItem.item);
-//console.log($scope.newItem.quant);
-//console.log($scope.newItem.cost);
 
-      Users.create({item: $scope.newItem.item, quant: $scope.newItem.quant, 
-      cost: $scope.newItem.cost, authority: 'product'}).then(function(response){
+console.log($scope.newItem.itemname);
+console.log($scope.newItem.itemqty);
+console.log($scope.newItem.itemprice);
+      console.log($scope.newItem.itempic);
+      console.log($scope.newItem.ibodnum);
+      console.log($scope.newItem.ivenuser);
+      Users.create({itemname: $scope.newItem.itemname, itemdesc: $scope.newItem.itemdesc, itemqty: $scope.newItem.itemqty,
+          itemexp: $scope.newItem.itemexp, itemcode: $scope.newItem.itemcode, itempic: $scope.newItem.itempic,
+          ibodnum: $scope.newItem.ibodnum, ivenuser: $scope.newItem.ivenuser,
+          itemprice: $scope.newItem.itemprice, authority: 'product'}).then(function(response){
+
       Users.getAll().then(function(response) {
           $scope.users = response.data;
           //console.log("here");
@@ -53,34 +59,37 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       }
     }
 
-    Users.update($scope.currentUser._id, 'newName', 0, 
-      name).then(function(response){
-    Users.getAll().then(function(response) {
-      $scope.users = response.data;
-      for (var i = 0; i < $scope.users.length; i++) {
-        if($scope.users[i].name === name){
-          $scope.currentUser = $scope.users[i];
-          break;
+  }
+//Uses the record id, action name, followed by values or variables to pass.
+      Users.update($scope.currentUser._id, 'newName', 0, 
+        name).then(function(response){
+      Users.getAll().then(function(response) {
+        $scope.users = response.data;
+        for (var i = 0; i < $scope.users.length; i++) {
+          if($scope.users[i].name === name){
+            $scope.currentUser = $scope.users[i];
+            break;
+          }
         }
-      }
-    //console.log($scope.currentUser);
-    if ($scope.currentUser == null) {
-      $scope.result = "Incorrect Username or Password";
-    }
-    else{
-      $scope.result = "";
-    }
+        //console.log($scope.currentUser);
+        if ($scope.currentUser == null) {
+          $scope.result = "Incorrect Username or Password";
+        }
+        else{
+          $scope.result = "";
+        }
+//this if else block controls passing of user between html pages
+        if (typeof(Storage) !== "undefined") {
+          var curr = $scope.currentUser;
+          //console.log(curr);
+          console.log($scope.currentUser.name);
+          // Store
+          sessionStorage.setItem("current", JSON.stringify(curr));
+        } 
+        else {
+          document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+        }
 
-    if (typeof(Storage) !== "undefined") {
-      var curr = $scope.currentUser;
-      //console.log(curr);
-      console.log($scope.currentUser.name);
-      // Store
-      sessionStorage.setItem("current", JSON.stringify(curr));
-    } 
-    else {
-      document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-    }
 
       //$scope.finalPrice();
 
@@ -89,6 +98,141 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       });
     }); 
   }
+
+    $scope.newItemName = function(iname){
+        console.log(iname);
+        if (iname == undefined || iname == ""){
+            return;
+        }
+        Users.update($scope.currentUser._id, 'newItemName', 0,
+            iname).then(function(response){
+            Users.getAll().then(function(response) {
+                $scope.users = response.data;
+            }, function(error) {
+                console.log('Unable to retrieve listings:', error);
+            });
+        });
+    }
+
+    $scope.newItemDesc = function(idesc){
+        console.log(idesc);
+        if (idesc == undefined || idesc == ""){
+            return;
+        }
+        Users.update($scope.currentUser._id, 'newItemDesc', 0,
+            idesc).then(function(response){
+            Users.getAll().then(function(response) {
+                $scope.users = response.data;
+            }, function(error) {
+                console.log('Unable to retrieve listings:', error);
+            });
+        });
+    }
+
+    $scope.newItemPrice = function(iprice){
+        console.log(iprice);
+        if (iprice == undefined || iprice == ""){
+            return;
+        }
+        Users.update($scope.currentUser._id, 'newItemPrice', 0,
+            iprice).then(function(response){
+            Users.getAll().then(function(response) {
+                $scope.users = response.data;
+            }, function(error) {
+                console.log('Unable to retrieve listings:', error);
+            });
+        });
+    }
+
+    $scope.newItemExp = function(iexp){
+        console.log(iexp);
+        if (iexp == undefined || iexp == ""){
+            return;
+        }
+        Users.update($scope.currentUser._id, 'newItemExp', 0,
+            iexp).then(function(response){
+            Users.getAll().then(function(response) {
+                $scope.users = response.data;
+            }, function(error) {
+                console.log('Unable to retrieve listings:', error);
+            });
+        });
+    }
+
+    $scope.newItemQty = function(iqty){
+        console.log(iqty);
+        if (iqty == undefined || iqty == ""){
+            return;
+        }
+        Users.update($scope.currentUser._id, 'newItemQty', 0,
+            iqty).then(function(response){
+            Users.getAll().then(function(response) {
+                $scope.users = response.data;
+            }, function(error) {
+                console.log('Unable to retrieve listings:', error);
+            });
+        });
+    }
+
+    $scope.newItemCode = function(icode){
+        console.log(icode);
+        if (icode == undefined || icode == ""){
+            return;
+        }
+        Users.update($scope.currentUser._id, 'newItemCode', 0,
+            icode).then(function(response){
+            Users.getAll().then(function(response) {
+                $scope.users = response.data;
+            }, function(error) {
+                console.log('Unable to retrieve listings:', error);
+            });
+        });
+    }
+
+    $scope.newItemPic = function(ipic){
+        console.log(ipic);
+        if (ipic == undefined || ipic == ""){
+            return;
+        }
+        Users.update($scope.currentUser._id, 'newItemPic', 0,
+            ipic).then(function(response){
+            Users.getAll().then(function(response) {
+                $scope.users = response.data;
+            }, function(error) {
+                console.log('Unable to retrieve listings:', error);
+            });
+        });
+    }
+
+    $scope.newIBodNum = function(ibnum){
+        console.log(ibnum);
+        if (ibnum == undefined || ibnum == ""){
+            return;
+        }
+        Users.update($scope.currentUser._id, 'newIBodNum', 0,
+            ibnum).then(function(response){
+            Users.getAll().then(function(response) {
+                $scope.users = response.data;
+            }, function(error) {
+                console.log('Unable to retrieve listings:', error);
+            });
+        });
+    }
+
+    $scope.newIVenUser = function(iven){
+        console.log(iven);
+        if (iven == undefined || iven == ""){
+            return;
+        }
+        Users.update($scope.currentUser._id, 'newIVenUser', 0,
+            iven).then(function(response){
+            Users.getAll().then(function(response) {
+                $scope.users = response.data;
+            }, function(error) {
+                console.log('Unable to retrieve listings:', error);
+            });
+        });
+    }
 
   $scope.newTel = function(tel){
       console.log(tel);
@@ -143,7 +287,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
     }
 
   }
-      Users.update($scope.currentUser._id, 'newMail', 0, 
+      Users.update($scope.currentUser._id, 'newMail', 0,
         newMail).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
