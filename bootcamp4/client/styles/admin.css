@@ -107,6 +107,9 @@
   color: white;
   font-weight: bold;
   font-size: 20px;
+  background-color: #FC7869;
+  border: 3px outset #FCF3A2;
+  min-width: 1000px;
 }
 
 .inventory-box, .users-box, .orders-box, .analytics-box{
