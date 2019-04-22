@@ -1,6 +1,7 @@
 
 var mongoose = require('mongoose'), 
 
+
     Schema = mongoose.Schema;
 
 
@@ -14,25 +15,18 @@ var userSchema = new Schema({
   email: String,
   phone: String,
   password: Number,
-  //orderHist: [ { Product : String, transaction : {type: Date}} ], //take out date, save id
+
 
   cart: [ { itemID: String, productC : String, quantity : Number, price : Number, trans: String} ], //make array of cards to get transaction ID for them, 
+
   orderHist: [ {total: String, cart: [ { itemID: String, productC : String, quantity : Number, price : Number, trans: String} ]} ],
   //save date for credit card, save total price
   //maybe make order history just a list of carts, not its own array.
   created_at: {type: Date},
   updated_at: {type: Date},
 
-  /* This Schema encompasses the inventory within the vendor at a bodega*/
-    itemname: {type: String, required: true},
-    itemdesc: String,
-    itemprice: Number,
-    itemexp: {type: Date},
-    itemqty: Number,
-    itemcode: String,
-    itempic: String,
-    ibodnum: {type: Number, required: true},
-    ivenuser: {type: String, required: true},
+
+
 
     itemname: {type: String},
     itemdesc: String,
@@ -65,4 +59,6 @@ userSchema.pre('save', function(next) {
 var User = mongoose.model('User', userSchema);
 
 /* Export the model to make it avaiable to other parts of your Node application */
+
 module.exports = User;
+

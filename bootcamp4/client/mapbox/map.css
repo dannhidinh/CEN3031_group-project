@@ -1,8 +1,6 @@
 body {
   margin:0;
   padding:0;
-
-
 }
 #map {
   position:absolute;
@@ -12,5 +10,6 @@ body {
 }
 .mapboxgl-popup {
   max-width: 400px;
-  font: 12/20px 'Helvetical Neue', Arial, Helvetica, sans-serif; 
+  font: 12/20px 'Helvetical Neue', Arial, Helvetica, sans-serif;
+  background-color: lightblue;
 }

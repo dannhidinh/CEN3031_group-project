@@ -13,6 +13,8 @@ module.exports.init = function() {
   //connect to database
   mongoose.connect(config.db.uri);
 
+
+
   //initialize app
   var app = express();
 
@@ -32,6 +34,7 @@ module.exports.init = function() {
 
   /**
   Use the listings router for requests to the api */
+
 
 
    app.use('/api/users', listingsRouter);

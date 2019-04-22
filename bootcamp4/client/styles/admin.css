@@ -87,7 +87,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   justify-content: center;
+
 
   width: 75%;
   height: 100%;
@@ -107,6 +109,11 @@
   color: white;
   font-weight: bold;
   font-size: 20px;
+
+  background-color: #FC7869;
+  border: 3px outset #FCF3A2;
+  min-width: 1000px;
+
 }
 
 .inventory-box, .users-box, .orders-box, .analytics-box{
@@ -127,6 +134,9 @@
   align-items: center;
   justify-content: space-evenly;
 
+  border-bottom: 3px outset #FCF3A2;
+
+
   width: 100%;
 }
 
@@ -137,23 +147,52 @@
   justify-content: space-evenly;
 
   margin: 10px 0;
-  
+
+
   width: 100%;
 }
 
-.inventory-header, .inventory-listing{
+.inventory-header {
   width: 33%;
+  color: #FFFFFF;
+  background-color: #FC7869;
+}
+.inventory-listing{
+  width: 33%;
+  border-bottom: 1px solid #E0E0E0;
 }
 
-.users-header, .users-listing{
+.users-header {
   width: 25%;
+  color: #FFFFFF;
+  background-color: #FC7869;
+}
+.users-listing{
+  width: 25%;
+  border-bottom: 1px solid #E0E0E0;
 }
 
-.orders-header, .orders-listing{
-  width: 20%;
+.orders-header {
+  width: 100%;
+  color: #FFFFFF;
+  background-color: #FC7869;
+}
+.orders-listing{
+  width: 33%;
+  color: #FFFFFF;
+  background-color: #FC7869;
+  border-bottom: 2px outset #FC7869;
 }
 
-.analytics-header, .analytics-listing{
+.analytics-header {
+  width: 33%;
+  color: #FFFFFF;
+  background-color: #FC7869;
+  border-bottom: 3px outset #FCF3A2;
+
+}
+.analytics-listing{
+
   width: 33%;
 }
 
@@ -212,4 +251,13 @@
   color: #FFFFFF;
   cursor: pointer;
   border-radius: 5px;
+
 }
+.tableWrapper{
+    width: inherit;
+}
+.order-subhead {
+  width: 25%;
+  background-color: #F5F5F5;
+}
+

@@ -62,7 +62,10 @@
 	<!-- Search Bar and Drop down choice. -->
 	<div class = "searchbar">
 		 <form action="/action_page.php">
-			<input type="text" placeholder="Search" ng-model="query">
+
+			<input type="text" placeholder="Search.." name="search">
+			<button type="submit"><i class="fa fa-search"></i></button>
+
 			
 			<select class="bodegaDropdown">
 				<option value="0">Bodega At Hub</option>
@@ -71,7 +74,8 @@
 			</select> 
 		</form>
 	</div>
-	
+
+
 	<!-- Table of products -->
     <div class="tableWrapper" >
         <table class="table" id="atable">
@@ -81,6 +85,7 @@
                 <th>Product Price</th>
 				<th>More Details</th>
 				<th>Add to Cart</th>
+
               </tr>
               <tr ng-repeat="user in users | filter: query" ng-show= "user.authority == 'product' && user.itemqty > 0" >
                 <td>{{user.itemname}}</td>
@@ -93,6 +98,7 @@
     </div>	
 		  
 <!-- 	  First Photo Grid
+
   <div class="photo_grid" id="food">
     <div class="card">
       <img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="80%" height="60%">
@@ -130,9 +136,22 @@
   </div>
 
 
+<!-- MAP -->
+	<div class="map-box-element">
+    <span class="map-title">BODEGAS NEAR YOU</span>
+		<div class="nearestBodega">
+		<link rel="mapStyle" href="mapbox/map.css">
+		<div id='map' style='width: 800px; height: 400px;'>
+			<script src="mapbox/map.js"></script>
+		</div>
+  </div>
+
+
+
 
 
 <!-- MODALS -->
+
 
 	<!-- About Modal -->
 	<div id="myModalabout" class="modal fade" role="dialog">
@@ -192,15 +211,18 @@
 					</form>
 				</div>
 	  
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
+
 		</div>
 	</div>
 
 	<!-- product 1 Modal -->
 	<div id="myModal1" class="modal fade" role="dialog" ng-app="directoryApp" ng-controller="ListingsController">
+
   <div class="modal-dialog">
 
     <!-- Modal content-->
