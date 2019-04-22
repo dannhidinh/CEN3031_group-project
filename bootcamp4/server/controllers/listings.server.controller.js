@@ -1,75 +1,16 @@
 /* Dependencies */
 var mongoose = require('mongoose'),
-    //{User, Product} = require('../models/listings.server.model.js');
     User = require('../models/listings.server.model.js');
-    //Produc = require('../models/listings.server.model.js');
-    //Data = require('../models/listings.server.model.js');
+
+
 console.log("Page used");
-/*
-  In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
-  On an error you should send a 404 status code, as well as the error message.
-  On success (aka no error), you should send the listing(s) as JSON in the response.
-
-  HINT: if you are struggling with implementing these functions, refer back to this tutorial
-  from assignment 3 https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
- */
- //console.log(Data.User);
-/*
-  Data.User.findOne({ name: 'Steven' }, function (err, usert) {
-    if (err) return handleError(err);
-
-    else{
-      console.log("found User: " + usert);
-      //res.json(usert);
-    }
-  });
 
 
-  Data.Product.findOne({ item: 'burgers' }, function (err, usert) {
-    if (err) return handleError(err);
-    
-
-    else{
-      console.log("found Product: " + usert);
-      //res.json(usert);
-    }
-
-  });  
-
-*/
-
-//var MongoClient = require('mongodb').MongoClient;
-//var url = "mongodb://127.0.0.1:27017/";
-/*
-//MongoClient.connect(db.uri, function(err, db) {
-  //if (err) throw err;
-  //var dbo = db("bodega_users");
-  db.uri.collection('users').aggregate([
-    { $lookup:
-       {
-         from: 'products',
-         localField: 'name',
-         foreignField: 'item',
-         as: 'prods'
-       }
-     }
-    ]).toArray(function(err, res) {
-    if (err) throw err;
-    console.log(JSON.stringify(res));
-    //db.close();
-  });
-//});
-*/
-/* Create a listing */
+//creates a new 'user'; could either actually be a user or a product
 exports.create = function(req, res) {
-  /* Instantiate a Listing */
-console.log("authority: " + req.body.authority);
-//  if(req.body.authority == 'product'){
-//    var user = new Product(req.body);
-//  }
-//  else
-    var user = new User(req.body);
-  /* Then save the listing */
+
+
+  var user = new User(req.body);
 
   user.save(function(err) {
     if(err) {
@@ -79,9 +20,6 @@ console.log("authority: " + req.body.authority);
       res.json(user);
     }
   });
-
-
-
 
 };
 
@@ -95,28 +33,6 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 
   var user = req.user;
-  //console.log("used");
-  /** TODO **/
-  /* Replace the article's properties with the new properties found in req.body */
-  /* Save the article */
-  /*
-  user.name = req.body.name;
-  user.email = req.body.email;
-  user.password = req.body.password;
-  user.phone = req.body.phone;
-  //listing.address = req.body.address;
-  user.save(function(err) {
-    if(err) {
-      console.log(err);
-      res.status(400).send(err);
-    }
-    else {
-      res.json(user);
-    }
-  });
-*/
-console.log(req.query.act);
-
 
 
 //changes action depending act set here and in controllers; necessary because there can be only one put function
@@ -124,11 +40,6 @@ console.log(req.query.act);
 //used to add to cart, can now take parameter!
 
 
-  console.log(user.name);
-  console.log(req.query.item);
-  console.log(req.query.product);
-  console.log(req.query.amount);
-  console.log(req.query.cost);
   //console.log(user.orderHist[0]._id);
 
 /* 

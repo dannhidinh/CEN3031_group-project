@@ -49,7 +49,7 @@ console.log($scope.newItem.itemprice);
       });
   }
 
-//method to change currentUser's username; also checks if new name is already in use
+//method to change currentUser's username; also checks if new name is already in use, cancels update if it is
   $scope.newName = function(name){
     console.log(name);
       if (name == undefined || name == ""){
@@ -65,7 +65,8 @@ console.log($scope.newItem.itemprice);
       }
     }
 
-//Uses the record id, action name, followed by values or variables to pass.
+//Passes the currentUser's id, action name, followed by values or variables to pass. 
+//(the '0' is to take up the unused ItemID parameter in listingFactory)
       Users.update($scope.currentUser._id, 'newName', 0, 
         name).then(function(response){
       Users.getAll().then(function(response) {
@@ -84,6 +85,7 @@ console.log($scope.newItem.itemprice);
           $scope.result = "";
         }
 //this if else block controls passing of user between html pages
+//updates sessionStorage with changed currentUser
         if (typeof(Storage) !== "undefined") {
           var curr = $scope.currentUser;
           //console.log(curr);
@@ -342,7 +344,7 @@ console.log($scope.newItem.itemprice);
 
   }
 
-//calculates price amounts when button is pressed
+//calculates price dynamically when item is added or removed to cart
     $scope.finalPrice = function(){
 
       
@@ -390,7 +392,7 @@ console.log($scope.newItem.itemprice);
 
     }
 
-//carries user between htmls
+//carries user between htmls; pulls currentUser data out of sessionStorage on page load
   window.addEventListener('DOMContentLoaded', (event) => {
 
 
@@ -434,6 +436,7 @@ console.log($scope.newItem.itemprice);
         $scope.finalPrice();
   });
 
+//effectively signs out user by making currentUser undefined and emptying sessionStorage
   $scope.signOut = function(){
     $scope.currentUser = undefined;
     sessionStorage.setItem("current", null);
@@ -441,17 +444,17 @@ console.log($scope.newItem.itemprice);
     $scope.result = "";
   }
 
-
+//logs in user by checking name/email and password
     $scope.loggedIn = function(testName, testPass){
 console.log("used");
 
-
-//console.log($scope.users[2].name);
+//prevents user from loggin in if another user is already logged in
         if ($scope.currentUser != null){
           $scope.result = "Sign out current user";
           return;
         }
 
+//hashes testPass in order to compare with pre-hashed passwords in database
         var hash = 0, i, chr;
         if (testPass.length === 0) return hash;
         for (i = 0; i < testPass.length; i++) {
@@ -460,6 +463,7 @@ console.log("used");
             hash |= 0; // Convert to 32bit integer
           }
 
+//looks for user that has a matching name and password, or email and password and sets them as currentUser
       for (var i = 0; i < $scope.users.length; i++) {
 
         if(($scope.users[i].name === testName && $scope.users[i].password === hash) || 
@@ -470,6 +474,7 @@ console.log("used");
         }
       }
 
+//error response if no users matched name/email and password
       if ($scope.currentUser == null) {
         $scope.result = "Incorrect Username/Email or Password";
       }
@@ -477,6 +482,7 @@ console.log("used");
         $scope.result = "";
       }
 
+//stores currentUser in sessionStorage to be carried between pages
       if (typeof(Storage) !== "undefined") {
         var curr = $scope.currentUser;
 
@@ -490,12 +496,10 @@ console.log("used");
       }
 
     };
-//adds new customer user; authority = 0
+
+//adds new permanent-customer user; authority = 'member'; addListing name is holdover from school assignment
     $scope.addListing = function() {
-	  /**TODO
-	  *Save the article using the Listings factory. If the object is successfully
-	  saved redirect back to the list page. Otherwise, display the error
-	    */
+
 //resets upResults between sign attempts
       $scope.upResult = "";
 
@@ -505,7 +509,9 @@ console.log("used");
         $scope.newUser.email == undefined || $scope.newUser.phone == undefined || $scope.newUser.vpassword == undefined){
           
 
-          $scope.upResult = "Fill in all fields";
+        $scope.upResult = "Fill in all fields";
+        //resets newUser between attempts
+
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
         $scope.newUser.vpassword = undefined;
@@ -516,36 +522,31 @@ console.log("used");
 
 
 
-//checks if name or email is already in database (maybe dont check name because people share names, 
+//checks if name or email is already in database
+      for (var i = 0; i < $scope.users.length; i++) {
+        if ($scope.users[i].name == $scope.newUser.name){
+          $scope.upResult = "User name is already in use";
+          $scope.newUser.name = undefined;
+          $scope.newUser.password = undefined;
+          $scope.newUser.vpassword = undefined;
+          $scope.newUser.email = undefined;
+          $scope.newUser.phone = undefined;      
+          return;
+        }
+        else if ($scope.users[i].email == $scope.newUser.email){
+          $scope.upResult = "Email is already in use";
+          $scope.newUser.name = undefined;
+          $scope.newUser.password = undefined;
+          $scope.newUser.vpassword = undefined;
+          $scope.newUser.email = undefined;
+          $scope.newUser.phone = undefined;      
+          return;
+        }
 
-//or treat as unique username)
-  for (var i = 0; i < $scope.users.length; i++) {
-    if ($scope.users[i].name == $scope.newUser.name){
-      $scope.upResult = "Name is already in use";
-        $scope.newUser.name = undefined;
-        $scope.newUser.password = undefined;
-        $scope.newUser.vpassword = undefined;
-        $scope.newUser.email = undefined;
 
-        $scope.newUser.phone = undefined;      
+      }
 
-      return;
-    }
-    else if ($scope.users[i].email == $scope.newUser.email){
-      $scope.upResult = "Email is already in use";
-        $scope.newUser.name = undefined;
-        $scope.newUser.password = undefined;
-        $scope.newUser.vpassword = undefined;
-        $scope.newUser.email = undefined;
-        $scope.newUser.phone = undefined;      
-
-      return;
-    }
-
-  }
-  console.log($scope.newUser.password);
-  console.log($scope.newUser.vpassword);
-
+//verifies password
   if ($scope.newUser.password != $scope.newUser.vpassword) {
     $scope.upResult = "Passwords did not match";
     return;
@@ -553,7 +554,6 @@ console.log("used");
 
 //converts incoming password to hashed number
       var testPass = $scope.newUser.password;
-      //console.log(testPass);
         var hash = 0, i, chr;
         if (testPass.length === 0) return hash;
         for (i = 0; i < testPass.length; i++) {
@@ -563,44 +563,27 @@ console.log("used");
           }
           $scope.newUser.password = hash;
 
-//original add code from Nhi, didn't seem to work
-/*
-      $scope.save = function(error) {
-        //console.log("used");
-        if(error) {
-          throw error;
-          console.log('Unable to add listing');
-        }
-      };
-      console.log($scope.newUser);
-      $scope.users.push($scope.newUser);
-      console.log($scope.users[3]);
-      $scope.newUser = {};
-*/
 
-
-//WHERE USER IS ACTUALLY ADDED DONT REMOVE
-
+//Where user is actually added
 
     Users.create({name: $scope.newUser.name, password: $scope.newUser.password, 
 
       email: $scope.newUser.email, phone: $scope.newUser.phone, authority: 'member'}).then(function(response){
       Users.getAll().then(function(response) {
           $scope.users = response.data;
-          //console.log("here");
-          //$scope.loggedIn($scope.newUser.name, testPass);
+
       }, function(error) {
           console.log('Unable to add user', error);
         });
 
       });    
      
-
+//logs user in after sucessful sign up
       if (typeof(Storage) !== "undefined") {
         var isNew = 'yes';
         $scope.newUser.password = testPass;
         var newInfo = $scope.newUser;
-//console.log("stores yes and info");
+
         // Store
         sessionStorage.setItem("checksIf", JSON.stringify(isNew));
         sessionStorage.setItem("info", JSON.stringify(newInfo));
@@ -610,147 +593,83 @@ console.log("used");
         document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
       }
       
-    //$scope.loggedIn($scope.newUser.name, testPass);
-  
 
-
-
+//reloads page to trigger log in
 
    document.location.reload(true);
 
-
-//resets newUser values between attempts
-    //$scope.newUser.name = undefined;
-    //$scope.newUser.password = undefined;
-    //$scope.newUser.email = undefined;
-    //$scope.newUser.phone = undefined;
-
-
     };
 
-//adds new customer user; authority = 0
+//adds vendor user; authority = 'vendor'; used by admin to create vendor users
 $scope.addVendor = function() {
-  /**TODO
-  *Save the article using the Listings factory. If the object is successfully
-  saved redirect back to the list page. Otherwise, display the error
-    */
+
 //resets upResults between sign attempts
-    $scope.upResult = "";
+  $scope.upResult = "";
 
 //checks if all fields got data
-    if ($scope.newUser.name == undefined || $scope.newUser.password == undefined || 
-      $scope.newUser.email == undefined || $scope.newUser.phone == undefined || $scope.newUser.vpassword == undefined){
-        
-        $scope.upResult = "Fill in all fields";
+  if ($scope.newUser.name == undefined || $scope.newUser.password == undefined || 
+    $scope.newUser.email == undefined || $scope.newUser.phone == undefined || $scope.newUser.vpassword == undefined){
+      
+    $scope.upResult = "Fill in all fields";
+    $scope.newUser.name = undefined;
+    $scope.newUser.password = undefined;
+    $scope.newUser.vpassword = undefined;
+    $scope.newUser.email = undefined;
+    $scope.newUser.phone = undefined;
+    return;
+  }
+
+
+//checks if name or email is already in database
+  for (var i = 0; i < $scope.users.length; i++) {
+    if ($scope.users[i].name == $scope.newUser.name){
+      $scope.upResult = "Name is already in use";
       $scope.newUser.name = undefined;
       $scope.newUser.password = undefined;
       $scope.newUser.vpassword = undefined;
       $scope.newUser.email = undefined;
-      $scope.newUser.phone = undefined;
+      $scope.newUser.phone = undefined;      
+      return;
+    }
+    else if ($scope.users[i].email == $scope.newUser.email){
+      $scope.upResult = "Email is already in use";
+      $scope.newUser.name = undefined;
+      $scope.newUser.password = undefined;
+      $scope.newUser.vpassword = undefined;
+      $scope.newUser.email = undefined;
+      $scope.newUser.phone = undefined;      
       return;
     }
 
-
-//checks if name or email is already in database (maybe dont check name because people share names, 
-//or treat as unique username)
-for (var i = 0; i < $scope.users.length; i++) {
-  if ($scope.users[i].name == $scope.newUser.name){
-    $scope.upResult = "Name is already in use";
-      $scope.newUser.name = undefined;
-      $scope.newUser.password = undefined;
-      $scope.newUser.vpassword = undefined;
-      $scope.newUser.email = undefined;
-      $scope.newUser.phone = undefined;      
-    return;
-  }
-  else if ($scope.users[i].email == $scope.newUser.email){
-    $scope.upResult = "Email is already in use";
-      $scope.newUser.name = undefined;
-      $scope.newUser.password = undefined;
-      $scope.newUser.vpassword = undefined;
-      $scope.newUser.email = undefined;
-      $scope.newUser.phone = undefined;      
-    return;
   }
 
-}
-console.log($scope.newUser.password);
-console.log($scope.newUser.vpassword);
-
-if ($scope.newUser.password != $scope.newUser.vpassword) {
-  $scope.upResult = "Passwords did not match";
-  return;
-}
+  if ($scope.newUser.password != $scope.newUser.vpassword) {
+    $scope.upResult = "Passwords did not match";
+    return;
+  }
 
 //converts incoming password to hashed number
-    var testPass = $scope.newUser.password;
-    //console.log(testPass);
-      var hash = 0, i, chr;
-      if (testPass.length === 0) return hash;
-      for (i = 0; i < testPass.length; i++) {
-        chr   = testPass.charCodeAt(i);
-          hash  = ((hash << 6) - hash) + chr;
-          hash |= 0; // Convert to 32bit integer
-        }
-        $scope.newUser.password = hash;
-
-//original add code from Nhi, didn't seem to work
-/*
-    $scope.save = function(error) {
-      //console.log("used");
-      if(error) {
-        throw error;
-        console.log('Unable to add listing');
-      }
-    };
-    console.log($scope.newUser);
-    $scope.users.push($scope.newUser);
-    console.log($scope.users[3]);
-    $scope.newUser = {};
-*/
-
-
-//WHERE USER IS ACTUALLY ADDED DONT REMOVE
+  var testPass = $scope.newUser.password;
+  var hash = 0, i, chr;
+  if (testPass.length === 0) return hash;
+  for (i = 0; i < testPass.length; i++) {
+    chr   = testPass.charCodeAt(i);
+      hash  = ((hash << 6) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+  $scope.newUser.password = hash;
 
   Users.create({name: $scope.newUser.name, password: $scope.newUser.password, 
     email: $scope.newUser.email, phone: $scope.newUser.phone, authority: 'vendor'}).then(function(response){
     Users.getAll().then(function(response) {
         $scope.users = response.data;
-        //console.log("here");
-        //$scope.loggedIn($scope.newUser.name, testPass);
+
     }, function(error) {
         console.log('Unable to add user', error);
       });
     });    
-   
-
-    if (typeof(Storage) !== "undefined") {
-      var isNew = 'yes';
-      $scope.newUser.password = testPass;
-      var newInfo = $scope.newUser;
-//console.log("stores yes and info");
-      // Store
-      sessionStorage.setItem("checksIf", JSON.stringify(isNew));
-      sessionStorage.setItem("info", JSON.stringify(newInfo));
-    } 
-    else {
-      document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-    }
-    
-  //$scope.loggedIn($scope.newUser.name, testPass);
-
-
-
 
  document.location.reload(true);
-
-
-//resets newUser values between attempts
-  //$scope.newUser.name = undefined;
-  //$scope.newUser.password = undefined;
-  //$scope.newUser.email = undefined;
-  //$scope.newUser.phone = undefined;
-
 
   };
     
@@ -759,22 +678,14 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
 //adds to cart and refreshes currentUser data
     $scope.addToCart = function(id, name, qty, cost){
 
-//console.log(id);
-//console.log(name);
-//console.log(qty);
-//console.log(cost);
-//var practice = JSON.stringify($scope.currentUser.orderHist[1].cart)
-//console.log($scope.currentUser.orderHist[0]._id);
 
-//var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
-//console.log(cartID);
-
-//Pass the specific id of the item gotten, name of item, qty wanted, and cost/item
+//Pass the specific id of the item gotten, name of item, qty wanted, and cost per item
 
       Users.update($scope.currentUser._id, 'add', id, 
 
         name, qty, cost).then(function(response){
       Users.getAll().then(function(response) {
+//gets updated version of user from data base, puts it in currentUser and in sessionStorage
         $scope.users = response.data;
         for (var i = 0; i < $scope.users.length; i++) {
           if($scope.users[i].name === $scope.currentUser.name){
@@ -782,17 +693,9 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
             break;
           }
         }
-        //console.log($scope.currentUser);
-        if ($scope.currentUser == null) {
-          $scope.result = "Incorrect Username or Password";
-        }
-        else{
-          $scope.result = "";
-        }
 
         if (typeof(Storage) !== "undefined") {
           var curr = $scope.currentUser;
-          //console.log(curr);
 
           // Store
           sessionStorage.setItem("current", JSON.stringify(curr));
@@ -814,13 +717,13 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
 
     }
 
+//removes specific item from cart
     $scope.removeFromCart = function(itemID){
-      //console.log($scope.currentUser._id);
-      //console.log(itemID);
-      //this.currentUser.cart.splice(itemID,1);
-      console.log("remove used");
+
+//passes currentUser's id in order to find right cart, 'delete' action to specify type of "update", and the ID of the item to be deleted
       Users.update($scope.currentUser._id, 'delete', itemID).then(function(response){
       Users.getAll().then(function(response) {
+//gets updated version of user from data base, puts it in currentUser and in sessionStorage        
         $scope.users = response.data;
         for (var i = 0; i < $scope.users.length; i++) {
           if($scope.users[i].name === $scope.currentUser.name){
@@ -828,17 +731,9 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
             break;
           }
         }
-        //console.log($scope.currentUser);
-        if ($scope.currentUser == null) {
-          $scope.result = "Incorrect Username or Password";
-        }
-        else{
-          $scope.result = "";
-        }
 
         if (typeof(Storage) !== "undefined") {
           var curr = $scope.currentUser;
-          //console.log(curr);
 
           // Store
           sessionStorage.setItem("current", JSON.stringify(curr));
@@ -855,21 +750,23 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
       }); 
     }
 
+//post-checkout database changes; puts cart in currentUser's order history, includes date of order, 
+//reduces quanitity of products in the database by which and how many were gotten in the order
     $scope.toHist = function(){
   
 
-  //JSON.parse(sessionStorage.getItem("current"))
+  //gets date and puts it into mm/dd/yyyy format
+
       var date = new Date;
       date = date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear();
-      //console.log(date);
 
+//stores date in cart
       for (var i = 0; i < $scope.currentUser.cart.length; i++) {
         $scope.currentUser.cart[i].trans = date;
         console.log($scope.currentUser.cart[i].trans);
       }
-      //var practice = JSON.stringify($scope.currentUser.cart);
-      //console.log(JSON.parse(practice));
 
+//**test code to get latest transaction ID without making a new order; might get reworked as a "I forgot my order ID and need to see it again" button
       if ($scope.currentUser.cart.length == 0) {
         console.log("Cart is empty");
         console.log($scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id);
@@ -878,9 +775,13 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
         return;
       }
 
-
+//passes currentUser's id, 'toHist' action, the final price of the order, and the current cart; 
+//the 0's are to fill the parameters to get $scope.currentUser.cart in the right parameter spot (needed to be passed as an array, see listingFactory)
+//$scope.final didn't necassarily need to be where it is but that variable in listingFactory is named 'cost' so I thought... 
+//I'd put it there for some consistency
       Users.update($scope.currentUser._id, 'toHist', 0, 0, 0, $scope.final, $scope.currentUser.cart).then(function(response){
       Users.getAll().then(function(response) {
+//gets updated user from database, stores it in currentUser and sessionStorage
         $scope.users = response.data;
         for (var i = 0; i < $scope.users.length; i++) {
           if($scope.users[i].name === $scope.currentUser.name){
@@ -888,17 +789,9 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
             break;
           }
         }
-        //console.log($scope.currentUser);
-        if ($scope.currentUser == null) {
-          $scope.result = "Incorrect Username or Password";
-        }
-        else{
-          $scope.result = "";
-        }
 
         if (typeof(Storage) !== "undefined") {
           var curr = $scope.currentUser;
-          //console.log(curr);
 
           // Store
           sessionStorage.setItem("current", JSON.stringify(curr));
@@ -909,7 +802,7 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
 
-        console.log($scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id);
+//generates order ID by getting mongoose generated ._id from the latest cart put in orderHist and saving the last six digits
         var cartID = $scope.currentUser.orderHist[$scope.currentUser.orderHist.length - 1]._id;
         $scope.transID = cartID.substr(18, 6).toUpperCase();
 
