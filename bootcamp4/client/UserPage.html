@@ -22,7 +22,9 @@
         <button class='signout' ng-click='signOut()'>
           <span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
         </button>
-      </div>
+
+      </div>  
+
     </div>
     <div class='userContent'>
       <div class='loggedIn'>{{currentUser.name}} is Logged in!</div>
@@ -36,15 +38,15 @@
           <span class="topTitle">ORDER HISTORY</span>
           <div class='listedItems'>
             <div class='itemHeaders'>
-              <div class='nameHeader'>Name</div>
-              <div class='dateHeader'>Date</div>
+              <div class='nameHeader'>Name</div> 
+              <div class='dateHeader'>Date</div> 
               <div class="qtyHeader">Quantity</div>
-              <div class='descriptionHeader'>Price</div>
+              <div class='descriptionHeader'>Price</div> 
+
               <!--<div class='reorderHeader'>Reorder</div>-->
             </div>
             <div class='tableWrapper' ng-repeat= 'orderHist in currentUser.orderHist'>
               <table class="table table-striped table-hover">
-
                 <tr ng-repeat= 'cart in orderHist.cart'>
                 <td class='itemName'>{{cart.productC}}</td> <!--Place item name data here in {}-->
                 <!--Place item last order data here in {}-->

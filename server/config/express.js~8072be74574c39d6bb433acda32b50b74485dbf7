@@ -24,8 +24,8 @@ module.exports.init = function() {
 
   /**
   Serve static files */
-  app.use('/', express.static(__dirname + '/../../client'));
-  app.use('/public', express.static(__dirname + '/../../public'));
+  app.use('/', express.static(path.join(__dirname, '/../../client')));
+  app.use('/public', express.static(path.join(__dirname, '/../../public')));
 
   /**
   Use the listings router for requests to the api */
@@ -33,9 +33,9 @@ module.exports.init = function() {
 
   /**
   Go to homepage for all routes not specified */
- app.get('*', function(req, res) {
-  res.redirect('/');
- });
+ //app.get('*', function(req, res) {
+ //  res.redirect('/');
+ //});
 
     app.all('/*', function(req, res) {
         res.sendFile(path.resolve('./client/index.html'));

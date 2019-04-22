@@ -2,6 +2,7 @@
 <html>
 	<head>
 	<title>BODEGA ADMIN</title>
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -13,6 +14,7 @@
 	<script src="js/factories/listingFactory.js"></script>
 	<script src="js/controllers/listingController.js"></script>
 </head>
+
 
 <header>
     <div class='topBar' ng-app="directoryApp" ng-controller="ListingsController">
@@ -31,7 +33,9 @@
 				<button class='signout' ng-click='signOut()'>
 					<span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
 				</button>
+
 			</div>
+
     </div>
 </header>
 
@@ -44,6 +48,7 @@
 			<!-- orders-->
 			<div class="orders-container" >
 					<span class="orders-title">ORDERS</span>
+
 					<input type="text" class="form-control" placeholder="search order history" ng-model="queryOrderHist">
 					<div class="orders-box">
 						<div class="orders-headers-container">
@@ -168,7 +173,7 @@
 					<span class='signUpItem'>
 						<span class='fieldTitle'>Phone Number</span>
 						<input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" ng-model="newUser.phone"/></span>
-						<button class='btn btn-primary signUpSubmit' ng-click='addListing()'>SIGN UP</button>
+						<button class='btn btn-primary signUpSubmit' ng-click='addVendor()'>SIGN UP</button>
 						{{upResult}}
 				</form>
 				<!--<button class="test" ng-click="addToCart()">TESTS</button>-->
@@ -188,3 +193,4 @@
 	<script src="js/factories/listingFactory.js"></script>
 	<script src="js/controllers/listingController.js"></script>
 </html>
+
