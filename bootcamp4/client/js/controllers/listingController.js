@@ -24,7 +24,8 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
   };
 
-//adds product from homepage to curretUser's cart
+//adds product from homepage to currentUser's cart
+
   $scope.addProduct = function(){
 
 console.log($scope.newItem.itemname);
@@ -35,7 +36,7 @@ console.log($scope.newItem.itemprice);
       console.log($scope.newItem.ivenuser);
       Users.create({itemname: $scope.newItem.itemname, itemdesc: $scope.newItem.itemdesc, itemqty: $scope.newItem.itemqty,
           itemexp: $scope.newItem.itemexp, itemcode: $scope.newItem.itemcode, itempic: $scope.newItem.itempic,
-          ibodnum: $scope.newItem.ibodnum, ivenuser: $scope.newItem.ivenuser,
+          ibodnum: $scope.newItem.ibodnum, ivenuser: $scope.currentUser.name,
           itemprice: $scope.newItem.itemprice, authority: 'product'}).then(function(response){
 
 
@@ -64,6 +65,7 @@ console.log($scope.newItem.itemprice);
         return;
       }
     }
+
 
 //Passes the currentUser's id, action name, followed by values or variables to pass. 
 //(the '0' is to take up the unused ItemID parameter in listingFactory)
