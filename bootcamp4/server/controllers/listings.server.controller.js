@@ -170,22 +170,6 @@ console.log(req.query.act);
     });
   
   }
-  
-  //used to delete from cart
-  else if(req.query.act == 'delete'){
-
-            }
-        });
-
-
-        User.findOne({name: user.name}, function (err, user) {
-            if (err) return handleError(err);
-
-            else {
-                res.json(user);
-            }
-        });
-    }
     //used to delete from cart
     else if (req.query.act == 'delete') {
 
@@ -207,9 +191,6 @@ console.log(req.query.act);
             }
         });
     }
-
-  });
-  }
   else if(req.query.act == 'toHist'){
     //console.log(user.name);
     //console.log(req.query.cart);

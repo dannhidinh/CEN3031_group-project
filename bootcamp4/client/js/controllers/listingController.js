@@ -58,8 +58,6 @@ console.log($scope.newItem.itemprice);
         return;
       }
     }
-
-  }
 //Uses the record id, action name, followed by values or variables to pass.
       Users.update($scope.currentUser._id, 'newName', 0, 
         name).then(function(response){

@@ -18,8 +18,8 @@
         <button class="home-link"><a href="index.html">HOME</a></button>
         <button class="about-link" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
 				<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
-        <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : 'UserPage.html')}}">MY INFO</a></button>
-        <button class="cart-link"><a href="CartPage.html">CART</a></button>
+        <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : (currentUser.authority == 'member' ? 'UserPage.html' : 'LoginPage.html'))}}">MY INFO</a></button>
+        <button class="cart-link"><a ng-href="{{currentUser != undefined ? 'CartPage.html' : 'LoginPage.html'}}">CART</a></button>
 		<!--<button class="cart-link" data-toggle="modal" data-target="#myModalcart">CART</a></button>-->
 				<button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
 			</div>
@@ -116,7 +116,7 @@
 		<div class="vendor-signup-container">
 			<div class='mySignUp' ng-controller="ListingsController">
 				<span class='signTitle'>SIGN UP</span>
-				<form class= 'signForm' id= "myForm" action="index.html" onsubmit="this.reset()">
+				<form class= 'signForm' id= "myForm" onsubmit="this.reset()">
 					<span class='signUpItem'>
 						<span class='fieldTitle'>Username</span>
 						<input type='text' ng-model="newUser.name"/></span>

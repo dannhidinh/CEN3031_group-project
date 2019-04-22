@@ -88,11 +88,15 @@
   .history{
     order: 1;
     display: flex;
-    flex-direction: column;;
+    flex-direction: column;
     justify-content: center;
     padding-top: 20px;
     width: 35%;
   } 
+
+  .transactionSearch{
+    width: 100%;
+  }
   
   .listedItems{
 
@@ -108,10 +112,25 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
 
     font-size: 1vw;
-    margin: 10px 0;
+    padding: 10px 0;
+  }
+
+  .itemName, .ordertime{
+    height: 100%;
+    width: 35%;
+  }
+
+  .productAmount, .productPrice{
+    height: 100%;
+    width: 15%;
+  }
+
+  .singleOrder{
+    border-bottom: 2px solid #D2D2D2;
+    padding: 10px 0;
   }
 
   .itemHeaders{
@@ -121,28 +140,19 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    font-size: 1.5vw;
+    justify-content: space-evenly;
+    font-size: 1vw;
     padding: 10px 0;
   }
 
-  .nameHeader, .dateHeader, .itemName, .orderDate{
+  .nameHeader, .dateHeader{
     height: 100%;
-    width: 25%;
+    width: 35%;
   }
 
-  .descriptionButton, .reorderButton, .descriptionHeader, .reorderHeader{
+  .qtyHeader, .priceHeader{
     height: 100%;
-    width: 25%;
-  }
-
-  .fa-info-circle, .fa-plus-circle{
-    border-radius: 50%;
-    border: 2px solid #FCF3A2;
-    color: #FC7869;
-
-    cursor: pointer;
-    outline: none;
+    width: 15%;
   }
 
   .userInfo{
