@@ -638,14 +638,21 @@ console.log("used");
       else
         return false;
     };
-    $scope.isOrderHist = function(index) {
-      if($scope.users[index].orderHist.total == "null")
-        return true;
-      else
-        return false;
+    $scope.getOrderDate = function(index) {
+      //get single order date
+      var transDate = $scope.user.orderHist.cart[index].trans;
+      var dates = {};
+      $(transdate).each(function(){
+          var text = $.trim($(this).text());
+          if(dates[text]){
+              $(this).remove();
+          } else {
+              dates[text] = true;
+          }
+      });
     };
 
-    // login page - for having a trigger thing
+    // login page - for having a trigger thing to tell user about password requirements
     // from www.java2s.com
     $(window).load(function() {
       $('input[type=password]').popover({trigger:'focus'});
