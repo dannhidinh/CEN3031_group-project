@@ -27,10 +27,12 @@
                 <th>quant</th>
                 <th>price</th>
               </tr>
+
               <tr ng-repeat="cart in currentUser.cart | filter: query" ng-click="showDetails($index)">
                 <td>{{cart.productC}}</td>
                 <td>{{cart.quantity}}</td>
                 <td>{{cart.price}}</td>
+
               </tr>
             </table>
           </div>
@@ -40,6 +42,7 @@
             quant: <input type="text" ng-model="newItem.quantity" /><br />
             price: <input type="text" ng-model="newItem.price" /><br />
             <button class="btn btn-primary" ng-click="addToCart()">Add Pseudo Product</button>
+
           </form>
         </div>
         <!--

@@ -24,6 +24,7 @@ color : black;
   align-items: center;
   color: #FFFFFF;
   border: 5px ridge #FCF3A2;
+
 }
 
 .logo{
@@ -176,10 +177,105 @@ button{
 #ctable th {
 
   background-color: #4CAF50;
+
   color: white;
+  max-height: 60%;
+  font-size: 1.3vw;
+}
+
+/* TOP BAR END */
+
+#food{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+
+  margin: 20px 0;
+}
+
+.card{
+  width: 22%;
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: #FC7869;
+
+  border: 3px outset #FCF3A2;
+  background-color: #FFFFFF;
+  text-align: center;
+
+  padding: 10px 0;
+}
+
+.item_name{
+  text-overflow: wrap;
+}
+
+button{
+  border: 2px outset #FCF3A2;
+  background-color: #FC7869;
+  color: #FFFFFF;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.map-box-element{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: #000000;
+
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.map-title{
+  margin-bottom: 20px;
+}
+
+#myModalabout, #myModalcontact{
+  color: black;
+}
+
+.sideButtons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  order: 3;
+}
+
+.signout{
+  border: 2px outset #FCF3A2;
+  background-color: #FC7869;
+  color: #FFFFFF;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.searchbar{
+	float:center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+
+}
+.searchbar input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+
 }
 /* table end */
-
-
-
 

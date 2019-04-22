@@ -2,13 +2,16 @@
 var mongoose = require('mongoose'),
     User = require('../models/listings.server.model.js');
 
+
 console.log("Page used");
+
 
 //creates a new 'user'; could either actually be a user or a product
 exports.create = function(req, res) {
 
+
   var user = new User(req.body);
-  
+
   user.save(function(err) {
     if(err) {
       console.log(err);
@@ -31,21 +34,26 @@ exports.update = function(req, res) {
 
   var user = req.user;
 
+
 //changes action depending act set here and in controllers; necessary because there can be only one put function
     if (req.query.act == 'add') {
 //used to add to cart, can now take parameter!
 
+
   //console.log(user.orderHist[0]._id);
+
 /* 
     User.findOneAndUpdate({ name: user.name, "orderHist._id": user.orderHist[user.orderHist.length-1]._id }, 
       {$addToSet: {"orderHist.$.cart": {productC: req.query.product, quantity: req.query.amount, price: req.query.cost}} }, 
       function(err, user) {
 
+
       if(err) {
         console.log(err);
         res.status(400).send(err);
       }
       else{
+
         
       }
     });
@@ -54,13 +62,16 @@ exports.update = function(req, res) {
     User.findOne({ name: user.name }, function (err, user) {
       if (err) return handleError(err);
       
+
       else{
         res.json(user);
       }
     });
 */
+
     User.findOneAndUpdate({ name: user.name }, 
       {$push: {cart: {itemID: req.query.item, productC: req.query.product, quantity: req.query.amount, price: req.query.cost}} }, 
+
       function(err, user) {
 
       if(err) {
@@ -68,6 +79,7 @@ exports.update = function(req, res) {
         res.status(400).send(err);
       }
       else{
+
         
       }
     });
@@ -76,10 +88,12 @@ exports.update = function(req, res) {
     User.findOne({ name: user.name }, function (err, user) {
       if (err) return handleError(err);
       
+
       else{
         res.json(user);
       }
     });
+
   
   }
   
@@ -103,6 +117,7 @@ exports.update = function(req, res) {
                 res.json(user);
             }
         });
+
   }
   else if(req.query.act == 'toHist'){
     //console.log(user.name);
@@ -110,8 +125,10 @@ exports.update = function(req, res) {
     var converted = JSON.parse(req.query.cart);
     //console.log(converted[0].productC);
     console.log(req.query.cost);
+
     var final = req.query.cost.toString();
     //final = "Total Price (w/tax): " + final;
+
     console.log(final);
 //for (var i = Things.length - 1; i >= 0; i--) {
 //  Things[i]
@@ -123,16 +140,14 @@ exports.update = function(req, res) {
     //console.log(converted[i].itemID);
     //console.log(product.itemname);
     //var newQTY = product.itemqty - converted[i].quantity;
-            
+
     User.findOneAndUpdate({ _id: converted[i].itemID }, { $inc: { itemqty: converted[i].quantity*-1 } }, function(err, user) {
       if(err) {
         console.log(err);
         res.status(400).send(err);
       }
     });
-      
 
-    
   }
 
 
@@ -155,11 +170,13 @@ exports.update = function(req, res) {
       else{
         //console.log("got here");
       }
+
     });    
      
     User.findOne({ name: user.name }, function (err, user) {
       if (err) return handleError(err);
       
+
       else{
         //console.log(user.name);
         res.json(user);
@@ -168,6 +185,7 @@ exports.update = function(req, res) {
 
   }
 //used to change username in user page
+
     else if (req.query.act == 'newName') {
 
         var newName = req.query.product;
@@ -347,6 +365,7 @@ exports.update = function(req, res) {
         });
     }
 */
+
 };
 
 /* Delete a listing */

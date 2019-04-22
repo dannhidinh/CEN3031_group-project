@@ -1,3 +1,4 @@
+
 // Dependencies
 var keyPublishable = 'pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a',
     keySecret = 'sk_test_5szqSVkKfzjcxPvMPFSBLMxB00iWi4Ie9i',
@@ -8,6 +9,7 @@ var keyPublishable = 'pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a',
 
 router.post("/charge", (req, res) => {
   //let amount = 999;
+
 
   stripe.customers.create({
     email: req.body.email,
@@ -26,5 +28,6 @@ router.post("/charge", (req, res) => {
     res.status(500).send({error: "Purchase Failed"});
   });
 });
+
 
 module.exports = router;
