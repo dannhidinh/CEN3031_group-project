@@ -5,10 +5,10 @@ angular.module('users', []).factory('Users', function($http) {
       return $http.get('http://localhost:8080/api/users');
 
     },
-  
+
   create: function(user) {
     return $http.post('http://localhost:8080/api/users', user);
-    }, 
+    },
 
     delete: function(id) {
       return $http.delete('http://localhost:8080/api/users/' + id);
@@ -19,9 +19,9 @@ angular.module('users', []).factory('Users', function($http) {
     },
 
 
-    update: function(id, action, itemID, newItem, newQuant, newPrice){
-      return $http.put('http://localhost:8080/api/users/' + id, {}, { params: { act: action, item: itemID, 
-        product: newItem, amount: newQuant, cost: newPrice } });
+    update: function(id, action, itemID, newItem, newQuant, newPrice, array){
+      return $http.put('http://localhost:8080/api/users/' + id, {}, { params: { act: action, item: itemID,
+        product: newItem, amount: newQuant, cost: newPrice, cart: [array] } });
 
     },
 
@@ -29,7 +29,7 @@ angular.module('users', []).factory('Users', function($http) {
     //  return $http.put('http://localhost:8080/api/users/' + id, {}, { params: { item: itemID } });
     //}
 
-    
+
 
   };
 

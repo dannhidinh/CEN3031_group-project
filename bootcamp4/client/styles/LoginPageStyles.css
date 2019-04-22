@@ -12,7 +12,7 @@
 
     background-image: linear-gradient(to bottom right, rgb(57, 226, 225), rgb(6, 81, 112));
   }
-  
+
   .topBar{
     order: 1;
     width: 100%;
@@ -23,11 +23,11 @@
     color: #FFFFFF;
     border: 5px ridge #FCF3A2;
   }
-  
+
   .logo{
     order: 1;
   }
-  
+
   .navBar{
     order: 2;
     width: 70%;
@@ -39,12 +39,12 @@
     justify-content: space-evenly;
     height: 75px;
   }
-  
+
   .home-link, .about-link, .contact-link, .cart-link, .login-link, .user-link{
     outline: none;
     background-color: transparent;
     border: none;
-    color: white;
+    color: #FFFFFF;
     max-height: 60%;
     font-size: 1.3vw;
   }
@@ -56,7 +56,6 @@
     align-items: center;
     justify-content: space-around;
   }
-  
 
   .formsContainer{
     width: 50%;
@@ -79,7 +78,7 @@
     color: #FC7869;
 
   }
-  
+
   .logForm{
     display: flex;
     flex-direction: column;
@@ -87,43 +86,33 @@
     justify-content: center;
     font-size: 14px;
   }
-  
+
   .logTitle{
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 40px;
   }
-  
+
   .logInItem{
     margin-top: 10px;
   }
-  
-  .logSubmit{
-    margin-top: 20px;
 
-    border: 2px outset #FCF3A2;
-    background-color: #FC7869;
-    color: #FFFFFF;
-    cursor: pointer;
-    border-radius: 5px;
-
-  }
 
   .signForm{
     display: flex;
     flex-direction: column;
   }
-  
+
   .signTitle{
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 40px;
   }
-  
+
   .fieldTitle{
     margin-right: 20px;
   }
-  
+
   .signUpItem{
     display: flex;
     flex-direction: row;
@@ -133,15 +122,6 @@
     margin-top: 10px;
   }
 
-  .signUpSubmit{
-    margin-top: 20px;
-
-    border: 2px outset #FCF3A2;
-    background-color: #FC7869;
-    color: #FFFFFF;
-    cursor: pointer;
-    border-radius: 5px;
-  }
 
   .sideButtons{
     display: flex;
@@ -153,6 +133,24 @@
   }
 
   .signout{
+    border: 2px outset #FCF3A2;
+    background-color: #FC7869;
+    color: #FFFFFF;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .signUpSubmit{
+    margin-top: 20px;
+    border: 2px outset #FCF3A2;
+    background-color: #FC7869;
+    color: #FFFFFF;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .logSubmit{
+    margin-top: 20px;
     border: 2px outset #FCF3A2;
     background-color: #FC7869;
     color: #FFFFFF;

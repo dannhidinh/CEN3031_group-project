@@ -1,14 +1,13 @@
 var path = require('path'),
     express = require('express'),
     mongoose = require('mongoose'),
-    stripe = require('stripe')('sk_test_5szqSVkKfzjcxPvMPFSBLMxB00iWi4Ie9i'),
     morgan = require('morgan'),
     //cors = require('cors'),
     bodyParser = require('body-parser'),
     config = require('./config'),
-    blistingsRouter = require('../routes/blistings.server.routes'),
+    //blistingsRouter = require('../routes/blistings.server.routes'),
     listingsRouter = require('../routes/listings.server.routes'),
-    cardRouter = require('../routes/card.server.routes');
+    stripeRouter = require('../routes/card.server.routes'); // FOR STRIPE
 
 module.exports.init = function() {
   //connect to database
@@ -35,9 +34,14 @@ module.exports.init = function() {
   /**
   Use the listings router for requests to the api */
 
-  app.use('/api/blistings', blistingsRouter);
+  //app.use('/api/blistings', blistingsRouter);
   app.use('/api/users', listingsRouter);
-  app.use('/api/card', cardRouter);
+
+  // STRIPE - API route
+  app.use('/api/card', stripeRouter);
+  // STRIPE - CRUD routes
+  app.use('/../routes', require('../routes/card.server.routes'));
+
 
 
   /**
