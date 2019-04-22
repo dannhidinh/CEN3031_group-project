@@ -22,6 +22,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
   };
 
 //adds product from homepage to currentUser's cart
+
   $scope.addProduct = function(){
 
 console.log($scope.newItem.itemname);
@@ -58,6 +59,7 @@ console.log($scope.newItem.itemprice);
         return;
       }
     }
+
 
 //Uses the record id, action name, followed by values or variables to pass.
       Users.update($scope.currentUser._id, 'newName', 0, 
@@ -891,7 +893,8 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
 	
       $scope.detailedInfo = $scope.users[index];
 
-      console.log($scope.detailedInfo);
+	  console.log($scope.detailedInfo);
+
     };
   }
 ]);
