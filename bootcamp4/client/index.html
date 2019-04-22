@@ -58,14 +58,11 @@
 <body ng-app="directoryApp" ng-controller="ListingsController">
 
 <!-- PRODUCTS -->
-		
+	<center><h4 style="color:white;font-weight: bold;">{{cartCheck}}</h4></center>
 	<!-- Search Bar and Drop down choice. -->
 	<div class = "searchbar">
 		 <form action="/action_page.php">
-
-			<input type="text" placeholder="Search.." name="search">
-			<button type="submit"><i class="fa fa-search"></i></button>
-
+			<input type="text" placeholder="Search" ng-model="query">
 			
 			<select class="bodegaDropdown">
 				<option value="0">Bodega At Hub</option>
@@ -74,57 +71,25 @@
 			</select> 
 		</form>
 	</div>
-
-
 	<!-- Table of products -->
     <div class="tableWrapper" >
         <table class="table" id="atable">
               <tr class="tableHeaders">
-                <th>Product</th>
-                <th>Quantity Available</th>
-                <th>Product Price</th>
-				<th>More Details</th>
-				<th>Add to Cart</th>
+                <th>PRODUCTS</th>
+				<th>DIVE DEEPER</th>
+				<th>PRICE TAG</th>
+				<th>ADD TO CART</th>
 
               </tr>
               <tr ng-repeat="user in users | filter: query" ng-show= "user.authority == 'product' && user.itemqty > 0" >
                 <td>{{user.itemname}}</td>
-                <td>{{user.itemqty}}</td>
-                <td>{{user.itemprice}}</td>
-				<td><button type="button"  data-toggle="modal" data-target="#myModal1" ng-click="showDetails($index)">More Details</button></td>
-				<td><button type="button"  ng-click="addToCart(user._id, user.itemname, 1, user.itemprice)">Add to Cart</button></td>
+				<td><button type="button" data-toggle="modal" data-target="#myModal1" ng-click="showDetails($index)">More Details</button></td>
+				<td>{{user.itemprice}}</td>
+				<td><button type="button"  ng-click="cartClick(user._id, user.itemname, 1, user.itemprice)">Add to Cart</button></td>
               </tr>
         </table>
     </div>	
 		  
-<!-- 	  First Photo Grid
-
-  <div class="photo_grid" id="food">
-    <div class="card">
-      <img src="pictures/foods/ChickenandVegies.jpg" alt="product" width="80%" height="60%">
-      <span class="item_name">Chicken and Veggies</span>
-      <button type="button"  data-toggle="modal" data-target="#myModal1">More Details</button>
-    </div>
-	
-     <div class="card">
-      <img src="pictures/foods/Mojo pork with rice and beans.jpg" alt="product" width="80%" height="60%" >
-      <span class="item_name">Mojo pork with rice and beans</span>
-	  <button type="button" data-toggle="modal" data-target="#myModal2">More Details</button>
-    </div>
-	
-    <div class="card">
-      <img src="pictures/foods/Turkey with mash potatoes.jpg" alt="product" width="80%" height="60%" >
-      <span class="item_name">Turkey with mash potatoes</span>
-	  <button type="button"  data-toggle="modal" data-target="#myModal3">More Details</button>
-    </div>
-	
-    <div class="card">
-      <img src="pictures/foods/Summer Salad.jpg" alt="product" width="80%" height="60%" >
-      <span class="item_name">Summer Salad</span>
-	  <button type="button" data-toggle="modal" data-target="#myModal4">More Details</button>
-    </div>
-  </div> -->
-
 <!-- MAP -->
 	<div class="map-box-element">
     <span class="map-title">BODEGAS NEAR YOU</span>
@@ -134,24 +99,8 @@
 			<script src="mapbox/map.js"></script>
 		</div>
   </div>
-
-
-<!-- MAP -->
-	<div class="map-box-element">
-    <span class="map-title">BODEGAS NEAR YOU</span>
-		<div class="nearestBodega">
-		<link rel="mapStyle" href="mapbox/map.css">
-		<div id='map' style='width: 800px; height: 400px;'>
-			<script src="mapbox/map.js"></script>
-		</div>
-  </div>
-
-
-
-
 
 <!-- MODALS -->
-
 
 	<!-- About Modal -->
 	<div id="myModalabout" class="modal fade" role="dialog">
@@ -185,6 +134,8 @@
 				</div>
 	 
 				<div class="modal-body">
+						<h4>BODEGA GAINESVILLE EMAIL : bodegaGNV@gmail.com</h4>
+						<p>  </p>
 					<form action="action_page.php">
 
 						<label for="fname">First Name</label>
@@ -211,28 +162,24 @@
 					</form>
 				</div>
 	  
-
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
-
 		</div>
 	</div>
 
-	<!-- product 1 Modal -->
-	<div id="myModal1" class="modal fade" role="dialog" ng-app="directoryApp" ng-controller="ListingsController">
-
+	<!-- product Modal -->
+	<div id="myModal1" class="modal fade" role="dialog" >
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="color:black;">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">{{detailedInfo}}</h4>
+        <center><h4>ABOUT THE PRODUCT</h4></center>
       </div>
 	  <center>
-	  {{detailedInfo}}
       <div class="modal-body" style="color:black;">
 		<div class='productInfo'>
             <div class='productName'>
@@ -241,6 +188,15 @@
             <div class='productDescription'>
               <span>Description: </span><span class='descriptionContent'>{{detailedInfo.desc}}</span>
             </div>
+			
+			<div class='productqty'>
+              <span>Quantity Left: </span><span class='priceqty'>{{detailedInfo.itemqty}}</span>
+            </div>
+			
+			<div class='productven'>
+              <span>Vendor: </span><span class='priceven'>{{detailedInfo.ivenuser}}</span>
+            </div>
+			
             <div class='productPrice'>
               <span>Price: </span><span class='priceContent'>{{detailedInfo.itemprice}}</span>
             </div>
@@ -251,109 +207,10 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
-
   </div>
 </div>
-	<!-- product2 Modal -->
-	<div id="myModal2" class="modal fade" role="dialog">
-  <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Mojo pork with rice and beans</h4>
-      </div>
-	  <center>
-      <div class="modal-body">
-		<img src="pictures/foods/Mojo pork with rice and beans.jpg" alt="product" width="396" height="354">
-			<div class='productInfo'>
-            <div class='productName'>
-              <span>Name: </span><span class='nameContent'>Chips and Queso</span>
-            </div>
-            <div class='productDescription'>
-              <span>Description: </span><span class='descriptionContent'>Yum!</span>
-            </div>
-            <div class='productPrice'>
-              <span>Price: </span><span class='priceContent'>$5.00</span>
-            </div>
-            <button class='addToCart'>Add to My Cart</button>
-          </div>
-      </div>
-	  </center>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-	
-  </div>
-</div>
-	<!-- product 3 Modal -->
-	<div id="myModal3" class="modal fade" role="dialog">
-  <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Turkey with mash potatoes</h4>
-      </div>
-	  <center>
-      <div class="modal-body">
-		<img src="pictures/foods/Turkey with mash potatoes.jpg" alt="product" width="396" height="354">
-			<div class='productInfo'>
-            <div class='productName'>
-              <span>Name: </span><span class='nameContent'>Chips and Queso</span>
-            </div>
-            <div class='productDescription'>
-              <span>Description: </span><span class='descriptionContent'>Yum!</span>
-            </div>
-            <div class='productPrice'>
-              <span>Price: </span><span class='priceContent'>$5.00</span>
-            </div>
-            <button class='addToCart'>Add to My Cart</button>
-          </div>
-      </div>
-	  </center>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-	<!-- product 4 Modal -->
-	<div id="myModal4" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Summer Salad</h4>
-      </div>
-	  <center>
-      <div class="modal-body">
-		<img src="pictures/foods/Summer Salad.jpg" alt="product" width="396" height="354">
-		<div class='productInfo'>
-            <div class='productName'>
-              <span>Name: </span><span class='nameContent'>Chips and Queso</span>
-            </div>
-            <div class='productDescription'>
-              <span>Description: </span><span class='descriptionContent'>Yum!</span>
-            </div>
-            <div class='productPrice'>
-              <span>Price: </span><span class='priceContent'>$5.00</span>
-            </div>
-            <button class='addToCart'>Add to My Cart</button>
-          </div>
-      </div>
-	  </center>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- SCRIPTS -->
 	 <!--cart-->
 	<script src="https://js.stripe.com/v3/"></script>
@@ -366,6 +223,7 @@
     <script src="js/app.js"></script>
     <script src="js/factories/listingFactory.js"></script>
     <script src="js/controllers/listingController.js"></script> 
+
 	
 </body>
 </html>

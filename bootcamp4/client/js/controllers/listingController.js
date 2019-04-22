@@ -837,6 +837,23 @@ $scope.addVendor = function() {
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.users[index];
     };
+	
+	$scope.cartClick = function(id, name, qty, cost)
+	{
+		$scope.cartCheck = undefined;
+		var cartCheck;
+		if($scope.currentUser.name != null)
+		{
+			console.log('yas');
+			$scope.cartCheck = "Just Added to Cart : " + name;
+			$scope.addToCart(id, name, qty, cost);
+		}
+		else 
+		{
+			console.log('test');
+			$scope.cartCheck = "Need to Sign In";
+		}
+	};
 
     // conditions for admin page views
     $scope.isMember = function(index) {
