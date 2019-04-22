@@ -1,5 +1,7 @@
 //var Data = require('../models/listings.server.model.js');
+
 angular.module('users').controller('ListingsController', ['$scope', 'Users',  
+
   function($scope, Users) {
     //var msg = require('../factories/listingFactory.js');
     /* Get all the listings, then bind it to the scope */
@@ -19,6 +21,7 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
       console.log(qty);
       console.log(cost);
 
+
   };
 
 //adds product from homepage to curretUser's cart
@@ -34,6 +37,7 @@ console.log($scope.newItem.itemprice);
           itemexp: $scope.newItem.itemexp, itemcode: $scope.newItem.itemcode, itempic: $scope.newItem.itempic,
           ibodnum: $scope.newItem.ibodnum, ivenuser: $scope.newItem.ivenuser,
           itemprice: $scope.newItem.itemprice, authority: 'product'}).then(function(response){
+
 
       Users.getAll().then(function(response) {
           $scope.users = response.data;
@@ -54,7 +58,9 @@ console.log($scope.newItem.itemprice);
 
     for (var i = 0; i < $scope.users.length; i++) {
       if ($scope.users[i].name == name){
+
         $scope.newResult = "Name is already in use";     
+
         return;
       }
     }
@@ -88,6 +94,7 @@ console.log($scope.newItem.itemprice);
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
+
 
 
       //$scope.finalPrice();
@@ -239,6 +246,7 @@ console.log($scope.newItem.itemprice);
         return;
       }
       Users.update($scope.currentUser._id, 'newTel', 0, 
+
         tel).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
@@ -262,7 +270,9 @@ console.log($scope.newItem.itemprice);
           //console.log($scope.currentUser.name);
           // Store
           sessionStorage.setItem("current", JSON.stringify(curr));
+
         } 
+
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
@@ -272,7 +282,9 @@ console.log($scope.newItem.itemprice);
       }, function(error) {
           console.log('Unable to retrieve listings:', error);
         });
+
       });     
+
   }
 
   $scope.newMail = function(newMail){
@@ -281,7 +293,9 @@ console.log($scope.newItem.itemprice);
     }
   for (var i = 0; i < $scope.users.length; i++) {
     if ($scope.users[i].email == newMail){
+
       $scope.newResult = "Email is already in use";      
+
       return;
     }
 
@@ -310,7 +324,9 @@ console.log($scope.newItem.itemprice);
           //console.log($scope.currentUser.name);
           // Store
           sessionStorage.setItem("current", JSON.stringify(curr));
+
         } 
+
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
@@ -320,16 +336,19 @@ console.log($scope.newItem.itemprice);
       }, function(error) {
           console.log('Unable to retrieve listings:', error);
         });
+
       });    
+
 
   }
 
 //calculates price amounts when button is pressed
     $scope.finalPrice = function(){
+
       
       var amount = 0;
       for (var i = 0; i < $scope.currentUser.cart.length; i++) {
-        
+
         amount += $scope.currentUser.cart[i].price * $scope.currentUser.cart[i].quantity;
       }
       $scope.before = amount.toFixed(2);
@@ -339,8 +358,8 @@ console.log($scope.newItem.itemprice);
 
       amount = amount + uftax;
       $scope.final = amount.toFixed(2);
-          
-      
+
+         
       // STRIPE - checkout form
       var checkoutHandler = StripeCheckout.configure({
         key: "pk_test_iTugFek1yZMY2i7fqgtKnauz00RFrdnY7a",
@@ -368,7 +387,7 @@ console.log($scope.newItem.itemprice);
             document.getElementById("shop").innerHTML = "<p>Purchase complete!</p>";
         })
       }
-      
+
     }
 
 //carries user between htmls
@@ -379,7 +398,9 @@ console.log($scope.newItem.itemprice);
           // Retrieve
           var isNew = JSON.parse(sessionStorage.getItem("checksIf"));
           var newInfo = JSON.parse(sessionStorage.getItem("info"));
+
         } 
+
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
@@ -393,7 +414,7 @@ console.log($scope.newItem.itemprice);
           }, function(error) {
             console.log('Unable to retrieve listings:', error);
           });
-        
+
         isNew = 'no';
         sessionStorage.setItem("checksIf", JSON.stringify(isNew));
       }
@@ -402,7 +423,9 @@ console.log($scope.newItem.itemprice);
       if (typeof(Storage) !== "undefined") {
           // Retrieve
           $scope.currentUser = JSON.parse(sessionStorage.getItem("current"));
+
         } 
+
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
@@ -438,7 +461,9 @@ console.log("used");
           }
 
       for (var i = 0; i < $scope.users.length; i++) {
+
         if(($scope.users[i].name === testName && $scope.users[i].password === hash) || 
+
           ($scope.users[i].email === testName && $scope.users[i].password === hash)){
           $scope.currentUser = $scope.users[i];
           break;
@@ -457,7 +482,9 @@ console.log("used");
 
         // Store
         sessionStorage.setItem("current", JSON.stringify(curr));
+
       } 
+
       else {
         document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
       }
@@ -473,9 +500,11 @@ console.log("used");
       $scope.upResult = "";
 
 //checks if all fields got data
+
       if ($scope.newUser.name == undefined || $scope.newUser.password == undefined || 
         $scope.newUser.email == undefined || $scope.newUser.phone == undefined || $scope.newUser.vpassword == undefined){
           
+
           $scope.upResult = "Fill in all fields";
         $scope.newUser.name = undefined;
         $scope.newUser.password = undefined;
@@ -486,7 +515,9 @@ console.log("used");
       }
 
 
+
 //checks if name or email is already in database (maybe dont check name because people share names, 
+
 //or treat as unique username)
   for (var i = 0; i < $scope.users.length; i++) {
     if ($scope.users[i].name == $scope.newUser.name){
@@ -495,7 +526,9 @@ console.log("used");
         $scope.newUser.password = undefined;
         $scope.newUser.vpassword = undefined;
         $scope.newUser.email = undefined;
+
         $scope.newUser.phone = undefined;      
+
       return;
     }
     else if ($scope.users[i].email == $scope.newUser.email){
@@ -505,6 +538,7 @@ console.log("used");
         $scope.newUser.vpassword = undefined;
         $scope.newUser.email = undefined;
         $scope.newUser.phone = undefined;      
+
       return;
     }
 
@@ -547,7 +581,9 @@ console.log("used");
 
 //WHERE USER IS ACTUALLY ADDED DONT REMOVE
 
+
     Users.create({name: $scope.newUser.name, password: $scope.newUser.password, 
+
       email: $scope.newUser.email, phone: $scope.newUser.phone, authority: 'member'}).then(function(response){
       Users.getAll().then(function(response) {
           $scope.users = response.data;
@@ -556,6 +592,7 @@ console.log("used");
       }, function(error) {
           console.log('Unable to add user', error);
         });
+
       });    
      
 
@@ -567,6 +604,7 @@ console.log("used");
         // Store
         sessionStorage.setItem("checksIf", JSON.stringify(isNew));
         sessionStorage.setItem("info", JSON.stringify(newInfo));
+
       } 
       else {
         document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
@@ -574,6 +612,7 @@ console.log("used");
       
     //$scope.loggedIn($scope.newUser.name, testPass);
   
+
 
 
 
@@ -716,6 +755,7 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
   };
     
 
+
 //adds to cart and refreshes currentUser data
     $scope.addToCart = function(id, name, qty, cost){
 
@@ -730,7 +770,9 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
 //console.log(cartID);
 
 //Pass the specific id of the item gotten, name of item, qty wanted, and cost/item
+
       Users.update($scope.currentUser._id, 'add', id, 
+
         name, qty, cost).then(function(response){
       Users.getAll().then(function(response) {
         $scope.users = response.data;
@@ -754,7 +796,9 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
 
           // Store
           sessionStorage.setItem("current", JSON.stringify(curr));
+
         } 
+
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
@@ -764,7 +808,9 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
       }, function(error) {
           console.log('Unable to retrieve listings:', error);
         });
+
       }); 
+
 
     }
 
@@ -796,6 +842,7 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
 
           // Store
           sessionStorage.setItem("current", JSON.stringify(curr));
+
         } 
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
@@ -810,6 +857,7 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
 
     $scope.toHist = function(){
   
+
   //JSON.parse(sessionStorage.getItem("current"))
       var date = new Date;
       date = date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear();
@@ -854,7 +902,9 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
 
           // Store
           sessionStorage.setItem("current", JSON.stringify(curr));
+
         } 
+
         else {
           document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
         }
@@ -868,8 +918,10 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
       }, function(error) {
           console.log('Unable to retrieve listings:', error);
         });
+
       });       
         
+
     }
 
     $scope.deleteListing = function(id) {
@@ -888,10 +940,34 @@ if ($scope.newUser.password != $scope.newUser.vpassword) {
 
 
     $scope.showDetails = function(index) {
-	
       $scope.detailedInfo = $scope.users[index];
-
-      console.log($scope.detailedInfo);
     };
+
+    // conditions for admin page views
+    $scope.isMember = function(index) {
+      if($scope.users[index].authority == "member")
+        return true;
+      else
+        return false;
+    };
+    $scope.isVendor = function(index) {
+      if($scope.users[index].authority == "vendor")
+        return true;
+      else
+        return false;
+    };
+    $scope.isProduct = function(index) {
+      if($scope.users[index].authority == "product")
+        return true;
+      else
+        return false;
+    };
+
+    // login page - for having a trigger thing to tell user about password requirements
+    // from www.java2s.com
+    $(window).load(function() {
+      $('input[type=password]').popover({trigger:'focus'});
+    });
+
   }
 ]);
