@@ -64,63 +64,79 @@
 	<div class="w3-container w3-light-gray">
 		<h2>Product Update Form</h2>
 	</div>
-	<br>
+		 <div ng-show="detailedInfo == undefined">
+		 </div>
+		 <div ng-show="detailedInfo != undefined">
 	<form class="w3-container" class='changeInfo' onsubmit="this.reset()">
 
-		<div class='changeName'>Change Name</div><input placeholder='{{detailedinfo.itemname}}' type='text'/>
-		<button class="changeName" ng-click="newItemName()">Change</button>
+		<div class='changeName'>Change Name</div>
+		<input newname ng-model="detailedInfo.itemname" ng-value="newname" type="text" required/>
+		<button class="changeName" ng-click="newItemName(detailedInfo.itemname)">Change</button>
 
-		<div class='changeDesc'>Change Description</div><input type='text'/>
+		<div class='changeDesc'>Change Description</div><input ng-model="detailedInfo.itemdesc" type='text'/>
 		<button class="changeDesc" ng-click="newItemDesc()">Change</button>
 	
-		<div class='changeExp'>Change Exp Date</div><input type='date'/>
+		<div class='changeExp'>Change Exp Date</div><input ng-model="detailedInfo.itemexp" type='date'/>
 		<button class="changeExp" ng-click="newItemExp()">Change</button>
 
-		<div class='changePrice'>Change Price</div><input type='number'/>
+		<div class='changePrice'>Change Price</div><input ng-model="detailedInfo.itemprice" type='number'/>
 		<button class="changePrice" ng-click="newItemPrice()">Change</button>
-	
-		<div class='submittedImg'>New Image</div><input type="file" name="datasize" size="30" /><!--Find dropImage API and place here-->
 
-	<br>
+		<div class='changePic'>Change Image</div><input ng-model="detailedInfo.itempic" type='text'>
+		<div class='submittedImg'></div><input type="file" name="datasize" size="30" />
+				<!--Find dropImage API and place here-->
 
     </form>
+		 </div>
   </div>
 </div>
 
 	<!--ADD inventory -->
 	<div class="w3-row-padding w3-padding-16 w3-half">
-		<CENTER><h3>ADD PRODUCT</h3></CENTER>
-		<div class="w3-card-4">
+			<div class="w3-card-4">
 
 			<div class="w3-container w3-light-gray">
 				<h2>Product Addition Form</h2>
 			</div>
-			<br>
-			<form class="w3-container">
-
-				<label>Product Name:</label>
-				<input class="w3-input" type="text">
-
-				<label>Product Description:</label>
-				<input class="w3-input" type="text">
-
-				<label>Product Expiration:</label>
-				<input class="w3-input" type="text">
-
-				<label>Product Price:</label>
-				<input class="w3-input" type="text">
-
-				<label>Product Image:</label>
-				<input type="file" name="datasize" size="30">
-				<br>
-
-			</form>
-
+                    <form name="newItem" ng-submit="addProduct()">
+                        <div class="form-group">
+                            <label for="itemname">Name: </label>
+                            <input id="itemname" class="form-control" ng-model="newItem.itemname" type="text" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemdesc">Descr: </label>
+                            <input id="itemdesc" class="form-control" ng-model="newItem.itemdesc" type="text">
+                        </div><br>
+                        <div class="form-inline"><div class="form-group">
+                            <label for="itemprice">Price:    </label>
+                            <input id="itemprice" class="form-control" ng-model="newItem.itemprice" type="number" step="0.01" placeholder="" required>
+                        </div>
+                            <div class="form-group">
+                                <label for="itemexp">Exp Date:  </label>
+                                <input id="itemexp" class="form-control" ng-model="newItem.itemexp" type="date">
+                            </div>
+                            <div class="form-group">
+                                <label for="itemqty">Qty:    </label>
+                                <input id="itemqty" class="form-control" ng-model="newItem.itemqty" type="number" placeholder="" required>
+                            </div></div>
+                        <div class="form-inline"><div class="form-group">
+                            <label for="itemcode">Lot Code:   </label>
+                            <input id="itemcode" class="form-control" ng-model="newItem.itemcode" type="text">
+                        </div><br>
+                            <div class="form-group">
+                                <label for="itempic">image file:  </label>
+                                <input id="itempic" class="form-control" ng-model="newItem.itempic" type="file">
+                            </div>
+                            <div class="form-group">
+                                <label for="ibodnum">Bodega Number:</label>
+                                <input id="ibodnum" class="form-control" ng-model="newItem.ibodnum" type="number" placeholder="" required>
+                            </div></div>
+                        <div class="form-group">
+                            <div><input type="submit" value="Submit"/></div></div>
+                    </form>
 		</div>
-
 	</div>
 
-  
   </div> <!-- END MAIN CONTENT -->
    
 
