@@ -158,7 +158,7 @@
   background-color: #FC7869;
 }
 .inventory-listing{
-  width: 33%;
+  width: 25%;
   border-bottom: 1px solid #E0E0E0;
 }
 
@@ -260,4 +260,7 @@
   width: 25%;
   background-color: #F5F5F5;
 }
-
+.popover {
+    top: !important;
+    left: !important;
+}
