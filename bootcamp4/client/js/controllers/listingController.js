@@ -124,7 +124,7 @@ console.log($scope.newItem.itemprice);
             });
         });
     }
-
+ 
     $scope.newItemDesc = function(idesc){
         console.log(idesc);
         if (idesc == undefined || idesc == ""){
