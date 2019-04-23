@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/vendor.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
@@ -17,12 +17,11 @@
       <div class="navBar">
         <button class="home-link"><a href="index.html">HOME</a></button>
         <button class="about-link" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
-				<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
+		    <button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
         <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : (currentUser.authority == 'member' ? 'UserPage.html' : 'LoginPage.html'))}}">MY INFO</a></button>
         <button class="cart-link"><a ng-href="{{currentUser != undefined ? 'CartPage.html' : 'LoginPage.html'}}">CART</a></button>
-		<!--<button class="cart-link" data-toggle="modal" data-target="#myModalcart">CART</a></button>-->
-				<button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
-			</div>
+		    <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
+		  </div>
 			<div class='sideButtons'>
 				Welcome {{currentUser.name}}!
 				<button class='signout' ng-click='signOut()'>
@@ -32,112 +31,127 @@
     </div>
 </header>
 
-<body ng-app="directoryApp">
+<body class="vendorPage" ng-app="directoryApp" ng-controller=ListingsController>
 <!-- !PAGE CONTENT! -->
-<div class="w3-main w3-content " style="max-width:1200px;margin-top:50px" ng-controller="ListingsController">
-	<div class="w3-container w3-light-gray" ng-show="user.authority == 'product'">
+<div class="mainInventory">
+  
+	<div class="vendorTitle" ng-show="user.authority == 'product'">
 		<h2>Vendor: {{user.ivenuser}}</h2>
 	</div>
       <!--inventory -->
-  <div class="w3-row-padding w3-padding-16 w3-half">
-	  <div class="w3-container w3-light-gray">
-		  <h2>Vendor Inventory</h2>
-	  </div>  	<table class="w3-table-all w3-card-4">
-		<tr>
-			<th>NAME</th>
-			<th>QTY</th>
-			<th>Price</th>
-			<!-- ng repeat table -->
-			</tr>
-			<tr ng-repeat="user in users | filter: query" ng-show="user.authority == 'product'" ng-click="showDetails($index)">
-                <td>{{user.itemname}}</td>
-                <td>{{user.itemqty}}</td>
-				<td>{{user.itemprice}}</td>
-		</tr>
-	</table>
+  <div class="inventory-container">
+	  <span class="inventoryTitle">Vendor Inventory</span>  	
+    <div class="inventory-content">
+      <div class="inventoryHeaders">
+        <div class="nameHeader">NAME</div>
+        <div class="qtyHeader">QTY</div>
+        <div class="priceHeader">Price</div>
+        <!-- ng repeat table -->
+      </div>
+      <div class="inventoryListings" ng-repeat="user in users | filter: query" ng-show="user.authority == 'product'" ng-click="showDetails($index)">
+        <div class="listingName">{{user.itemname}}</div>
+        <div class="listingQty">{{user.itemqty}}</div>
+        <div class="listingPrice">{{user.itemprice}}</div>
+      </div>
+	  </div>
   </div>
   
   <!--Update inventory -->
-  <div class="w3-row-padding w3-padding-16 w3-half">
-	 <div class="w3-card-4">
+  <div class="formsContainer">
+    <div class="updateForm">
 
-	<div class="w3-container w3-light-gray">
-		<h2>Product Update Form</h2>
-	</div>
-		 <div ng-show="detailedInfo == undefined">
-		 </div>
-		 <div ng-show="detailedInfo != undefined">
-	<form class="w3-container" class='changeInfo' onsubmit="this.reset()">
+      <div ng-show="detailedInfo == undefined">
+      </div>
+      <div ng-show="detailedInfo != undefined">
+        <span class="updateTitle">Product Update Form</span>
+        <form class="updateItem" class='changeInfo' onsubmit="this.reset()">
 
-		<div class='changeName'>Change Name</div>
-		<input newname ng-model="detailedInfo.itemname" ng-value="newname" type="text" required/>
-		<button class="changeName" ng-click="newItemName(detailedInfo.itemname)">Change</button>
+          <div class="updateFormItem">
+            <span class='update-form-prompt'>Name: </span>
+            <input class="update-form-control" newname ng-model="detailedInfo.itemname" ng-value="newname" type="text" required/>
+            <button class="changeName update-form-button" ng-click="newItemName(detailedInfo.itemname)">Change</button>
+          </div>
 
-		<div class='changeDesc'>Change Description</div><input ng-model="detailedInfo.itemdesc" type='text'/>
-		<button class="changeDesc" ng-click="newItemDesc()">Change</button>
-	
-		<div class='changeExp'>Change Exp Date</div><input ng-model="detailedInfo.itemexp" type='date'/>
-		<button class="changeExp" ng-click="newItemExp()">Change</button>
+          <div class="updateFormItem">
+            <span class='update-form-prompt'>Description: </span>
+            <input class="update-form-control" ng-model="detailedInfo.itemdesc" type='text'/>
+            <button class="changeDesc update-form-button" ng-click="newItemDesc()">Change</button>
+          </div>
+        
+          <div class="updateFormItem">
+            <span class='update-form-prompt'>Exp Date: </span>
+            <input class="update-form-control" ng-model="detailedInfo.itemexp" type='date'/>
+            <button class="changeExp update-form-button" ng-click="newItemExp()">Change</button>
+          </div>
 
-		<div class='changePrice'>Change Price</div><input ng-model="detailedInfo.itemprice" type='number'/>
-		<button class="changePrice" ng-click="newItemPrice()">Change</button>
+          <div class="updateFormItem">
+            <span class='update-form-prompt'>Price: </span>
+            <input class="update-form-control" ng-model="detailedInfo.itemprice" type='number'/>
+            <button class="changePrice update-form-button" ng-click="newItemPrice()">Change</button>
+          </div>
 
-		<div class='changePic'>Change Image</div><input ng-model="detailedInfo.itempic" type='text'>
-		<div class='submittedImg'></div><input type="file" name="datasize" size="30" />
-				<!--Find dropImage API and place here-->
+          <div class="updateFormItem">
+            <span class='update-form-prompt'>Image: </span>
+            <input class="update-form-control" ng-model="detailedInfo.itempic" type='file' name="datasize" size="30">
+            <!--Find dropImage API and place here-->
+          </div>     
 
-    </form>
-		 </div>
+        </form>
+      </div>
+    </div>
+
+	  <!--ADD inventory -->
+    <div class="addForm">
+
+      <span class="addTitle">Product Addition Form</span>
+      <form class="itemContent" name="newItem" ng-submit="addProduct()">
+
+        <div class="addFormItem">
+          <span class="add-form-prompt">Name: </span>
+          <input id="itemname" class="add-form-control" ng-model="newItem.itemname" type="text" placeholder="" required>
+        </div>
+
+        <div class="addFormItem">
+          <span class="add-form-prompt">Description: </span>
+          <input id="itemdesc" class="add-form-control" ng-model="newItem.itemdesc" type="text">
+        </div>
+
+        <div class="addFormItem">
+          <span class="add-form-prompt">Price: </span>
+          <input id="itemprice" class="add-form-control" ng-model="newItem.itemprice" type="number" step="0.01" placeholder="" required>
+        </div>
+
+        <div class="addFormItem">
+          <span class="add-form-prompt">Exp Date: </span>
+          <input id="itemexp" class="add-form-control" ng-model="newItem.itemexp" type="date">
+        </div>
+
+        <div class="addFormItem">
+          <span class="add-form-prompt">Qty: </span>
+          <input id="itemqty" class="add-form-control" ng-model="newItem.itemqty" type="number" placeholder="" required>
+        </div>
+
+        <div class="addFormItem">
+          <span class="add-form-prompt">Lot Code: </span>
+          <input id="itemcode" class="add-form-control" ng-model="newItem.itemcode" type="text">
+        </div>
+
+        <div class="addFormItem">
+          <span class="add-form-prompt">Image file: </span>
+          <input id="itempic" class="add-form-control" ng-model="newItem.itempic" type="file">
+        </div>
+
+        <div class="addFormItem">
+          <span class="add-form-prompt">Bodega Number: </span>
+          <input id="ibodnum" class="add-form-control" ng-model="newItem.ibodnum" type="number" placeholder="" required>
+        </div>
+
+        <input class="add-form-submit" type="submit" value="Submit"/>
+
+      </form>
+    </div>
   </div>
-</div>
-
-	<!--ADD inventory -->
-	<div class="w3-row-padding w3-padding-16 w3-half">
-			<div class="w3-card-4">
-
-			<div class="w3-container w3-light-gray">
-				<h2>Product Addition Form</h2>
-			</div>
-                    <form name="newItem" ng-submit="addProduct()">
-                        <div class="form-group">
-                            <label for="itemname">Name: </label>
-                            <input id="itemname" class="form-control" ng-model="newItem.itemname" type="text" placeholder="" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="itemdesc">Descr: </label>
-                            <input id="itemdesc" class="form-control" ng-model="newItem.itemdesc" type="text">
-                        </div><br>
-                        <div class="form-inline"><div class="form-group">
-                            <label for="itemprice">Price:    </label>
-                            <input id="itemprice" class="form-control" ng-model="newItem.itemprice" type="number" step="0.01" placeholder="" required>
-                        </div>
-                            <div class="form-group">
-                                <label for="itemexp">Exp Date:  </label>
-                                <input id="itemexp" class="form-control" ng-model="newItem.itemexp" type="date">
-                            </div>
-                            <div class="form-group">
-                                <label for="itemqty">Qty:    </label>
-                                <input id="itemqty" class="form-control" ng-model="newItem.itemqty" type="number" placeholder="" required>
-                            </div></div>
-                        <div class="form-inline"><div class="form-group">
-                            <label for="itemcode">Lot Code:   </label>
-                            <input id="itemcode" class="form-control" ng-model="newItem.itemcode" type="text">
-                        </div><br>
-                            <div class="form-group">
-                                <label for="itempic">image file:  </label>
-                                <input id="itempic" class="form-control" ng-model="newItem.itempic" type="file">
-                            </div>
-                            <div class="form-group">
-                                <label for="ibodnum">Bodega Number:</label>
-                                <input id="ibodnum" class="form-control" ng-model="newItem.ibodnum" type="number" placeholder="" required>
-                            </div></div>
-                        <div class="form-group">
-                            <div><input type="submit" value="Submit"/></div></div>
-                    </form>
-		</div>
-	</div>
-
-  </div> <!-- END MAIN CONTENT -->
+</div> <!-- END MAIN CONTENT -->
    
 
 <!-- End page content -->
