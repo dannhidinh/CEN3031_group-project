@@ -70,11 +70,12 @@
 	<form class="w3-container" class='changeInfo' onsubmit="this.reset()">
 
 		<div class='changeName'>Change Name</div>
-		<input newname ng-model="detailedInfo.itemname" ng-value="newname" type="text" required/>
-		<button class="changeName" ng-click="newItemName(detailedInfo.itemname)">Change</button>
+		<input ng-model="detailedInfo.itemname" newname="detailedInfo.itemname" type="text" required/>
+		<button class="changeName" ng-click="newItemName(newname)">Change</button>
 
-		<div class='changeDesc'>Change Description</div><input ng-model="detailedInfo.itemdesc" type='text'/>
-		<button class="changeDesc" ng-click="newItemDesc()">Change</button>
+		<div class='changeDesc'>Change Description</div>
+		<input class="form-control" ng-model="detailedInfo.itemdesc" id="desc2" ng-value="myForm.desc2" type='text'/>
+		<button class="changeDesc" ng-click="newItemDesc(myForm.desc2)">Change</button>
 	
 		<div class='changeExp'>Change Exp Date</div><input ng-model="detailedInfo.itemexp" type='date'/>
 		<button class="changeExp" ng-click="newItemExp()">Change</button>
