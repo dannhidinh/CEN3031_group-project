@@ -22,7 +22,7 @@
       <div class="navBar">
         <button class="home-link"><a href="index.html">HOME</a></button>
         <button class="about-link" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
-				<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
+		<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
         <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : (currentUser.authority == 'member' ? 'UserPage.html' : 'LoginPage.html'))}}">MY INFO</a></button>
         <button class="cart-link"><a ng-href="{{currentUser != undefined ? 'CartPage.html' : 'LoginPage.html'}}">CART</a></button>
 		<!--<button class="cart-link" data-toggle="modal" data-target="#myModalcart">CART</a></button>-->
@@ -192,6 +192,75 @@
 		</div>
 	</div>
 </body>
+
+<!-- MODALS -->
+
+	<!-- About Modal -->
+	<div id="myModalabout" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content" style="color:black;">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<center><h4 class="modal-title">ABOUT US</h4></center>
+				</div>
+				<div class="modal-body">
+						<h3>Collective & Co opened The Bodega marketplace September 2018 inside UF Innovate the Hub. The Bodega exists to provide a premiere lunch experience through fast and reliable service, exceptional customer-to-employee interactions, and high quality, locally-sourced prepared foods. Catering and group orders can be ordered by businesses around the Bodega.</h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Contact Modal -->
+	<div id="myModalcontact" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content" style="color:black;">
+				<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<center><h4 class="modal-title">CONTACT US</h4></center>
+				</div>
+	 
+				<div class="modal-body">
+						<h4>BODEGA GAINESVILLE EMAIL : bodegaGNV@gmail.com</h4>
+						<p>  </p>
+					<form action="action_page.php">
+
+						<label for="fname">First Name</label>
+						<br>
+						<input type="text" id="fname" name="firstname" placeholder="Your name..">
+						<br>
+						<label for="lname">Last Name</label>
+						<br>
+						<input type="text" id="lname" name="lastname" placeholder="Your last name..">
+						<br>
+						<label for="email">E-mail</label>
+						<br>
+						<input type="text" id="email" name="lastname" placeholder="Your Email">
+						<br>
+						<label for="subject">Subject</label>
+						<br>
+						<input type="text" id="subject" name="subject" placeholder="Subject here" style="width:500px;">
+						<br>
+						<label for="content" >Content</label>
+						<br>
+						<textarea id="content" name="content" placeholder="Write something.." style="height:200px; width:500px;"></textarea>
+						<br>
+						<input type="submit" value="Submit">
+					</form>
+				</div>
+	  
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<script src="https://js.stripe.com/v3/"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
