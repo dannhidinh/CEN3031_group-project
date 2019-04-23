@@ -56,8 +56,8 @@
 							<div class="orders-header">EMAIL</div>
 							<div class="orders-header">TOTAL PRICE (WITH TAX)</div>
 						</div>
-						<div class="tableWrapper" ng-show="isMember($index)" ng-repeat="orderUser in users" >
-							<div class="tableWrapper" ng-repeat="orderHist in orderUser.orderHist | filter: queryOrderHist">
+						<div class="tableWrapper" ng-show="orderUser.authority == 'member'" ng-repeat="orderUser in users | filter: queryOrderHist" >
+							<div class="tableWrapper" ng-repeat="orderHist in orderUser.orderHist">
 								<table class="table">
 									<td class="order-subhead">{{orderHist._id}}</td>
 									<td class="order-subhead">{{orderUser.name}}</td>
@@ -88,7 +88,7 @@
 					</div>
 					<div class="tableWrapper" >
 						<table class="table">
-							<tr ng-repeat="user in users | filter:queryInventory" ng-show="isProduct($index)">
+							<tr ng-repeat="user in users | filter:queryInventory" ng-show="user.authority == 'product'">
 								<td class="inventory-listing">{{user.itemname}}</td>
 								<td class="inventory-listing">{{user._id}}</td>
 								<td class="inventory-listing">{{user.itemqty}}</td>
@@ -112,7 +112,7 @@
 					</div>
 					<div class="tableWrapper" >
 						<table class="table">
-							<tr ng-repeat="user in users | filter:queryMembers" ng-show="isMember($index)">
+							<tr ng-repeat="user in users | filter:queryMembers" ng-show="user.authority == 'member'">
 								<td class="inventory-listing">{{user.name}}</td>
 								<td class="inventory-listing">{{user._id}}</td>
 								<td class="inventory-listing">{{user.email}}</td>
@@ -136,7 +136,7 @@
 					</div>
 					<div class="tableWrapper" >
 						<table class="table">
-							<tr ng-repeat="user in users | filter:queryVendors" ng-show="isVendor($index)">
+							<tr ng-repeat="user in users | filter:queryVendors" ng-show="user.authority == 'vendor'">
 								<td class="inventory-listing">{{user.name}}</td>
 								<td class="inventory-listing">{{user._id}}</td>
 								<td class="inventory-listing">{{user.email}}</td>

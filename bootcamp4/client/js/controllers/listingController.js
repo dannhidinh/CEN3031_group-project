@@ -837,26 +837,6 @@ $scope.addVendor = function() {
       $scope.detailedInfo = $scope.users[index];
     };
 
-    // conditions for admin page views
-    $scope.isMember = function(index) {
-      if($scope.users[index].authority == "member")
-        return true;
-      else
-        return false;
-    };
-    $scope.isVendor = function(index) {
-      if($scope.users[index].authority == "vendor")
-        return true;
-      else
-        return false;
-    };
-    $scope.isProduct = function(index) {
-      if($scope.users[index].authority == "product")
-        return true;
-      else
-        return false;
-    };
-
     // login page - for having a trigger thing to tell user about password requirements
     // from www.java2s.com
     $(window).load(function() {
