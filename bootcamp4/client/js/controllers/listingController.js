@@ -24,7 +24,8 @@ angular.module('users').controller('ListingsController', ['$scope', 'Users',
 
   };
 
-//adds product from homepage to curretUser's cart
+//adds product from homepage to currentUser's cart
+
   $scope.addProduct = function(){
 
 console.log($scope.newItem.itemname);
@@ -35,7 +36,7 @@ console.log($scope.newItem.itemprice);
       console.log($scope.newItem.ivenuser);
       Users.create({itemname: $scope.newItem.itemname, itemdesc: $scope.newItem.itemdesc, itemqty: $scope.newItem.itemqty,
           itemexp: $scope.newItem.itemexp, itemcode: $scope.newItem.itemcode, itempic: $scope.newItem.itempic,
-          ibodnum: $scope.newItem.ibodnum, ivenuser: $scope.newItem.ivenuser,
+          ibodnum: $scope.newItem.ibodnum, ivenuser: $scope.currentUser.name,
           itemprice: $scope.newItem.itemprice, authority: 'product'}).then(function(response){
 
 
@@ -65,7 +66,9 @@ console.log($scope.newItem.itemprice);
       }
     }
 
-//Passes the currentUser's id, action name, followed by values or variables to pass.
+
+
+//Passes the currentUser's id, action name, followed by values or variables to pass. 
 //(the '0' is to take up the unused ItemID parameter in listingFactory)
       Users.update($scope.currentUser._id, 'newName', 0,
         name).then(function(response){
@@ -836,6 +839,23 @@ $scope.addVendor = function() {
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.users[index];
     };
+	
+	$scope.cartClick = function(id, name, qty, cost)
+	{
+		$scope.cartCheck = undefined;
+		var cartCheck;
+		if($scope.currentUser.name != null)
+		{
+			console.log('yas');
+			$scope.cartCheck = "Just Added to Cart : " + name;
+			$scope.addToCart(id, name, qty, cost);
+		}
+		else 
+		{
+			console.log('test');
+			$scope.cartCheck = "Need to Sign In";
+		}
+	};
 
     // login page - for having a trigger thing to tell user about password requirements
     // from www.java2s.com

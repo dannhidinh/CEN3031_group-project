@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html>
+	<head>
 <title>BODEGA VENDOR</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
-<head>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+	</head>
 <!-- Top menu -->
-	<div class='topBar'>
-		<img class='logo' src='./pictures/logo_transparent.svg' height='150px' width='150px'/>
-		<div class="navBar">
-			<button class="home-link"><a href="index.html">HOME</a></button>
-			<button class="about-link" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
-			<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
-			<button class="user-link"><a href="UserPage.html">MY INFO</a></button>
-			<button class="cart-link"><a href="CartPage.html">CART</a></button>
-			<!--<button class="cart-link" data-toggle="modal" data-target="#myModalcart">CART</a></button>-->
-			<button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
-		</div>
-	</div>
-</head>
+<header>
+    <div class='topBar' ng-app="directoryApp" ng-controller="ListingsController">
+      <img class='logo' src='./pictures/logo_transparent.svg' height='150px' width='150px'/>
+      <div class="navBar">
+        <button class="home-link"><a href="index.html">HOME</a></button>
+        <button class="about-link" data-toggle="modal" data-target="#myModalabout">ABOUT</button>
+				<button class="contact-link" data-toggle="modal" data-target="#myModalcontact">CONTACT</button>
+        <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : (currentUser.authority == 'member' ? 'UserPage.html' : 'LoginPage.html'))}}">MY INFO</a></button>
+        <button class="cart-link"><a ng-href="{{currentUser != undefined ? 'CartPage.html' : 'LoginPage.html'}}">CART</a></button>
+		<!--<button class="cart-link" data-toggle="modal" data-target="#myModalcart">CART</a></button>-->
+				<button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
+			</div>
+			<div class='sideButtons'>
+				Welcome {{currentUser.name}}!
+				<button class='signout' ng-click='signOut()'>
+					<span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
+				</button>
+			</div>  
+    </div>
+</header>
+
 <body ng-app="directoryApp">
 <!-- !PAGE CONTENT! -->
 <div class="w3-main w3-content " style="max-width:1200px;margin-top:50px" ng-controller="ListingsController">
@@ -55,63 +64,79 @@
 	<div class="w3-container w3-light-gray">
 		<h2>Product Update Form</h2>
 	</div>
-	<br>
+		 <div ng-show="detailedInfo == undefined">
+		 </div>
+		 <div ng-show="detailedInfo != undefined">
 	<form class="w3-container" class='changeInfo' onsubmit="this.reset()">
 
-		<div class='changeName'>Change Name</div><input placeholder='{{detailedinfo.itemname}}' type='text'/>
-		<button class="changeName" ng-click="newItemName()">Change</button>
+		<div class='changeName'>Change Name</div>
+		<input newname ng-model="detailedInfo.itemname" ng-value="newname" type="text" required/>
+		<button class="changeName" ng-click="newItemName(detailedInfo.itemname)">Change</button>
 
-		<div class='changeDesc'>Change Description</div><input type='text'/>
+		<div class='changeDesc'>Change Description</div><input ng-model="detailedInfo.itemdesc" type='text'/>
 		<button class="changeDesc" ng-click="newItemDesc()">Change</button>
 	
-		<div class='changeExp'>Change Exp Date</div><input type='date'/>
+		<div class='changeExp'>Change Exp Date</div><input ng-model="detailedInfo.itemexp" type='date'/>
 		<button class="changeExp" ng-click="newItemExp()">Change</button>
 
-		<div class='changePrice'>Change Price</div><input type='number'/>
+		<div class='changePrice'>Change Price</div><input ng-model="detailedInfo.itemprice" type='number'/>
 		<button class="changePrice" ng-click="newItemPrice()">Change</button>
-	
-		<div class='submittedImg'>New Image</div><input type="file" name="datasize" size="30" /><!--Find dropImage API and place here-->
 
-	<br>
+		<div class='changePic'>Change Image</div><input ng-model="detailedInfo.itempic" type='text'>
+		<div class='submittedImg'></div><input type="file" name="datasize" size="30" />
+				<!--Find dropImage API and place here-->
 
     </form>
+		 </div>
   </div>
 </div>
 
 	<!--ADD inventory -->
 	<div class="w3-row-padding w3-padding-16 w3-half">
-		<CENTER><h3>ADD PRODUCT</h3></CENTER>
-		<div class="w3-card-4">
+			<div class="w3-card-4">
 
 			<div class="w3-container w3-light-gray">
 				<h2>Product Addition Form</h2>
 			</div>
-			<br>
-			<form class="w3-container">
-
-				<label>Product Name:</label>
-				<input class="w3-input" type="text">
-
-				<label>Product Description:</label>
-				<input class="w3-input" type="text">
-
-				<label>Product Expiration:</label>
-				<input class="w3-input" type="text">
-
-				<label>Product Price:</label>
-				<input class="w3-input" type="text">
-
-				<label>Product Image:</label>
-				<input type="file" name="datasize" size="30">
-				<br>
-
-			</form>
-
+                    <form name="newItem" ng-submit="addProduct()">
+                        <div class="form-group">
+                            <label for="itemname">Name: </label>
+                            <input id="itemname" class="form-control" ng-model="newItem.itemname" type="text" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemdesc">Descr: </label>
+                            <input id="itemdesc" class="form-control" ng-model="newItem.itemdesc" type="text">
+                        </div><br>
+                        <div class="form-inline"><div class="form-group">
+                            <label for="itemprice">Price:    </label>
+                            <input id="itemprice" class="form-control" ng-model="newItem.itemprice" type="number" step="0.01" placeholder="" required>
+                        </div>
+                            <div class="form-group">
+                                <label for="itemexp">Exp Date:  </label>
+                                <input id="itemexp" class="form-control" ng-model="newItem.itemexp" type="date">
+                            </div>
+                            <div class="form-group">
+                                <label for="itemqty">Qty:    </label>
+                                <input id="itemqty" class="form-control" ng-model="newItem.itemqty" type="number" placeholder="" required>
+                            </div></div>
+                        <div class="form-inline"><div class="form-group">
+                            <label for="itemcode">Lot Code:   </label>
+                            <input id="itemcode" class="form-control" ng-model="newItem.itemcode" type="text">
+                        </div><br>
+                            <div class="form-group">
+                                <label for="itempic">image file:  </label>
+                                <input id="itempic" class="form-control" ng-model="newItem.itempic" type="file">
+                            </div>
+                            <div class="form-group">
+                                <label for="ibodnum">Bodega Number:</label>
+                                <input id="ibodnum" class="form-control" ng-model="newItem.ibodnum" type="number" placeholder="" required>
+                            </div></div>
+                        <div class="form-group">
+                            <div><input type="submit" value="Submit"/></div></div>
+                    </form>
 		</div>
-
 	</div>
 
-  
   </div> <!-- END MAIN CONTENT -->
    
 
