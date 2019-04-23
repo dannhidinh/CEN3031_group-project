@@ -15,8 +15,8 @@
         <button class="home-link"><a href="index.html">HOME</a></button>
         <button class="about-link"><a href="#about">ABOUT</a></button>
         <button class="contact-link"><a href="#contact">CONTACT</a></button>
-        <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : 'UserPage.html')}}">MY INFO</a></button>
-        <button class="cart-link"><a href="CartPage.html">CART</a></button>
+        <button class="user-link"><a ng-href="{{currentUser.authority == 'admin' ? 'admin.html' : (currentUser.authority == 'vendor' ? 'vendor.html' : (currentUser.authority == 'member' ? 'UserPage.html' : 'LoginPage.html'))}}">MY INFO</a></button>
+        <button class="cart-link"><a ng-href="{{currentUser != undefined ? 'CartPage.html' : 'LoginPage.html'}}">CART</a></button>
         <button class="login-link"><a href="LoginPage.html">LOG IN / SIGN UP</a></button>
       </div>
       <div class='sideButtons'>
@@ -24,7 +24,7 @@
         <button class='signout' ng-click='signOut()'>
           <span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
         </button>
-      </div>  
+      </div>
     </div>
     <div class='cartContent'>
       <div class='loggedIn'>{{currentUser.name}} is Logged in!</div>
@@ -56,13 +56,11 @@
       </div>
       <div class='bottomButtons'>
         <button class='backToProducts'><a href='index.html' >Go Back To Shopping</a></button>
-<a href="orgindex.html" class="w3-right w3-bar-item w3-button">test add</a>
 		 <!-- CHECKOUT API -->
        <!-- <div class='payment' id='finalPayment'ng-click='finalPrice()'>Total Payment: ${{final}}</div> -->
         <script src="https://checkout.stripe.com/checkout.js"></script>
-        <button class='order' id="buttonCheckout" ng-click='finalPrice()'><a href="charge.html">Checkout</button>
-        <button class='fakeorder' id="fakeCheckout" ng-click='toHist()'>psuedo-Checkout</button>
-{{transID}}
+        <button class='order' id="buttonCheckout" ng-click='finalPrice()'>Checkout</button>
+        <div class="orderIDPopup">Your Order ID: {{transID}}</div>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
