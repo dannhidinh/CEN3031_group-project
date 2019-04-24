@@ -31,20 +31,20 @@
 				<button class='signout' ng-click='signOut()'>
 					<span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
 				</button>
-			</div>  
+			</div>
     </div>
 </header>
 
 <body class="vendorPage" ng-app="directoryApp" ng-controller=ListingsController>
 <!-- !PAGE CONTENT! -->
 <div class="mainInventory">
-  
+
 	<div class="vendorTitle" ng-show="user.authority == 'product'">
 		<h2>Vendor: {{user.ivenuser}}</h2>
 	</div>
       <!--inventory -->
   <div class="inventory-container">
-	  <span class="inventoryTitle">Vendor Inventory</span>  	
+	  <span class="inventoryTitle">Vendor Inventory</span>
     <div class="inventory-content">
       <div class="inventoryHeaders">
         <div class="nameHeader">NAME</div>
@@ -59,7 +59,7 @@
       </div>
 	  </div>
   </div>
-  
+
   <!--Update inventory -->
   <div class="formsContainer">
     <div class="updateForm">
@@ -81,7 +81,7 @@
             <input class="update-form-control" ng-model="detailedInfo.itemdesc" type='text'/>
             <button class="changeDesc update-form-button" ng-click="newItemDesc()">Change</button>
           </div>
-        
+
           <div class="updateFormItem">
             <span class='update-form-prompt'>Exp Date: </span>
             <input class="update-form-control" ng-model="detailedInfo.itemexp" type='date'/>
@@ -98,7 +98,7 @@
             <span class='update-form-prompt'>Image: </span>
             <input class="update-form-control" ng-model="detailedInfo.itempic" type='file' name="datasize" size="30">
             <!--Find dropImage API and place here-->
-          </div>     
+          </div>
 
         </form>
       </div>
@@ -131,8 +131,8 @@
         </div>
 
         <div class="addFormItem">
-          <span class="add-form-prompt">Qty: </span>
-          <input id="itemqty" class="add-form-control" ng-model="newItem.itemqty" type="number" placeholder="" required>
+          <span class="add-form-prompt">Quantity: </span>
+          <input id="itemqty" class="add-form-control" ng-model="newItem.itemqty" type="number" min="1" max="1000000000000000000000" placeholder="" required>
         </div>
 
         <div class="addFormItem">
@@ -153,6 +153,7 @@
         <input class="add-form-submit" type="submit" value="Submit"/>
 
       </form>
+
     </div>
   </div>
 </div> <!-- END MAIN CONTENT -->
@@ -189,7 +190,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<center><h4 class="modal-title">CONTACT US</h4></center>
 				</div>
-	 
+
 				<div class="modal-body">
 						<h4>BODEGA GAINESVILLE EMAIL : bodegaGNV@gmail.com</h4>
 						<p>  </p>
@@ -218,14 +219,14 @@
 						<input type="submit" value="Submit">
 					</form>
 				</div>
-	  
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
-   
+
 
 <!-- End page content -->
 
