@@ -10,4 +10,4 @@ Product Manager - Teresa Ferguson\
 Scrum Master - Steven Polk\
 Developer - Nhi Dinh\
 Developer - Matthew Hennig\
-Developer - Michael Roberts Jr.\
+Developer - Michael Roberts Jr.
