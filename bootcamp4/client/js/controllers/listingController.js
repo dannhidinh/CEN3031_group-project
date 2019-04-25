@@ -32,11 +32,11 @@ console.log($scope.newItem.itemname);
 console.log($scope.newItem.itemqty);
 console.log($scope.newItem.itemprice);
       console.log($scope.newItem.itempic);
-      console.log($scope.newItem.ibodnum);
+      console.log($scope.value);
       console.log($scope.newItem.ivenuser);
       Users.create({itemname: $scope.newItem.itemname, itemdesc: $scope.newItem.itemdesc, itemqty: $scope.newItem.itemqty,
           itemexp: $scope.newItem.itemexp, itemcode: $scope.newItem.itemcode, itempic: $scope.newItem.itempic,
-          ibodnum: $scope.newItem.ibodnum, ivenuser: $scope.currentUser.name,
+          ibodnum: $scope.value, ivenuser: $scope.currentUser.name,
           itemprice: $scope.newItem.itemprice, authority: 'product'}).then(function(response){
 
 
@@ -110,15 +110,21 @@ console.log($scope.newItem.itemprice);
     });
   }
 
-    $scope.newItemName = function(iname){
-        console.log(iname);
-        if (iname == undefined || iname == ""){
+    $scope.newItemName = function(newItemName){
+        console.log(newItemName);
+        if (newItemName == undefined || newItemName == ""){
             return;
         }
-        Users.update($scope.currentUser._id, 'newItemName', 0,
-            iname).then(function(response){
+        Users.update($scope.detailedInfo._id, 'newItemName', 0,
+            newItemName).then(function(response){
             Users.getAll().then(function(response) {
                 $scope.users = response.data;
+ //               for (var i = 0; i < $scope.users.length; i++) {
+ //                   if($scope.users[i].itemname === $scope.currentUser.itemname){
+ //                       $scope.currentUser = $scope.users[i];
+ //                       break;
+ //                   }
+ //               }
             }, function(error) {
                 console.log('Unable to retrieve listings:', error);
             });
