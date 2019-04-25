@@ -33,7 +33,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 
   var user = req.user;
-
+    console.log(user);
 
 //changes action depending act set here and in controllers; necessary because there can be only one put function
     if (req.query.act == 'add') {
@@ -264,12 +264,12 @@ exports.update = function(req, res) {
         });
 
     }
-/*
+
 // the following else blocks are used to change vendor fields
     else if (req.query.act == 'newItemQty') {
-        var newiqty = req.query.item;
+        var newiqty = req.query.product;
 //user is name of entire document (row) that contains users, vendors, items, transactions...)
-        User.findOneAndUpdate({_id: user._id}, {itemqty: newiqty}, function (err, user) {
+        User.findOneAndUpdate({ivenuser: user.ivenuser}, {itemqty: newiqty}, {ibodnum: value}, function (err, user) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -278,8 +278,8 @@ exports.update = function(req, res) {
             }
         });
     } else if (req.query.act == 'newItemPrice') {
-        var newiprice = req.query.item;
-        User.findOneAndUpdate({_id: user._id}, {itemprice: newiprice}, function (err, user) {
+        var newiprice = req.query.product;
+        User.findOneAndUpdate({ivenuser: user.ivenuser}, {itemprice: newiprice}, {ibodnum: value}, function (err, user) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -288,9 +288,9 @@ exports.update = function(req, res) {
             }
         });
     } else if (req.query.act == 'newItemExp') {
-        var newiexp = req.query.item;
+        var newiexp = req.query.product;
 //user is name of entire document (row) that contains users, vendors, items, transactions...)
-        User.findOneAndUpdate({_id: user._id}, {itemexp: newiexp}, function (err, user) {
+        User.findOneAndUpdate({ivenuser: user.ivenuser}, {itemexp: newiexp}, {ibodnum: value}, function (err, user) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -299,9 +299,9 @@ exports.update = function(req, res) {
             }
         });
     } else if (req.query.act == 'newItemDesc') {
-        var newidesc = req.query.item;
+        var newidesc = req.query.product;
 //user is name of entire document (row) that contains users, vendors, items, transactions...)
-        User.findOneAndUpdate({_id: user._id}, {itemdesc: newidesc}, function (err, user) {
+        User.findOneAndUpdate({ivenuser: user.ivenuser}, {itemdesc: newidesc}, {ibodnum: value}, function (err, user) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -310,9 +310,9 @@ exports.update = function(req, res) {
             }
         });
     } else if (req.query.act == 'newItemCode') {
-        var newicode = req.query.item;
+        var newicode = req.query.product;
 //user is name of entire document (row) that contains users, vendors, items, transactions...)
-        User.findOneAndUpdate({_id: user._id}, {itemcode: newicode}, function (err, user) {
+        User.findOneAndUpdate({ivenuser: user.ivenuser}, {itemcode: newicode}, {ibodnum: value}, function (err, user) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -321,20 +321,21 @@ exports.update = function(req, res) {
             }
         });
     } else if (req.query.act == 'newItemName') {
-        var newiname = req.query.item;
+        var newItemName = req.query.product;
 //user is name of entire document (row) that contains users, vendors, items, transactions...)
-        User.findOneAndUpdate({_id: user._id}, {itemname: newiname}, function (err, user) {
+        User.findOneAndUpdate({ivenuser: user.ivenuser}, {itemname: newItemName}, {ibodnum: value}, function (err, user) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
             } else {
-                //console.log("got here");
+ //                console.log(newItemName);
+//                res.status(200).send();
             }
         });
     } else if (req.query.act == 'newItemPic') {
-        var newipic = req.query.item;
+        var newipic = req.query.product;
 //user is name of entire document (row) that contains users, vendors, items, transactions...)
-        User.findOneAndUpdate({_id: user._id}, {itempic: newipic}, function (err, user) {
+        User.findOneAndUpdate({ivenuser: user.ivenuser}, {itempic: newipic}, {ibodnum: value}, function (err, user) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -343,9 +344,9 @@ exports.update = function(req, res) {
             }
         });
     } else if (req.query.act == 'newIBodNum') {
-        var newibnum = req.query.item;
+        var newibnum = req.query.product;
 //user is name of entire document (row) that contains users, vendors, items, transactions...)
-        User.findOneAndUpdate({_id: user._id}, {ibodnum: newibnum}, function (err, user) {
+        User.findOneAndUpdate({ivenuser: user.ivenuser}, {ibodnum: newibnum}, function (err, user) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
@@ -354,18 +355,17 @@ exports.update = function(req, res) {
             }
         });
     } else if (req.query.act == 'newIVenUser') {
-        var newiven = req.query.item;
-        User.findOneAndUpdate({_id: user._id}, {ivenuser: newiven}, function (err, user) {
+        var newiven = req.query.product;
+        User.findOneAndUpdate({ivenuser: user.ivenuser}, {ivenuser: newiven}, {ibodnum: value}, function (err, user) {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);
             } else {
                 //console.log("got here");
+//                res.status(200).send();
             }
         });
     }
-*/
-
 };
 
 /* Delete a listing */

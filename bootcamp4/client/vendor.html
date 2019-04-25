@@ -40,24 +40,41 @@
 <div class="mainInventory">
 
     <div class="vendorTitle" ng-show="user.authority == 'product'">
-        <h2>Vendor: {{user.ivenuser}}</h2>
+        <h2>Vendor: {{currentUser.name}}</h2>
     </div>
+
     <!--inventory -->
     <div class="inventory-container">
         <span class="inventoryTitle">Vendor Inventory</span>
         <div class="inventory-content">
+            <!-- Search Bar and Drop down choice. -->
+            <span> <select class="bodegaDropdown" ng-model="value">
+                <option value="" disabled selected>Select Your Bodega</option>
+                <option value="0">Bodega at UF Innovate the Hub</option>
+                <option value="1">Bodega at Exactech</option>
+                <option value="2">Bodega TBD</option>
+            </select></span>
+
+            <div class = "searchbar">
+                <form action="/action_page.php">
+                    <input type="text" placeholder="Search Inventory" ng-model="query">
+                </form>
+            </div>
+
             <div class="inventoryHeaders">
                 <div class="nameHeader">NAME</div>
                 <div class="qtyHeader">QTY</div>
                 <div class="priceHeader">Price</div>
+                <div class="glyphicon glyphicon-trash"></div>
                 <!-- ng repeat table -->
             </div>
-            <div class="inventoryListings" ng-repeat="user in users | filter: query" ng-show="user.authority == 'product'" ng-click="showDetails($index)">
-                <div class="listingName">{{user.itemname}}</div>
-                <div class="listingQty">{{user.itemqty}}</div>
-                <div class="listingPrice">{{user.itemprice}}</div>
+            <div class="inventoryListings" ng-repeat="product in users | filter: query" ng-show="product.authority == 'product' && product.ibodnum == value && product.ivenuser == currentUser.name" ng-click="showDetails($index)">
+                <div class="listingName">{{product.itemname}}</div>
+                <div class="listingQty">x{{product.itemqty}}</div>
+                <div class="listingPrice">${{product.itemprice}}</div>
+                <span style="color: red;" class="glyphicon glyphicon-remove-circle" ng-click="deleteListing($index)"></span>
             </div>
-        </div>
+    </div>
     </div>
 
     <!--Update inventory -->
@@ -68,38 +85,45 @@
             </div>
             <div ng-show="detailedInfo != undefined">
                 <span class="updateTitle">Product Update Form</span>
-                <form class="updateItem" class='changeInfo' onsubmit="this.reset()">
+                <form class="updateItem" class='changeInfo'>
 
                     <div class="updateFormItem">
-                        <span class='update-form-prompt'>Name: </span>
-                        <input class="update-form-control" newname ng-model="detailedInfo.itemname" ng-value="newname" type="text" required/>
-                        <button class="changeName update-form-button" ng-click="newItemName(detailedInfo.itemname)">Change</button>
+                        <span class='update-form-prompt'>New Name: </span>
+                        <input class="update-form-control" ng-model="newIName" type="text">
+                        <button class="changeName update-form-button" ng-click="newItemName(newIName)">Change</button>
                     </div>
 
                     <div class="updateFormItem">
-                        <span class='update-form-prompt'>Description: </span>
-                        <input class="update-form-control" ng-model="detailedInfo.itemdesc" type='text'/>
-                        <button class="changeDesc update-form-button" ng-click="newItemDesc()">Change</button>
+                        <span class='update-form-prompt'>New Descr: </span>
+                        <input class="update-form-control" ng-model="newIDesc" type='text'/>
+                        <button class="changeDesc update-form-button" ng-click="newItemDesc(newIDesc)">Change</button>
                     </div>
 
                     <div class="updateFormItem">
-                        <span class='update-form-prompt'>Exp Date: </span>
-                        <input class="update-form-control" ng-model="detailedInfo.itemexp" type='date'/>
-                        <button class="changeExp update-form-button" ng-click="newItemExp()">Change</button>
+                        <span class='update-form-prompt'>New Qty: </span>
+                        <input class="update-form-control" ng-model="newIQty" type='number'/>
+                        <button class="changeDesc update-form-button" ng-click="newItemQty(newIQty)">Change</button>
                     </div>
 
                     <div class="updateFormItem">
-                        <span class='update-form-prompt'>Price: </span>
-                        <input class="update-form-control" ng-model="detailedInfo.itemprice" type='number'/>
-                        <button class="changePrice update-form-button" ng-click="newItemPrice()">Change</button>
+                        <span class='update-form-prompt'> New Exp Date: </span>
+                        <input class="update-form-control" ng-model="newIExp" type='date'/>
+                        <button class="changeExp update-form-button" ng-click="newItemExp(newIExp)">Change</button>
+                    </div>
+
+                    <div class="updateFormItem">
+                        <span class='update-form-prompt'>New Price: </span>
+                        <input class="update-form-control" ng-model="newIPrice" type='number' step="0.01"/>
+                        <button class="changePrice update-form-button" ng-click="newItemPrice(newIPrice)">Change</button>
                     </div>
 
                     <div class="updateFormItem">
                         <span class='update-form-prompt'>Image: </span>
-                        <input class="update-form-control" ng-model="detailedInfo.itempic" type='file' name="datasize" size="30">
+                        <input class="update-form-control" type='file' name="datasize" size="30">
                         <!--Find dropImage API and place here-->
                     </div>
-
+                    <br>
+                    <button ng-click=this.reset()>CLEAR</button>
                 </form>
             </div>
         </div>
@@ -127,7 +151,7 @@
 
                 <div class="addFormItem">
                     <span class="add-form-prompt">Exp Date: </span>
-                    <input id="itemexp" class="add-form-control" ng-model="newItem.itemexp" type="date">
+                    <input id="itemexp" class="add-form-control" ng-model="newItem.itemexp" type="date" placeholder="date()+3" required>
                 </div>
 
                 <div class="addFormItem">
@@ -136,7 +160,7 @@
                 </div>
 
                 <div class="addFormItem">
-                    <span class="add-form-prompt">Lot Code: </span>
+                    <span class="add-form-prompt">Lot/SKU: </span>
                     <input id="itemcode" class="add-form-control" ng-model="newItem.itemcode" type="text">
                 </div>
 
@@ -145,11 +169,11 @@
                     <input id="itempic" class="add-form-control" ng-model="newItem.itempic" type="file">
                 </div>
 
-                <div class="addFormItem">
-                    <span class="add-form-prompt">Bodega Number: </span>
+ <!--               <div class="addFormItem">
+                    <span class="add-form-prompt">Bodega: </span>
                     <input id="ibodnum" class="add-form-control" ng-model="newItem.ibodnum" type="number" placeholder="" required>
                 </div>
-
+-->
                 <input class="add-form-submit" type="submit" value="Submit"/>
 
             </form>
