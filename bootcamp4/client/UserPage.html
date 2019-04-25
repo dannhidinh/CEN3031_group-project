@@ -27,7 +27,7 @@
           <span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
         </button>
 
-      </div>  
+      </div>
 
     </div>
     <div class='userContent'>
@@ -37,18 +37,18 @@
           <input class="transactionSearch" type="text" placeholder="Search Transactions" ng-model="transactionQuery">
           <div class='listedItems'>
             <div class='itemHeaders'>
-              <div class='nameHeader'>Name</div> 
-              <div class='dateHeader'>Date</div> 
+              <div class='nameHeader'>Name</div>
+              <div class='dateHeader'>Date</div>
               <div class="qtyHeader">Quantity</div>
-              <div class='priceHeader'>Price</div> 
+              <div class='priceHeader'>Price</div>
             </div>
-            <div class="singleOrder" ng-repeat='orderHist in currentUser.orderHist | filter: transactionQuery'>  
+            <div class="singleOrder" ng-repeat='orderHist in currentUser.orderHist | filter: transactionQuery'>
               <div class="individualItem" ng-repeat= 'cart in orderHist.cart'>
                 <div class='itemName'>{{cart.productC}}</div> <!--Place item name data here in {}-->
                 <!--Place item last order data here in {}-->
                 <div class='ordertime'>{{cart.trans}}</div>
-                <div class='productAmount'>{{cart.quantity}}</div>
-                <div class="productPrice">{{cart.price}}</div>
+                <div class='productAmount'>x{{cart.quantity}}</div>
+                <div class="productPrice">${{cart.price}}</div>
               </div>
               <div class='orderprice'>{{"Total Price (w/tax): " + orderHist.total}}</div>
             </div>
@@ -83,7 +83,7 @@
         </div>
       </div>
     </div>
-	
+
 	<!-- MODALS -->
 
 	<!-- About Modal -->
@@ -116,7 +116,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<center><h4 class="modal-title">CONTACT US</h4></center>
 				</div>
-	 
+
 				<div class="modal-body">
 						<h4>BODEGA GAINESVILLE EMAIL : bodegaGNV@gmail.com</h4>
 						<p>  </p>
@@ -145,16 +145,16 @@
 						<input type="submit" value="Submit">
 					</form>
 				</div>
-	  
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
-	
-	
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>

@@ -68,7 +68,7 @@ console.log($scope.newItem.itemprice);
 
 
 
-//Passes the currentUser's id, action name, followed by values or variables to pass. 
+//Passes the currentUser's id, action name, followed by values or variables to pass.
 //(the '0' is to take up the unused ItemID parameter in listingFactory)
       Users.update($scope.currentUser._id, 'newName', 0,
         name).then(function(response){
@@ -130,7 +130,7 @@ console.log($scope.newItem.itemprice);
             });
         });
     }
- 
+
     $scope.newItemDesc = function(idesc){
         console.log(idesc);
         if (idesc == undefined || idesc == ""){
@@ -845,7 +845,7 @@ $scope.addVendor = function() {
     $scope.showDetails = function(index) {
       $scope.detailedInfo = $scope.users[index];
     };
-	
+
 	$scope.cartClick = function(id, name, qty, cost)
 	{
 		$scope.cartCheck = undefined;
@@ -856,7 +856,7 @@ $scope.addVendor = function() {
 			$scope.cartCheck = "Just Added to Cart : " + name;
 			$scope.addToCart(id, name, qty, cost);
 		}
-		else 
+		else
 		{
 			console.log('test');
 			$scope.cartCheck = "Need to Sign In";

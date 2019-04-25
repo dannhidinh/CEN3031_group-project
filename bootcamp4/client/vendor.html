@@ -31,7 +31,7 @@
 				<button class='signout' ng-click='signOut()'>
 					<span>Sign Out</span><i class='fas fa-sign-out-alt'></i>
 				</button>
-			</div>  
+			</div>
     </div>
 </header>
 
@@ -39,8 +39,10 @@
 <!-- !PAGE CONTENT! -->
 <div class="mainInventory">
 
+
     <div class="vendorTitle" ng-show="user.authority == 'product'">
         <h2>Vendor: {{currentUser.name}}</h2>
+
     </div>
 
     <!--inventory -->
@@ -92,6 +94,7 @@
                         <input class="update-form-control" ng-model="newIName" type="text">
                         <button class="changeName update-form-button" ng-click="newItemName(newIName)">Change</button>
                     </div>
+
 
                     <div class="updateFormItem">
                         <span class='update-form-prompt'>New Descr: </span>
@@ -154,6 +157,7 @@
                     <input id="itemexp" class="add-form-control" ng-model="newItem.itemexp" type="date" placeholder="date()+3" required>
                 </div>
 
+
                 <div class="addFormItem">
                     <span class="add-form-prompt">Qty: </span>
                     <input id="itemqty" class="add-form-control" ng-model="newItem.itemqty" type="number" placeholder="" required>
@@ -178,6 +182,7 @@
 
             </form>
         </div>
+
     </div>
 </div> <!-- END MAIN CONTENT -->
 
@@ -213,7 +218,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<center><h4 class="modal-title">CONTACT US</h4></center>
 				</div>
-	 
+
 				<div class="modal-body">
 						<h4>BODEGA GAINESVILLE EMAIL : bodegaGNV@gmail.com</h4>
 						<p>  </p>
@@ -242,14 +247,14 @@
 						<input type="submit" value="Submit">
 					</form>
 				</div>
-	  
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 		</div>
 	</div>
-   
+
 
 <!-- End page content -->
 
