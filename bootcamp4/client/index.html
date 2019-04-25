@@ -87,12 +87,12 @@
 				<th>Add to Cart</th>
 
               </tr>
-              <tr ng-repeat="user in users | filter: query" ng-show= "user.authority == 'product' && user.itemqty > 0" >
-                <td>{{user.itemname}}</td>
-                <td>{{user.itemqty}}</td>
-                <td>{{user.itemprice}}</td>
+              <tr ng-repeat="product in users | filter: query" ng-show= "product.authority == 'product' && product.itemqty > 0" >
+                <td>{{product.itemname}}</td>
+                <td>{{"x"+product.itemqty}}</td>
+                <td>{{"$"+product.itemprice}}</td>
 				<td><button type="button"  data-toggle="modal" data-target="#myModal1" ng-click="showDetails($index)">More Details</button></td>
-				<td><button type="button"  ng-click="addToCart(user._id, user.itemname, 1, user.itemprice)">Add to Cart</button></td>
+				<td><button type="button"  ng-click="addToCart(product._id, product.itemname, 1, product.itemprice)">Add to Cart</button></td>
               </tr>
         </table>
     </div>	
